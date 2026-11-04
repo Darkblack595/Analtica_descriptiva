@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Código fuente y notebook del PRE 13: Scopus.">
+  <meta name="description" content="Código práctico del PRE 13: Scopus.">
   <title>PRE 13 · Scopus</title>
   <style>
     :root { color-scheme: light; --paper: #f3f5f2; --surface: #fff; --ink: #172522; --muted: #596963; --line: #d7dfd9; --green: #245c4b; --green-soft: #e2eee8; --blue-soft: #e5eef2; --code: #172b2b; }
@@ -16,7 +16,7 @@
     aside { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; } aside h2 { font-size: .85rem; text-transform: uppercase; } aside ol { padding-left: 1.25rem; } aside li { margin: .3rem 0; font-size: .88rem; } aside a { text-decoration: none; }
     main { min-width: 0; } .note { padding: .8rem 1rem; border-left: 3px solid #426d83; background: var(--blue-soft); }
     section.file, section.cell { margin: 0 0 1rem; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; scroll-margin-top: 1rem; }
-    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; } h3 { margin: 0 0 .5rem; font-size: 1rem; }
+    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; }
     .source { margin: .2rem 0 .8rem; color: var(--muted); font-size: .86rem; } .cell-comment { color: var(--green); font-weight: 650; }
     pre { overflow-x: auto; margin: .65rem 0; padding: 1rem; border-radius: 3px; background: var(--code); color: #ecf4ee; font: .85rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; tab-size: 4; }
     code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; } .markdown { white-space: pre-wrap; } .output { margin-top: .7rem; border-top: 1px solid var(--line); } .output summary { padding: .5rem 0; cursor: pointer; color: var(--green); font-weight: 700; } .output pre { background: #edf1ed; color: var(--ink); }
@@ -26,16 +26,15 @@
 </head>
 <body>
   <header>
-    <a class="back" href="../index.html#catalogo">Volver al índice principal</a>
-    <p>Material estático · PRE 13</p>
+    <a class="back" href="../index.html#practica">Volver al índice práctico</a>
+    <p>Cuaderno de código · PRE 13</p>
     <h1>PRE 13 · Scopus</h1>
-    <p>Código fuente completo del proyecto, agrupado por archivo o por celda de notebook.</p>
   </header>
   <div class="layout">
-    <aside aria-label="Navegación por PRE"><h2>PRE 01–15</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_07.html">PRE 07 · No disponible</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_09.html">PRE 09 · Drivers y ChatGPT</a></li><li><a href="pre_10.html">PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html" aria-current=page>PRE 13 · Scopus</a></li><li><a href="pre_14.html">PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
+    <aside aria-label="Navegación por PRE"><h2>Cuadernos con código</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_10.html">PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html" aria-current=page>PRE 13 · Scopus</a></li><li><a href="pre_14.html">PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
     <main>
-      <p class="note">El contenido está escrito directamente en esta página HTML. El código y los comentarios originales se pueden seleccionar, copiar y explicar sin descargar el archivo. Las salidas guardadas se muestran como texto cuando están disponibles.</p>
-      <section class="file" id="archivo-main-py"><h2>main.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/main.py">PRE_13_scopus/src/main.py</a> · 48 líneas</p><pre><code>from s01_ingest import s01_ingest
+      <p class="note">Código mostrado como texto estático, organizado por archivo o celda. Se conservan los comentarios originales y, si el notebook las guarda, las salidas textuales. Puedes recorrer y copiar los fragmentos directamente desde aquí.</p>
+      <section class="file" id="archivo-main-py"><h2>main.py</h2><p class="source"><a href="../PRE_13_scopus/src/main.py">Abrir fuente original</a> · 48 líneas</p><pre><code>from s01_ingest import s01_ingest
 from s02_make_documents_by_year_plot import s02_make_documents_by_year_plot
 from s03_countries_create import s03_countries_create
 from s04_countries_clean import s04_countries_clean
@@ -83,7 +82,7 @@ def main():
 
 if __name__ == &quot;__main__&quot;:
     main()</code></pre></section>
-<section class="file" id="archivo-s01-ingest-py"><h2>s01_ingest.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s01_ingest.py">PRE_13_scopus/src/s01_ingest.py</a> · 52 líneas</p><pre><code>from pathlib import Path
+<section class="file" id="archivo-s01-ingest-py"><h2>s01_ingest.py</h2><p class="source"><a href="../PRE_13_scopus/src/s01_ingest.py">Abrir fuente original</a> · 52 líneas</p><pre><code>from pathlib import Path
 
 import pandas as pd
 
@@ -135,7 +134,7 @@ def s01_ingest() -&gt; None:
 
 if __name__ == &quot;__main__&quot;:
     s01_ingest()</code></pre></section>
-<section class="file" id="archivo-s02-make-documents-by-year-plot-py"><h2>s02_make_documents_by_year_plot.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s02_make_documents_by_year_plot.py">PRE_13_scopus/src/s02_make_documents_by_year_plot.py</a> · 53 líneas</p><pre><code># s02_make_documents_by_year_plot.py
+<section class="file" id="archivo-s02-make-documents-by-year-plot-py"><h2>s02_make_documents_by_year_plot.py</h2><p class="source"><a href="../PRE_13_scopus/src/s02_make_documents_by_year_plot.py">Abrir fuente original</a> · 53 líneas</p><pre><code># s02_make_documents_by_year_plot.py
 
 from pathlib import Path
 
@@ -189,7 +188,7 @@ if __name__ == &quot;__main__&quot;:
 
 
 </code></pre></section>
-<section class="file" id="archivo-s03-countries-create-py"><h2>s03_countries_create.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s03_countries_create.py">PRE_13_scopus/src/s03_countries_create.py</a> · 41 líneas</p><pre><code>
+<section class="file" id="archivo-s03-countries-create-py"><h2>s03_countries_create.py</h2><p class="source"><a href="../PRE_13_scopus/src/s03_countries_create.py">Abrir fuente original</a> · 41 líneas</p><pre><code>
 
 from pathlib import Path
 
@@ -230,7 +229,7 @@ if __name__ == &quot;__main__&quot;:
     s03_countries_create()
     
     </code></pre></section>
-<section class="file" id="archivo-s04-countries-clean-py"><h2>s04_countries_clean.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s04_countries_clean.py">PRE_13_scopus/src/s04_countries_clean.py</a> · 74 líneas</p><pre><code># s04_countries_clean.py
+<section class="file" id="archivo-s04-countries-clean-py"><h2>s04_countries_clean.py</h2><p class="source"><a href="../PRE_13_scopus/src/s04_countries_clean.py">Abrir fuente original</a> · 74 líneas</p><pre><code># s04_countries_clean.py
 
 
 from pathlib import Path
@@ -305,7 +304,7 @@ def s04_countries_clean() -&gt; None:
 if __name__ == &quot;__main__&quot;:
     s04_countries_clean()
 </code></pre></section>
-<section class="file" id="archivo-s05-countries-frequency-report-py"><h2>s05_countries_frequency_report.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s05_countries_frequency_report.py">PRE_13_scopus/src/s05_countries_frequency_report.py</a> · 35 líneas</p><pre><code># s05_countries_frequency_report.py
+<section class="file" id="archivo-s05-countries-frequency-report-py"><h2>s05_countries_frequency_report.py</h2><p class="source"><a href="../PRE_13_scopus/src/s05_countries_frequency_report.py">Abrir fuente original</a> · 35 líneas</p><pre><code># s05_countries_frequency_report.py
 
 
 from pathlib import Path
@@ -341,7 +340,7 @@ if __name__ == &quot;__main__&quot;:
     s05_countries_frequency_report()
 
 </code></pre></section>
-<section class="file" id="archivo-s06-countries-frequency-plot-py"><h2>s06_countries_frequency_plot.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s06_countries_frequency_plot.py">PRE_13_scopus/src/s06_countries_frequency_plot.py</a> · 36 líneas</p><pre><code># s06_countries_frequency_plot.py
+<section class="file" id="archivo-s06-countries-frequency-plot-py"><h2>s06_countries_frequency_plot.py</h2><p class="source"><a href="../PRE_13_scopus/src/s06_countries_frequency_plot.py">Abrir fuente original</a> · 36 líneas</p><pre><code># s06_countries_frequency_plot.py
 
 
 from pathlib import Path
@@ -377,7 +376,7 @@ if __name__ == &quot;__main__&quot;:
     s06_countries_frequency_plot()
     
     </code></pre></section>
-<section class="file" id="archivo-s07-countries-world-map-py"><h2>s07_countries_world_map.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s07_countries_world_map.py">PRE_13_scopus/src/s07_countries_world_map.py</a> · 42 líneas</p><pre><code># s07_countries_world_map.py
+<section class="file" id="archivo-s07-countries-world-map-py"><h2>s07_countries_world_map.py</h2><p class="source"><a href="../PRE_13_scopus/src/s07_countries_world_map.py">Abrir fuente original</a> · 42 líneas</p><pre><code># s07_countries_world_map.py
 
 from pathlib import Path
 
@@ -420,7 +419,7 @@ if __name__ == &quot;__main__&quot;:
 
 
 </code></pre></section>
-<section class="file" id="archivo-s08-countries-cooc-matrix-py"><h2>s08_countries_cooc_matrix.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s08_countries_cooc_matrix.py">PRE_13_scopus/src/s08_countries_cooc_matrix.py</a> · 46 líneas</p><pre><code># s08_countries_cooc_matrix.py
+<section class="file" id="archivo-s08-countries-cooc-matrix-py"><h2>s08_countries_cooc_matrix.py</h2><p class="source"><a href="../PRE_13_scopus/src/s08_countries_cooc_matrix.py">Abrir fuente original</a> · 46 líneas</p><pre><code># s08_countries_cooc_matrix.py
 
 from pathlib import Path
 
@@ -467,7 +466,7 @@ if __name__ == &quot;__main__&quot;:
     s08_countries_cooc_matrix()
 
 </code></pre></section>
-<section class="file" id="archivo-s09-countries-heatmap-py"><h2>s09_countries_heatmap.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s09_countries_heatmap.py">PRE_13_scopus/src/s09_countries_heatmap.py</a> · 57 líneas</p><pre><code># s09_countries_heatmap.py
+<section class="file" id="archivo-s09-countries-heatmap-py"><h2>s09_countries_heatmap.py</h2><p class="source"><a href="../PRE_13_scopus/src/s09_countries_heatmap.py">Abrir fuente original</a> · 57 líneas</p><pre><code># s09_countries_heatmap.py
 
 from pathlib import Path
 
@@ -524,7 +523,7 @@ def s09_countries_heatmap():
 
 if __name__ == &quot;__main__&quot;:
     s09_countries_heatmap()</code></pre></section>
-<section class="file" id="archivo-s10-countries-clusters-py"><h2>s10_countries_clusters.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s10_countries_clusters.py">PRE_13_scopus/src/s10_countries_clusters.py</a> · 45 líneas</p><pre><code># s10_countries_clusters.py
+<section class="file" id="archivo-s10-countries-clusters-py"><h2>s10_countries_clusters.py</h2><p class="source"><a href="../PRE_13_scopus/src/s10_countries_clusters.py">Abrir fuente original</a> · 45 líneas</p><pre><code># s10_countries_clusters.py
 
 
 from pathlib import Path
@@ -570,7 +569,7 @@ def s10_countries_clusters():
 if __name__ == &quot;__main__&quot;:
     s10_countries_clusters()
 </code></pre></section>
-<section class="file" id="archivo-s11-countries-network-py"><h2>s11_countries_network.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s11_countries_network.py">PRE_13_scopus/src/s11_countries_network.py</a> · 290 líneas</p><pre><code># s11_countries_network.py
+<section class="file" id="archivo-s11-countries-network-py"><h2>s11_countries_network.py</h2><p class="source"><a href="../PRE_13_scopus/src/s11_countries_network.py">Abrir fuente original</a> · 290 líneas</p><pre><code># s11_countries_network.py
 
 
 from pathlib import Path
@@ -861,7 +860,7 @@ def s11_countries_network():
 if __name__ == &quot;__main__&quot;:
     s11_countries_network()
 </code></pre></section>
-<section class="file" id="archivo-s12-sources-frequency-report-py"><h2>s12_sources_frequency_report.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s12_sources_frequency_report.py">PRE_13_scopus/src/s12_sources_frequency_report.py</a> · 18 líneas</p><pre><code>from pathlib import Path
+<section class="file" id="archivo-s12-sources-frequency-report-py"><h2>s12_sources_frequency_report.py</h2><p class="source"><a href="../PRE_13_scopus/src/s12_sources_frequency_report.py">Abrir fuente original</a> · 18 líneas</p><pre><code>from pathlib import Path
 
 import pandas as pd
 from s05_countries_frequency_report import make_frequency_report
@@ -879,7 +878,7 @@ def s12_sources_frequency_report():
 
 if __name__ == &quot;__main__&quot;:
     s12_sources_frequency_report()</code></pre></section>
-<section class="file" id="archivo-s13-authors-frequency-report-py"><h2>s13_authors_frequency_report.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s13_authors_frequency_report.py">PRE_13_scopus/src/s13_authors_frequency_report.py</a> · 18 líneas</p><pre><code>from pathlib import Path
+<section class="file" id="archivo-s13-authors-frequency-report-py"><h2>s13_authors_frequency_report.py</h2><p class="source"><a href="../PRE_13_scopus/src/s13_authors_frequency_report.py">Abrir fuente original</a> · 18 líneas</p><pre><code>from pathlib import Path
 
 import pandas as pd
 from s05_countries_frequency_report import make_frequency_report
@@ -897,7 +896,7 @@ def s13_authors_frequency_report():
 
 if __name__ == &quot;__main__&quot;:
     s13_authors_frequency_report()</code></pre></section>
-<section class="file" id="archivo-s14-keywords-create-py"><h2>s14_keywords_create.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s14_keywords_create.py">PRE_13_scopus/src/s14_keywords_create.py</a> · 20 líneas</p><pre><code>from pathlib import Path
+<section class="file" id="archivo-s14-keywords-create-py"><h2>s14_keywords_create.py</h2><p class="source"><a href="../PRE_13_scopus/src/s14_keywords_create.py">Abrir fuente original</a> · 20 líneas</p><pre><code>from pathlib import Path
 
 import pandas as pd
 
@@ -917,7 +916,7 @@ def s14_keywords_create() -&gt; None:
 
 if __name__ == &quot;__main__&quot;:
     s14_keywords_create()</code></pre></section>
-<section class="file" id="archivo-s15-keywords-clean-py"><h2>s15_keywords_clean.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s15_keywords_clean.py">PRE_13_scopus/src/s15_keywords_clean.py</a> · 30 líneas</p><pre><code>
+<section class="file" id="archivo-s15-keywords-clean-py"><h2>s15_keywords_clean.py</h2><p class="source"><a href="../PRE_13_scopus/src/s15_keywords_clean.py">Abrir fuente original</a> · 30 líneas</p><pre><code>
 from pathlib import Path
 
 import pandas as pd
@@ -948,7 +947,7 @@ def s15_keywords_clean() -&gt; None:
 if __name__ == &quot;__main__&quot;:
     s15_keywords_clean()
 </code></pre></section>
-<section class="file" id="archivo-s16-keywords-frequency-report-py"><h2>s16_keywords_frequency_report.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s16_keywords_frequency_report.py">PRE_13_scopus/src/s16_keywords_frequency_report.py</a> · 20 líneas</p><pre><code>from pathlib import Path
+<section class="file" id="archivo-s16-keywords-frequency-report-py"><h2>s16_keywords_frequency_report.py</h2><p class="source"><a href="../PRE_13_scopus/src/s16_keywords_frequency_report.py">Abrir fuente original</a> · 20 líneas</p><pre><code>from pathlib import Path
 
 import pandas as pd
 
@@ -969,7 +968,7 @@ def s16_keywords_frequency_report():
 if __name__ == &quot;__main__&quot;:
     s16_keywords_frequency_report()
 </code></pre></section>
-<section class="file" id="archivo-s17-keywords-cooc-matrix-py"><h2>s17_keywords_cooc_matrix.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s17_keywords_cooc_matrix.py">PRE_13_scopus/src/s17_keywords_cooc_matrix.py</a> · 21 líneas</p><pre><code>from pathlib import Path
+<section class="file" id="archivo-s17-keywords-cooc-matrix-py"><h2>s17_keywords_cooc_matrix.py</h2><p class="source"><a href="../PRE_13_scopus/src/s17_keywords_cooc_matrix.py">Abrir fuente original</a> · 21 líneas</p><pre><code>from pathlib import Path
 
 from s08_countries_cooc_matrix import make_cooc_matrix
 
@@ -990,7 +989,7 @@ if __name__ == &quot;__main__&quot;:
     
     
     </code></pre></section>
-<section class="file" id="archivo-s18-keywords-filter-py"><h2>s18_keywords_filter.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s18_keywords_filter.py">PRE_13_scopus/src/s18_keywords_filter.py</a> · 37 líneas</p><pre><code># s18_keywords_filter.py
+<section class="file" id="archivo-s18-keywords-filter-py"><h2>s18_keywords_filter.py</h2><p class="source"><a href="../PRE_13_scopus/src/s18_keywords_filter.py">Abrir fuente original</a> · 37 líneas</p><pre><code># s18_keywords_filter.py
 
 from pathlib import Path
 
@@ -1027,7 +1026,7 @@ def s18_keywords_filter():
 
 if __name__ == &quot;__main__&quot;:
     s18_keywords_filter()</code></pre></section>
-<section class="file" id="archivo-s19-keywords-clusters-py"><h2>s19_keywords_clusters.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s19_keywords_clusters.py">PRE_13_scopus/src/s19_keywords_clusters.py</a> · 23 líneas</p><pre><code>from pathlib import Path
+<section class="file" id="archivo-s19-keywords-clusters-py"><h2>s19_keywords_clusters.py</h2><p class="source"><a href="../PRE_13_scopus/src/s19_keywords_clusters.py">Abrir fuente original</a> · 23 líneas</p><pre><code>from pathlib import Path
 
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -1051,7 +1050,7 @@ def s19_keywords_clusters():
 if __name__ == &quot;__main__&quot;:
     s19_keywords_clusters()
 </code></pre></section>
-<section class="file" id="archivo-s20-keywords-network-py"><h2>s20_keywords_network.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s20_keywords_network.py">PRE_13_scopus/src/s20_keywords_network.py</a> · 30 líneas</p><pre><code>from pathlib import Path
+<section class="file" id="archivo-s20-keywords-network-py"><h2>s20_keywords_network.py</h2><p class="source"><a href="../PRE_13_scopus/src/s20_keywords_network.py">Abrir fuente original</a> · 30 líneas</p><pre><code>from pathlib import Path
 
 from s11_countries_network import make_cooc_network_plot
 
@@ -1082,9 +1081,9 @@ def s20_keywords_network():
 if __name__ == &quot;__main__&quot;:
     s20_keywords_network()
 </code></pre></section>
-      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_12.html">PRE 12</a><a href="pre_14.html">PRE 14</a></nav>
+      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_12.html">← PRE 12</a><a href="pre_14.html">PRE 14 →</a></nav>
     </main>
   </div>
-  <footer><a class="back" href="../index.html#catalogo">Índice principal</a></footer>
+  <footer><a class="back" href="../index.html#practica">Índice práctico</a></footer>
 </body>
 </html>

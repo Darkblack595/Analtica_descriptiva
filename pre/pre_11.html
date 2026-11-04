@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Código fuente y notebook del PRE 11: Vuelos.">
+  <meta name="description" content="Código práctico del PRE 11: Vuelos.">
   <title>PRE 11 · Vuelos</title>
   <style>
     :root { color-scheme: light; --paper: #f3f5f2; --surface: #fff; --ink: #172522; --muted: #596963; --line: #d7dfd9; --green: #245c4b; --green-soft: #e2eee8; --blue-soft: #e5eef2; --code: #172b2b; }
@@ -16,7 +16,7 @@
     aside { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; } aside h2 { font-size: .85rem; text-transform: uppercase; } aside ol { padding-left: 1.25rem; } aside li { margin: .3rem 0; font-size: .88rem; } aside a { text-decoration: none; }
     main { min-width: 0; } .note { padding: .8rem 1rem; border-left: 3px solid #426d83; background: var(--blue-soft); }
     section.file, section.cell { margin: 0 0 1rem; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; scroll-margin-top: 1rem; }
-    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; } h3 { margin: 0 0 .5rem; font-size: 1rem; }
+    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; }
     .source { margin: .2rem 0 .8rem; color: var(--muted); font-size: .86rem; } .cell-comment { color: var(--green); font-weight: 650; }
     pre { overflow-x: auto; margin: .65rem 0; padding: 1rem; border-radius: 3px; background: var(--code); color: #ecf4ee; font: .85rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; tab-size: 4; }
     code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; } .markdown { white-space: pre-wrap; } .output { margin-top: .7rem; border-top: 1px solid var(--line); } .output summary { padding: .5rem 0; cursor: pointer; color: var(--green); font-weight: 700; } .output pre { background: #edf1ed; color: var(--ink); }
@@ -26,17 +26,15 @@
 </head>
 <body>
   <header>
-    <a class="back" href="../index.html#catalogo">Volver al índice principal</a>
-    <p>Material estático · PRE 11</p>
+    <a class="back" href="../index.html#practica">Volver al índice práctico</a>
+    <p>Cuaderno de código · PRE 11</p>
     <h1>PRE 11 · Vuelos</h1>
-    <p>Código fuente completo del proyecto, agrupado por archivo o por celda de notebook.</p>
   </header>
   <div class="layout">
-    <aside aria-label="Navegación por PRE"><h2>PRE 01–15</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_07.html">PRE 07 · No disponible</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_09.html">PRE 09 · Drivers y ChatGPT</a></li><li><a href="pre_10.html">PRE 10 · Retail sales</a></li><li><a href="pre_11.html" aria-current=page>PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html">PRE 13 · Scopus</a></li><li><a href="pre_14.html">PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
+    <aside aria-label="Navegación por PRE"><h2>Cuadernos con código</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_10.html">PRE 10 · Retail sales</a></li><li><a href="pre_11.html" aria-current=page>PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html">PRE 13 · Scopus</a></li><li><a href="pre_14.html">PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
     <main>
-      <p class="note">El contenido está escrito directamente en esta página HTML. El código y los comentarios originales se pueden seleccionar, copiar y explicar sin descargar el archivo. Las salidas guardadas se muestran como texto cuando están disponibles.</p>
-      <p class="note">Notebook original: 16 celdas, en su orden original. Se conservan comentarios de código y salidas textuales guardadas; las figuras Plotly se identifican, pero no se ejecutan en esta página estática.</p>
-<section class="cell" id="celda-1"><h2>Celda 1 · código</h2><p class="cell-comment">Comentario original: Se deben importar las librerías usadas durante el análisis.</p><pre><code># Se deben importar las librerías usadas durante el análisis.
+      <p class="note">Código mostrado como texto estático, organizado por archivo o celda. Se conservan los comentarios originales y, si el notebook las guarda, las salidas textuales. Puedes recorrer y copiar los fragmentos directamente desde aquí.</p>
+      <section class="cell" id="celda-1"><h2>Celda 1 · código</h2><p class="cell-comment">Comentario: Se deben importar las librerías usadas durante el análisis.</p><pre><code># Se deben importar las librerías usadas durante el análisis.
 
 from pathlib import Path
 import pandas as pd
@@ -45,7 +43,7 @@ import plotly.express as px</code></pre><details class="output"><summary>Salida 
 [1;31mInstall &#x27;ipykernel&#x27; into the Python environment. 
 
 [1;31mCommand: &#x27;&quot;c:/Users/Juan Pablo/Documentos/GitHub/std-juan-pablo-gaviria-orozco/.venv/Scripts/python.exe&quot; -m pip install ipykernel -U --user --force-reinstall&#x27;</pre></details></section>
-<section class="cell" id="celda-2"><h2>Celda 2 · código</h2><p class="cell-comment">Comentario original: Se deben definir y verificar las rutas de los dos agregados reales y la carpeta de resultados.</p><pre><code># Se deben definir y verificar las rutas de los dos agregados reales y la carpeta de resultados.
+<section class="cell" id="celda-2"><h2>Celda 2 · código</h2><p class="cell-comment">Comentario: Se deben definir y verificar las rutas de los dos agregados reales y la carpeta de resultados.</p><pre><code># Se deben definir y verificar las rutas de los dos agregados reales y la carpeta de resultados.
 
 DATA_DIR = Path(&quot;../data&quot;)
 DAY_HOUR_PATH = DATA_DIR / &quot;flights_by_carrier_day_hour.csv.gz&quot;
@@ -55,7 +53,7 @@ assert DAY_HOUR_PATH.exists()
 assert MONTHLY_PATH.exists()
 assert SUBMISSION_DIR.exists()
 </code></pre></section>
-<section class="cell" id="celda-3"><h2>Celda 3 · código</h2><p class="cell-comment">Comentario original: Se debe cargar y verificar el agregado por aerolínea, día y hora programada.</p><pre><code># Se debe cargar y verificar el agregado por aerolínea, día y hora programada.
+<section class="cell" id="celda-3"><h2>Celda 3 · código</h2><p class="cell-comment">Comentario: Se debe cargar y verificar el agregado por aerolínea, día y hora programada.</p><pre><code># Se debe cargar y verificar el agregado por aerolínea, día y hora programada.
 
 day_hour = pd.read_csv(DAY_HOUR_PATH)
 day_hour.info()
@@ -97,7 +95,7 @@ memory usage: 7.3+ MB
 2                           9.0                             384.0  
 3                           7.0                             327.0  
 4                           9.0                             657.0  </pre></details></section>
-<section class="cell" id="celda-4"><h2>Celda 4 · código</h2><p class="cell-comment">Comentario original: Se debe cargar y verificar el agregado mensual por aerolínea.</p><pre><code># Se debe cargar y verificar el agregado mensual por aerolínea.
+<section class="cell" id="celda-4"><h2>Celda 4 · código</h2><p class="cell-comment">Comentario: Se debe cargar y verificar el agregado mensual por aerolínea.</p><pre><code># Se debe cargar y verificar el agregado mensual por aerolínea.
 
 monthly = pd.read_csv(MONTHLY_PATH)
 monthly.info()
@@ -136,7 +134,7 @@ memory usage: 44.3+ KB
 2                          172836.0  
 3                          251771.0  
 4                          512386.0  </pre></details></section>
-<section class="cell" id="celda-5"><h2>Celda 5 · código</h2><p class="cell-comment">Comentario original: Se deben explorar las medidas numéricas del agregado por día y hora.</p><pre><code># Se deben explorar las medidas numéricas del agregado por día y hora.
+<section class="cell" id="celda-5"><h2>Celda 5 · código</h2><p class="cell-comment">Comentario: Se deben explorar las medidas numéricas del agregado por día y hora.</p><pre><code># Se deben explorar las medidas numéricas del agregado por día y hora.
 
 day_hour.describe().T</code></pre><details class="output"><summary>Salida guardada</summary><pre>                                    count         mean          std     min  \
 year                              96071.0  2006.990205     0.811760  2006.0   
@@ -159,7 +157,7 @@ cancelled_flights                    0.0     2.0     5.0    103.0
 operated_flights                    60.0   179.0   321.0   1518.0  
 delayed_departure_15_flights         7.0    30.0    63.0    652.0  
 positive_departure_delay_minutes   433.0  1798.0  3932.0  54270.0  </pre></details></section>
-<section class="cell" id="celda-6"><h2>Celda 6 · código</h2><p class="cell-comment">Comentario original: Se deben explorar las medidas numéricas del agregado mensual.</p><pre><code># Se deben explorar las medidas numéricas del agregado mensual.
+<section class="cell" id="celda-6"><h2>Celda 6 · código</h2><p class="cell-comment">Comentario: Se deben explorar las medidas numéricas del agregado mensual.</p><pre><code># Se deben explorar las medidas numéricas del agregado mensual.
 
 monthly.describe().T</code></pre><details class="output"><summary>Salida guardada</summary><pre>                                  count           mean            std     min  \
 year                              707.0    2006.990099       0.813250  2006.0   
@@ -178,12 +176,12 @@ cancelled_flights                    141.0     429.0     833.5     3918.0
 operated_flights                   16229.0   24776.0   40264.0   102986.0  
 delayed_departure_15_flights        2831.5    5343.0    8062.5    31413.0  
 positive_departure_delay_minutes  178508.0  336002.0  521550.5  2071869.0  </pre></details></section>
-<section class="cell" id="celda-7"><h2>Celda 7 · código</h2><p class="cell-comment">Comentario original: Se debe verificar que ninguno de los dos agregados tenga valores faltantes.</p><pre><code># Se debe verificar que ninguno de los dos agregados tenga valores faltantes.
+<section class="cell" id="celda-7"><h2>Celda 7 · código</h2><p class="cell-comment">Comentario: Se debe verificar que ninguno de los dos agregados tenga valores faltantes.</p><pre><code># Se debe verificar que ninguno de los dos agregados tenga valores faltantes.
 
 assert day_hour.isna().sum().sum() == 0
 assert monthly.isna().sum().sum() == 0
 </code></pre></section>
-<section class="cell" id="celda-8"><h2>Celda 8 · código</h2><p class="cell-comment">Comentario original: Se deben definir las medidas aditivas y las tasas con sus denominadores correctos.</p><pre><code># Se deben definir las medidas aditivas y las tasas con sus denominadores correctos.
+<section class="cell" id="celda-8"><h2>Celda 8 · código</h2><p class="cell-comment">Comentario: Se deben definir las medidas aditivas y las tasas con sus denominadores correctos.</p><pre><code># Se deben definir las medidas aditivas y las tasas con sus denominadores correctos.
 
 metric_columns = [
     &quot;scheduled_flights&quot;,
@@ -206,7 +204,7 @@ def add_rates(frame):
     )
     return result
 </code></pre></section>
-<section class="cell" id="celda-9"><h2>Celda 9 · código</h2><p class="cell-comment">Comentario original: Se debe verificar que reagrupar día y hora produce exactamente el agregado mensual.</p><pre><code># Se debe verificar que reagrupar día y hora produce exactamente el agregado mensual.
+<section class="cell" id="celda-9"><h2>Celda 9 · código</h2><p class="cell-comment">Comentario: Se debe verificar que reagrupar día y hora produce exactamente el agregado mensual.</p><pre><code># Se debe verificar que reagrupar día y hora produce exactamente el agregado mensual.
 
 recomputed = (
     day_hour.groupby([&quot;year&quot;, &quot;month&quot;, &quot;reporting_airline&quot;])[metric_columns]
@@ -220,7 +218,7 @@ provided = monthly.sort_values([&quot;year&quot;, &quot;month&quot;, &quot;repor
     drop=True
 )
 pd.testing.assert_frame_equal(recomputed, provided)</code></pre></section>
-<section class="cell" id="celda-10"><h2>Celda 10 · código</h2><p class="cell-comment">Comentario original: ¿Cuál es el KPI nacional de demora, cancelación y minutos positivos?</p><pre><code># ¿Cuál es el KPI nacional de demora, cancelación y minutos positivos?
+<section class="cell" id="celda-10"><h2>Celda 10 · código</h2><p class="cell-comment">Comentario: ¿Cuál es el KPI nacional de demora, cancelación y minutos positivos?</p><pre><code># ¿Cuál es el KPI nacional de demora, cancelación y minutos positivos?
 
 overall = add_rates(monthly[metric_columns].sum().to_frame().T)
 overall.to_csv(SUBMISSION_DIR / &quot;overall_kpis.csv&quot;, index=False)
@@ -241,7 +239,7 @@ operated_flights             2.118693e+07
 delay_rate                   2.040000e-01
 cancellation_rate            1.900000e-02
 mean_positive_delay_minutes  1.278900e+01</pre></details></section>
-<section class="cell" id="celda-11"><h2>Celda 11 · código</h2><p class="cell-comment">Comentario original: ¿Qué aerolíneas combinan mayor tasa de demora, volumen y cancelación?</p><pre><code># ¿Qué aerolíneas combinan mayor tasa de demora, volumen y cancelación?
+<section class="cell" id="celda-11"><h2>Celda 11 · código</h2><p class="cell-comment">Comentario: ¿Qué aerolíneas combinan mayor tasa de demora, volumen y cancelación?</p><pre><code># ¿Qué aerolíneas combinan mayor tasa de demora, volumen y cancelación?
 
 carrier_summary = add_rates(
     monthly.groupby(&quot;reporting_airline&quot;)[metric_columns].sum().reset_index()
@@ -275,7 +273,7 @@ carrier_summary[
 0                 9E          506020.0       0.154              0.029
 10                KH           88372.0       0.072              0.013
 9                 HA          169113.0       0.048              0.006</pre></details></section>
-<section class="cell" id="celda-12"><h2>Celda 12 · código</h2><p class="cell-comment">Comentario original: ¿Cómo evoluciona mensualmente la tasa nacional de demora?</p><pre><code># ¿Cómo evoluciona mensualmente la tasa nacional de demora?
+<section class="cell" id="celda-12"><h2>Celda 12 · código</h2><p class="cell-comment">Comentario: ¿Cómo evoluciona mensualmente la tasa nacional de demora?</p><pre><code># ¿Cómo evoluciona mensualmente la tasa nacional de demora?
 
 monthly_overall = add_rates(
     monthly.groupby([&quot;year&quot;, &quot;month&quot;])[metric_columns].sum().reset_index()
@@ -296,8 +294,8 @@ fig.update_yaxes(tickformat=&quot;.0%&quot;)
 fig.update_layout(template=&quot;plotly_white&quot;, showlegend=False)
 fig.show()
 
-</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
-<section class="cell" id="celda-13"><h2>Celda 13 · código</h2><p class="cell-comment">Comentario original: ¿En qué aerolíneas se concentra la mayor tasa de demora?</p><pre><code>
+</code></pre><p class="output-note">El notebook guarda una visualización interactiva de Plotly; consulta la figura en el notebook original.</p></section>
+<section class="cell" id="celda-13"><h2>Celda 13 · código</h2><p class="cell-comment">Comentario: ¿En qué aerolíneas se concentra la mayor tasa de demora?</p><pre><code>
 # ¿En qué aerolíneas se concentra la mayor tasa de demora?
 
 fig = px.bar(
@@ -310,8 +308,8 @@ fig = px.bar(
 fig.update_yaxes(tickformat=&quot;.0%&quot;)
 fig.update_layout(template=&quot;plotly_white&quot;, showlegend=False)
 fig.show()
-</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
-<section class="cell" id="celda-14"><h2>Celda 14 · código</h2><p class="cell-comment">Comentario original: ¿Qué días y horas programadas concentran las mayores tasas de demora?</p><pre><code># ¿Qué días y horas programadas concentran las mayores tasas de demora?
+</code></pre><p class="output-note">El notebook guarda una visualización interactiva de Plotly; consulta la figura en el notebook original.</p></section>
+<section class="cell" id="celda-14"><h2>Celda 14 · código</h2><p class="cell-comment">Comentario: ¿Qué días y horas programadas concentran las mayores tasas de demora?</p><pre><code># ¿Qué días y horas programadas concentran las mayores tasas de demora?
 
 day_names = {
     1: &quot;Lunes&quot;,
@@ -341,8 +339,8 @@ fig.update_yaxes(
     tickmode=&quot;array&quot;, tickvals=list(day_names), ticktext=list(day_names.values())
 )
 fig.update_layout(template=&quot;plotly_white&quot;, coloraxis_colorbar_tickformat=&quot;.0%&quot;)
-fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
-<section class="cell" id="celda-15"><h2>Celda 15 · código</h2><p class="cell-comment">Comentario original: ¿Qué segmentos aerolínea–día–hora se deben priorizar para investigar y reducir las demoras, sin ignorar su volumen?</p><pre><code># ¿Qué segmentos aerolínea–día–hora se deben priorizar para investigar y reducir las demoras, sin ignorar su volumen?
+fig.show()</code></pre><p class="output-note">El notebook guarda una visualización interactiva de Plotly; consulta la figura en el notebook original.</p></section>
+<section class="cell" id="celda-15"><h2>Celda 15 · código</h2><p class="cell-comment">Comentario: ¿Qué segmentos aerolínea–día–hora se deben priorizar para investigar y reducir las demoras, sin ignorar su volumen?</p><pre><code># ¿Qué segmentos aerolínea–día–hora se deben priorizar para investigar y reducir las demoras, sin ignorar su volumen?
 
 minimum_operated_flights = 25_000
 critical = add_rates(
@@ -372,8 +370,8 @@ fig = px.bar(
 )
 fig.update_xaxes(tickformat=&quot;.0%&quot;)
 fig.update_layout(template=&quot;plotly_white&quot;, showlegend=False)
-fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
-<section class="cell" id="celda-16"><h2>Celda 16 · código</h2><p class="cell-comment">Comentario original: ¿La evolución de las aerolíneas de mayor volumen revela un patrón estacional?</p><pre><code># ¿La evolución de las aerolíneas de mayor volumen revela un patrón estacional?
+fig.show()</code></pre><p class="output-note">El notebook guarda una visualización interactiva de Plotly; consulta la figura en el notebook original.</p></section>
+<section class="cell" id="celda-16"><h2>Celda 16 · código</h2><p class="cell-comment">Comentario: ¿La evolución de las aerolíneas de mayor volumen revela un patrón estacional?</p><pre><code># ¿La evolución de las aerolíneas de mayor volumen revela un patrón estacional?
 
 seasonality = add_rates(
     monthly.groupby([&quot;month&quot;, &quot;reporting_airline&quot;])[metric_columns].sum().reset_index()
@@ -392,10 +390,10 @@ fig = px.line(
 fig.update_xaxes(dtick=1)
 fig.update_yaxes(tickformat=&quot;.0%&quot;)
 fig.update_layout(template=&quot;plotly_white&quot;)
-fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
-      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_10.html">PRE 10</a><a href="pre_12.html">PRE 12</a></nav>
+fig.show()</code></pre><p class="output-note">El notebook guarda una visualización interactiva de Plotly; consulta la figura en el notebook original.</p></section>
+      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_10.html">← PRE 10</a><a href="pre_12.html">PRE 12 →</a></nav>
     </main>
   </div>
-  <footer><a class="back" href="../index.html#catalogo">Índice principal</a></footer>
+  <footer><a class="back" href="../index.html#practica">Índice práctico</a></footer>
 </body>
 </html>

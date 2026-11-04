@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Código fuente y notebook del PRE 10: Retail sales.">
+  <meta name="description" content="Código práctico del PRE 10: Retail sales.">
   <title>PRE 10 · Retail sales</title>
   <style>
     :root { color-scheme: light; --paper: #f3f5f2; --surface: #fff; --ink: #172522; --muted: #596963; --line: #d7dfd9; --green: #245c4b; --green-soft: #e2eee8; --blue-soft: #e5eef2; --code: #172b2b; }
@@ -16,7 +16,7 @@
     aside { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; } aside h2 { font-size: .85rem; text-transform: uppercase; } aside ol { padding-left: 1.25rem; } aside li { margin: .3rem 0; font-size: .88rem; } aside a { text-decoration: none; }
     main { min-width: 0; } .note { padding: .8rem 1rem; border-left: 3px solid #426d83; background: var(--blue-soft); }
     section.file, section.cell { margin: 0 0 1rem; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; scroll-margin-top: 1rem; }
-    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; } h3 { margin: 0 0 .5rem; font-size: 1rem; }
+    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; }
     .source { margin: .2rem 0 .8rem; color: var(--muted); font-size: .86rem; } .cell-comment { color: var(--green); font-weight: 650; }
     pre { overflow-x: auto; margin: .65rem 0; padding: 1rem; border-radius: 3px; background: var(--code); color: #ecf4ee; font: .85rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; tab-size: 4; }
     code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; } .markdown { white-space: pre-wrap; } .output { margin-top: .7rem; border-top: 1px solid var(--line); } .output summary { padding: .5rem 0; cursor: pointer; color: var(--green); font-weight: 700; } .output pre { background: #edf1ed; color: var(--ink); }
@@ -26,29 +26,27 @@
 </head>
 <body>
   <header>
-    <a class="back" href="../index.html#catalogo">Volver al índice principal</a>
-    <p>Material estático · PRE 10</p>
+    <a class="back" href="../index.html#practica">Volver al índice práctico</a>
+    <p>Cuaderno de código · PRE 10</p>
     <h1>PRE 10 · Retail sales</h1>
-    <p>Código fuente completo del proyecto, agrupado por archivo o por celda de notebook.</p>
   </header>
   <div class="layout">
-    <aside aria-label="Navegación por PRE"><h2>PRE 01–15</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_07.html">PRE 07 · No disponible</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_09.html">PRE 09 · Drivers y ChatGPT</a></li><li><a href="pre_10.html" aria-current=page>PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html">PRE 13 · Scopus</a></li><li><a href="pre_14.html">PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
+    <aside aria-label="Navegación por PRE"><h2>Cuadernos con código</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_10.html" aria-current=page>PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html">PRE 13 · Scopus</a></li><li><a href="pre_14.html">PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
     <main>
-      <p class="note">El contenido está escrito directamente en esta página HTML. El código y los comentarios originales se pueden seleccionar, copiar y explicar sin descargar el archivo. Las salidas guardadas se muestran como texto cuando están disponibles.</p>
-      <p class="note">Notebook original: 16 celdas, en su orden original. Se conservan comentarios de código y salidas textuales guardadas; las figuras Plotly se identifican, pero no se ejecutan en esta página estática.</p>
-<section class="cell" id="celda-1"><h2>Celda 1 · código</h2><p class="cell-comment">Comentario original: Se deben importar las librerías usadas durante el análisis.</p><pre><code># Se deben importar las librerías usadas durante el análisis.
+      <p class="note">Código mostrado como texto estático, organizado por archivo o celda. Se conservan los comentarios originales y, si el notebook las guarda, las salidas textuales. Puedes recorrer y copiar los fragmentos directamente desde aquí.</p>
+      <section class="cell" id="celda-1"><h2>Celda 1 · código</h2><p class="cell-comment">Comentario: Se deben importar las librerías usadas durante el análisis.</p><pre><code># Se deben importar las librerías usadas durante el análisis.
 
 from pathlib import Path
 import pandas as pd
 import plotly.express as px</code></pre></section>
-<section class="cell" id="celda-2"><h2>Celda 2 · código</h2><p class="cell-comment">Comentario original: Se deben definir y verificar la ruta del archivo de ventas y la carpeta de resultados.</p><pre><code># Se deben definir y verificar la ruta del archivo de ventas y la carpeta de resultados.
+<section class="cell" id="celda-2"><h2>Celda 2 · código</h2><p class="cell-comment">Comentario: Se deben definir y verificar la ruta del archivo de ventas y la carpeta de resultados.</p><pre><code># Se deben definir y verificar la ruta del archivo de ventas y la carpeta de resultados.
 
 SALES_PATH = Path(&quot;../data/sales.csv&quot;)
 SUBMISSION_DIR = Path(&quot;../submission&quot;)
 assert SALES_PATH.exists(), f&quot;No existe {SALES_PATH}&quot;
 assert SUBMISSION_DIR.exists(), f&quot;No existe {SUBMISSION_DIR}&quot;
 </code></pre></section>
-<section class="cell" id="celda-3"><h2>Celda 3 · código</h2><p class="cell-comment">Comentario original: Se debe cargar y verificar el archivo de ventas.</p><pre><code># Se debe cargar y verificar el archivo de ventas.
+<section class="cell" id="celda-3"><h2>Celda 3 · código</h2><p class="cell-comment">Comentario: Se debe cargar y verificar el archivo de ventas.</p><pre><code># Se debe cargar y verificar el archivo de ventas.
 
 sales = pd.read_csv(SALES_PATH)
 sales.info()
@@ -91,7 +89,7 @@ memory usage: 93.9+ KB
 2           0  
 3           1  
 4           1  </pre></details></section>
-<section class="cell" id="celda-4"><h2>Celda 4 · código</h2><p class="cell-comment">Comentario original: Se deben explorar las medidas numéricas de las órdenes de venta.</p><pre><code># Se deben explorar las medidas numéricas de las órdenes de venta.
+<section class="cell" id="celda-4"><h2>Celda 4 · código</h2><p class="cell-comment">Comentario: Se deben explorar las medidas numéricas de las órdenes de venta.</p><pre><code># Se deben explorar las medidas numéricas de las órdenes de venta.
 
 sales.describe().T</code></pre><details class="output"><summary>Salida guardada</summary><pre>              count        mean         std     min       25%       50%  \
 OrderID      1000.0   500.50000  288.819436    1.00  250.7500   500.500   
@@ -110,7 +108,7 @@ Price         612.7125   799.97
 TotalAmount  1904.4000  3988.50  
 CustomerID    379.2500   500.00  
 IsReturned      1.0000     1.00  </pre></details></section>
-<section class="cell" id="celda-5"><h2>Celda 5 · código</h2><p class="cell-comment">Comentario original: Se debe verificar que cada fila es una orden completa y que el valor de venta es consistente.</p><pre><code># Se debe verificar que cada fila es una orden completa y que el valor de venta es consistente.
+<section class="cell" id="celda-5"><h2>Celda 5 · código</h2><p class="cell-comment">Comentario: Se debe verificar que cada fila es una orden completa y que el valor de venta es consistente.</p><pre><code># Se debe verificar que cada fila es una orden completa y que el valor de venta es consistente.
 
 assert sales.isna().sum().sum() == 0
 assert sales[&quot;OrderID&quot;].is_unique
@@ -126,7 +124,7 @@ sales[[&quot;OrderID&quot;, &quot;Quantity&quot;, &quot;Price&quot;, &quot;Total
 2        3         5  205.01      1025.05
 3        4         4  163.13       652.52
 4        5         3  608.73      1826.19</pre></details></section>
-<section class="cell" id="celda-6"><h2>Celda 6 · código</h2><p class="cell-comment">Comentario original: Se deben preparar la fecha, el valor devuelto, la venta neta y el tipo de día de cada orden.</p><pre><code># Se deben preparar la fecha, el valor devuelto, la venta neta y el tipo de día de cada orden.
+<section class="cell" id="celda-6"><h2>Celda 6 · código</h2><p class="cell-comment">Comentario: Se deben preparar la fecha, el valor devuelto, la venta neta y el tipo de día de cada orden.</p><pre><code># Se deben preparar la fecha, el valor devuelto, la venta neta y el tipo de día de cada orden.
 
 sales[&quot;OrderDate&quot;] = pd.to_datetime(sales[&quot;OrderDate&quot;])
 sales[&quot;OrderMonth&quot;] = sales[&quot;OrderDate&quot;].dt.to_period(&quot;M&quot;).dt.to_timestamp()
@@ -136,7 +134,7 @@ sales[&quot;DayType&quot;] = sales[&quot;OrderDate&quot;].dt.dayofweek.map(
 sales[&quot;ReturnedAmount&quot;] = sales[&quot;TotalAmount&quot;].where(sales[&quot;IsReturned&quot;].eq(1), 0)
 sales[&quot;NetAmount&quot;] = sales[&quot;TotalAmount&quot;] - sales[&quot;ReturnedAmount&quot;]
 </code></pre></section>
-<section class="cell" id="celda-7"><h2>Celda 7 · código</h2><p class="cell-comment">Comentario original: ¿Cuál es el desempeño comercial global en ventas brutas, devoluciones y ventas netas?</p><pre><code># ¿Cuál es el desempeño comercial global en ventas brutas, devoluciones y ventas netas?
+<section class="cell" id="celda-7"><h2>Celda 7 · código</h2><p class="cell-comment">Comentario: ¿Cuál es el desempeño comercial global en ventas brutas, devoluciones y ventas netas?</p><pre><code># ¿Cuál es el desempeño comercial global en ventas brutas, devoluciones y ventas netas?
 
 kpi = pd.DataFrame(
     {
@@ -156,7 +154,7 @@ kpi.round(3)</code></pre><details class="output"><summary>Salida guardada</summa
 
    return_rate_by_orders  return_rate_by_value  net_sales_per_order  
 0                  0.516                 0.503              637.043  </pre></details></section>
-<section class="cell" id="celda-8"><h2>Celda 8 · código</h2><p class="cell-comment">Comentario original: ¿Cómo evolucionan las ventas brutas, devoluciones y ventas netas durante el período observado?</p><pre><code># ¿Cómo evolucionan las ventas brutas, devoluciones y ventas netas durante el período observado?
+<section class="cell" id="celda-8"><h2>Celda 8 · código</h2><p class="cell-comment">Comentario: ¿Cómo evolucionan las ventas brutas, devoluciones y ventas netas durante el período observado?</p><pre><code># ¿Cómo evolucionan las ventas brutas, devoluciones y ventas netas durante el período observado?
 
 monthly_sales = (
     sales.groupby(&quot;OrderMonth&quot;)[[&quot;TotalAmount&quot;, &quot;ReturnedAmount&quot;, &quot;NetAmount&quot;]]
@@ -177,8 +175,8 @@ fig = px.line(
     labels={&quot;OrderMonth&quot;: &quot;Mes&quot;, &quot;amount&quot;: &quot;Valor&quot;, &quot;metric&quot;: &quot;Métrica&quot;},
 )
 fig.update_layout(template=&quot;plotly_white&quot;)
-fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
-<section class="cell" id="celda-9"><h2>Celda 9 · código</h2><p class="cell-comment">Comentario original: ¿Qué categorías combinan ventas netas altas con tasas de devolución elevadas?</p><pre><code>
+fig.show()</code></pre><p class="output-note">El notebook guarda una visualización interactiva de Plotly; consulta la figura en el notebook original.</p></section>
+<section class="cell" id="celda-9"><h2>Celda 9 · código</h2><p class="cell-comment">Comentario: ¿Qué categorías combinan ventas netas altas con tasas de devolución elevadas?</p><pre><code>
 # ¿Qué categorías combinan ventas netas altas con tasas de devolución elevadas?
 
 category_summary = (
@@ -198,7 +196,7 @@ category_summary.round(3)</code></pre><details class="output"><summary>Salida gu
 1        Fashion     343    451214.50        225784.37  225430.13        0.522
 0    Electronics     336    440470.24        226316.49  214153.75        0.512
 2  Home &amp; Garden     321    389060.81        191602.16  197458.65        0.514</pre></details></section>
-<section class="cell" id="celda-10"><h2>Celda 10 · código</h2><p class="cell-comment">Comentario original: ¿Qué clientes aportan mayor valor neto después de considerar sus devoluciones?</p><pre><code># ¿Qué clientes aportan mayor valor neto después de considerar sus devoluciones?
+<section class="cell" id="celda-10"><h2>Celda 10 · código</h2><p class="cell-comment">Comentario: ¿Qué clientes aportan mayor valor neto después de considerar sus devoluciones?</p><pre><code># ¿Qué clientes aportan mayor valor neto después de considerar sus devoluciones?
 
 customer_summary = (
     sales.groupby(&quot;CustomerID&quot;)
@@ -238,7 +236,7 @@ top_customers.round(3)</code></pre><details class="output"><summary>Salida guard
 34                  0.229  
 261                 0.000  
 306                 0.000  </pre></details></section>
-<section class="cell" id="celda-11"><h2>Celda 11 · código</h2><p class="cell-comment">Comentario original: ¿Qué productos generan mayor venta neta dentro de cada categoría?</p><pre><code># ¿Qué productos generan mayor venta neta dentro de cada categoría?
+<section class="cell" id="celda-11"><h2>Celda 11 · código</h2><p class="cell-comment">Comentario: ¿Qué productos generan mayor venta neta dentro de cada categoría?</p><pre><code># ¿Qué productos generan mayor venta neta dentro de cada categoría?
 
 product_summary = (
     sales.groupby([&quot;Category&quot;, &quot;ProductName&quot;])
@@ -267,8 +265,8 @@ fig = px.bar(
     labels={&quot;net_sales&quot;: &quot;Ventas netas&quot;, &quot;ProductName&quot;: &quot;Producto&quot;},
 )
 fig.update_layout(template=&quot;plotly_white&quot;)
-fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
-<section class="cell" id="celda-12"><h2>Celda 12 · código</h2><p class="cell-comment">Comentario original: ¿Qué combinaciones de categoría y canal presentan mayor riesgo de devolución?</p><pre><code># ¿Qué combinaciones de categoría y canal presentan mayor riesgo de devolución?
+fig.show()</code></pre><p class="output-note">El notebook guarda una visualización interactiva de Plotly; consulta la figura en el notebook original.</p></section>
+<section class="cell" id="celda-12"><h2>Celda 12 · código</h2><p class="cell-comment">Comentario: ¿Qué combinaciones de categoría y canal presentan mayor riesgo de devolución?</p><pre><code># ¿Qué combinaciones de categoría y canal presentan mayor riesgo de devolución?
 
 minimum_orders = 50
 return_risk = (
@@ -306,7 +304,7 @@ return_risk.round(3)
 3        0.500  
 0        0.488  
 6        0.449  </pre></details></section>
-<section class="cell" id="celda-13"><h2>Celda 13 · código</h2><p class="cell-comment">Comentario original: ¿Dónde se concentra visualmente el riesgo de devolución por categoría y canal?</p><pre><code># ¿Dónde se concentra visualmente el riesgo de devolución por categoría y canal?
+<section class="cell" id="celda-13"><h2>Celda 13 · código</h2><p class="cell-comment">Comentario: ¿Dónde se concentra visualmente el riesgo de devolución por categoría y canal?</p><pre><code># ¿Dónde se concentra visualmente el riesgo de devolución por categoría y canal?
 
 return_matrix = return_risk.pivot(
     index=&quot;Category&quot;, columns=&quot;SalesChannel&quot;, values=&quot;return_rate&quot;
@@ -318,8 +316,8 @@ fig = px.imshow(
     title=&quot;Tasa de devolución por categoría y canal&quot;,
 )
 fig.update_layout(template=&quot;plotly_white&quot;, coloraxis_colorbar_tickformat=&quot;.0%&quot;)
-fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
-<section class="cell" id="celda-14"><h2>Celda 14 · código</h2><p class="cell-comment">Comentario original: ¿Qué segmentos se deben priorizar para investigar y reducir las devoluciones?</p><pre><code># ¿Qué segmentos se deben priorizar para investigar y reducir las devoluciones?
+fig.show()</code></pre><p class="output-note">El notebook guarda una visualización interactiva de Plotly; consulta la figura en el notebook original.</p></section>
+<section class="cell" id="celda-14"><h2>Celda 14 · código</h2><p class="cell-comment">Comentario: ¿Qué segmentos se deben priorizar para investigar y reducir las devoluciones?</p><pre><code># ¿Qué segmentos se deben priorizar para investigar y reducir las devoluciones?
 
 priorities = return_risk.copy()
 priorities[&quot;segment&quot;] = priorities[&quot;Category&quot;] + &quot; — &quot; + priorities[&quot;SalesChannel&quot;]
@@ -342,8 +340,8 @@ fig = px.bar(
 )
 fig.update_coloraxes(colorbar_tickformat=&quot;.0%&quot;)
 fig.update_layout(template=&quot;plotly_white&quot;)
-fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
-<section class="cell" id="celda-15"><h2>Celda 15 · código</h2><p class="cell-comment">Comentario original: ¿El comportamiento comercial cambia entre días laborales y fines de semana?</p><pre><code># ¿El comportamiento comercial cambia entre días laborales y fines de semana?
+fig.show()</code></pre><p class="output-note">El notebook guarda una visualización interactiva de Plotly; consulta la figura en el notebook original.</p></section>
+<section class="cell" id="celda-15"><h2>Celda 15 · código</h2><p class="cell-comment">Comentario: ¿El comportamiento comercial cambia entre días laborales y fines de semana?</p><pre><code># ¿El comportamiento comercial cambia entre días laborales y fines de semana?
 
 day_type_summary = (
     sales.groupby(&quot;DayType&quot;)
@@ -372,8 +370,8 @@ fig = px.bar(
 )
 fig.update_coloraxes(colorbar_tickformat=&quot;.0%&quot;)
 fig.update_layout(template=&quot;plotly_white&quot;)
-fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
-<section class="cell" id="celda-16"><h2>Celda 16 · código</h2><p class="cell-comment">Comentario original: ¿Qué medios de pago combinan ventas netas y tasas de devolución que requieren investigación?</p><pre><code># ¿Qué medios de pago combinan ventas netas y tasas de devolución que requieren investigación?
+fig.show()</code></pre><p class="output-note">El notebook guarda una visualización interactiva de Plotly; consulta la figura en el notebook original.</p></section>
+<section class="cell" id="celda-16"><h2>Celda 16 · código</h2><p class="cell-comment">Comentario: ¿Qué medios de pago combinan ventas netas y tasas de devolución que requieren investigación?</p><pre><code># ¿Qué medios de pago combinan ventas netas y tasas de devolución que requieren investigación?
 
 payment_summary = (
     sales.groupby(&quot;PaymentMethod&quot;)
@@ -403,10 +401,10 @@ fig = px.bar(
 )
 fig.update_coloraxes(colorbar_tickformat=&quot;.0%&quot;)
 fig.update_layout(template=&quot;plotly_white&quot;)
-fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
-      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_09.html">PRE 09</a><a href="pre_11.html">PRE 11</a></nav>
+fig.show()</code></pre><p class="output-note">El notebook guarda una visualización interactiva de Plotly; consulta la figura en el notebook original.</p></section>
+      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_08.html">← PRE 08</a><a href="pre_11.html">PRE 11 →</a></nav>
     </main>
   </div>
-  <footer><a class="back" href="../index.html#catalogo">Índice principal</a></footer>
+  <footer><a class="back" href="../index.html#practica">Índice práctico</a></footer>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Código fuente y notebook del PRE 14: Marketing dashboard.">
+  <meta name="description" content="Código práctico del PRE 14: Marketing dashboard.">
   <title>PRE 14 · Marketing dashboard</title>
   <style>
     :root { color-scheme: light; --paper: #f3f5f2; --surface: #fff; --ink: #172522; --muted: #596963; --line: #d7dfd9; --green: #245c4b; --green-soft: #e2eee8; --blue-soft: #e5eef2; --code: #172b2b; }
@@ -16,7 +16,7 @@
     aside { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; } aside h2 { font-size: .85rem; text-transform: uppercase; } aside ol { padding-left: 1.25rem; } aside li { margin: .3rem 0; font-size: .88rem; } aside a { text-decoration: none; }
     main { min-width: 0; } .note { padding: .8rem 1rem; border-left: 3px solid #426d83; background: var(--blue-soft); }
     section.file, section.cell { margin: 0 0 1rem; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; scroll-margin-top: 1rem; }
-    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; } h3 { margin: 0 0 .5rem; font-size: 1rem; }
+    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; }
     .source { margin: .2rem 0 .8rem; color: var(--muted); font-size: .86rem; } .cell-comment { color: var(--green); font-weight: 650; }
     pre { overflow-x: auto; margin: .65rem 0; padding: 1rem; border-radius: 3px; background: var(--code); color: #ecf4ee; font: .85rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; tab-size: 4; }
     code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; } .markdown { white-space: pre-wrap; } .output { margin-top: .7rem; border-top: 1px solid var(--line); } .output summary { padding: .5rem 0; cursor: pointer; color: var(--green); font-weight: 700; } .output pre { background: #edf1ed; color: var(--ink); }
@@ -26,16 +26,15 @@
 </head>
 <body>
   <header>
-    <a class="back" href="../index.html#catalogo">Volver al índice principal</a>
-    <p>Material estático · PRE 14</p>
+    <a class="back" href="../index.html#practica">Volver al índice práctico</a>
+    <p>Cuaderno de código · PRE 14</p>
     <h1>PRE 14 · Marketing dashboard</h1>
-    <p>Código fuente completo del proyecto, agrupado por archivo o por celda de notebook.</p>
   </header>
   <div class="layout">
-    <aside aria-label="Navegación por PRE"><h2>PRE 01–15</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_07.html">PRE 07 · No disponible</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_09.html">PRE 09 · Drivers y ChatGPT</a></li><li><a href="pre_10.html">PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html">PRE 13 · Scopus</a></li><li><a href="pre_14.html" aria-current=page>PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
+    <aside aria-label="Navegación por PRE"><h2>Cuadernos con código</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_10.html">PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html">PRE 13 · Scopus</a></li><li><a href="pre_14.html" aria-current=page>PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
     <main>
-      <p class="note">El contenido está escrito directamente en esta página HTML. El código y los comentarios originales se pueden seleccionar, copiar y explicar sin descargar el archivo. Las salidas guardadas se muestran como texto cuando están disponibles.</p>
-      <section class="file" id="archivo-app-py"><h2>app.py</h2><p class="source">Archivo original: <a href="../PRE_14_marketing_dashboard/src/app.py">PRE_14_marketing_dashboard/src/app.py</a> · 123 líneas</p><pre><code>import plotly.express as px
+      <p class="note">Código mostrado como texto estático, organizado por archivo o celda. Se conservan los comentarios originales y, si el notebook las guarda, las salidas textuales. Puedes recorrer y copiar los fragmentos directamente desde aquí.</p>
+      <section class="file" id="archivo-app-py"><h2>app.py</h2><p class="source"><a href="../PRE_14_marketing_dashboard/src/app.py">Abrir fuente original</a> · 123 líneas</p><pre><code>import plotly.express as px
 import streamlit as st
 
 try:
@@ -158,7 +157,7 @@ if __name__ == &quot;__main__&quot;:
     main()
     
     </code></pre></section>
-<section class="file" id="archivo-main-py"><h2>main.py</h2><p class="source">Archivo original: <a href="../PRE_14_marketing_dashboard/src/main.py">PRE_14_marketing_dashboard/src/main.py</a> · 151 líneas</p><pre><code>from pathlib import Path
+<section class="file" id="archivo-main-py"><h2>main.py</h2><p class="source"><a href="../PRE_14_marketing_dashboard/src/main.py">Abrir fuente original</a> · 151 líneas</p><pre><code>from pathlib import Path
 
 import pandas as pd
 
@@ -309,9 +308,9 @@ def export_dashboard_tables(output_folder=SUBMISSION_FOLDER):
 
 if __name__ == &quot;__main__&quot;:
     export_dashboard_tables()</code></pre></section>
-      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_13.html">PRE 13</a><a href="pre_15.html">PRE 15</a></nav>
+      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_13.html">← PRE 13</a><a href="pre_15.html">PRE 15 →</a></nav>
     </main>
   </div>
-  <footer><a class="back" href="../index.html#catalogo">Índice principal</a></footer>
+  <footer><a class="back" href="../index.html#practica">Índice práctico</a></footer>
 </body>
 </html>

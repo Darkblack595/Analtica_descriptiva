@@ -160,8 +160,8 @@
   <header class="masthead">
     <p class="eyebrow">Guía de consulta · PRE 01–15</p>
     <h1>Analítica descriptiva</h1>
-    <p class="intro">Un índice temático de los proyectos PRE 01 al 15: fundamentos que aparecen en los archivos, procedimientos reproducibles, fragmentos de código, entregables y los límites de lo documentado.</p>
-    <p class="scope">Compendio local y estático · alcance: PRE 01–15</p>
+    <p class="intro">Cuadernos prácticos con los scripts y notebooks resueltos, organizados por PRE para recorrer el código paso a paso. Los temas de referencia quedan disponibles más abajo.</p>
+    <p class="scope">Páginas estáticas · código y comentarios incluidos en el HTML</p>
   </header>
 
   <div class="layout">
@@ -174,6 +174,7 @@
       <nav aria-label="Tabla de contenidos">
         <h2>Contenido</h2>
         <ol>
+          <li><a href="#practica">Cuadernos prácticos</a></li>
           <li><a href="#estadistica">Estadística descriptiva</a></li>
           <li><a href="#variables">Variables aleatorias</a></li>
           <li><a href="#distribuciones">Distribuciones</a></li>
@@ -190,9 +191,38 @@
 
     <main id="contenido">
       <div class="overview">
-        <p><strong>Alcance documental.</strong> Esta guía considera únicamente PRE 01–15. El contenido es principalmente aplicado: programación, preparación de datos, KPI y análisis descriptivo. No contiene desarrollo formal de probabilidad inferencial; las secciones de variables aleatorias, intervalos y contrastes señalan esa ausencia.</p>
-        <p><strong>Resultados.</strong> Se muestran cifras solo cuando hay un CSV de entrega guardado y se distingue entre salidas ejecutadas y gráficos visibles en notebooks.</p>
+        <p><strong>Uso principal.</strong> Abre un cuaderno para consultar scripts completos o celdas de notebook con sus comentarios y resultados guardados. Las páginas no ejecutan el código ni requieren descargarlo.</p>
+        <p><strong>Referencia.</strong> La tabla de contenidos también conserva los resúmenes temáticos y los límites de lo documentado en PRE 01–15.</p>
       </div>
+
+      <article class="topic" id="practica" data-topic>
+        <span class="tag">Código resuelto</span>
+        <h2>Cuadernos prácticos</h2>
+        <p>Selecciona un PRE para recorrer sus fuentes por archivo o celda. Los comentarios del código original se muestran junto al fragmento correspondiente.</p>
+        <div class="project-group">
+          <h3>Scripts Python</h3>
+          <ul class="source-list">
+            <li><a href="pre/pre_01.html">PRE 01 · Hola mundo</a></li>
+            <li><a href="pre/pre_02.html">PRE 02 · MapReduce</a></li>
+            <li><a href="pre/pre_03.html">PRE 03 · CSV a JSON</a></li>
+            <li><a href="pre/pre_04.html">PRE 04 · Limpieza</a></li>
+            <li><a href="pre/pre_13.html">PRE 13 · Scopus</a></li>
+            <li><a href="pre/pre_14.html">PRE 14 · Marketing dashboard</a></li>
+          </ul>
+        </div>
+        <div class="project-group">
+          <h3>Notebooks</h3>
+          <ul class="source-list">
+            <li><a href="pre/pre_05.html">PRE 05 · Anonimización</a></li>
+            <li><a href="pre/pre_06.html">PRE 06 · Análisis con Pandas</a></li>
+            <li><a href="pre/pre_08.html">PRE 08 · Drivers con SQLite</a></li>
+            <li><a href="pre/pre_10.html">PRE 10 · Retail sales</a></li>
+            <li><a href="pre/pre_11.html">PRE 11 · Vuelos</a></li>
+            <li><a href="pre/pre_12.html">PRE 12 · Supply chain</a></li>
+            <li><a href="pre/pre_15.html">PRE 15 · Salarios</a></li>
+          </ul>
+        </div>
+      </article>
 
       <article class="topic" id="estadistica" data-topic>
         <span class="tag">Fundamentos y exploración</span>
@@ -521,9 +551,7 @@ resumen = tabla.groupby("driverId")["hours-logged"].agg(["min", "max"])</code></
               <li><a href="pre/pre_04.html">PRE 04 · código</a></li>
               <li><a href="pre/pre_05.html">PRE 05 · notebook</a></li>
               <li><a href="pre/pre_06.html">PRE 06 · notebook</a></li>
-              <li><a href="pre/pre_07.html">PRE 07 · no disponible</a></li>
               <li><a href="pre/pre_08.html">PRE 08 · notebook</a></li>
-              <li><a href="pre/pre_09.html">PRE 09 · notebook</a></li>
               <li><a href="pre/pre_10.html">PRE 10 · notebook</a></li>
               <li><a href="pre/pre_11.html">PRE 11 · notebook</a></li>
               <li><a href="pre/pre_12.html">PRE 12 · notebook</a></li>
@@ -532,128 +560,8 @@ resumen = tabla.groupby("driverId")["hours-logged"].agg(["min", "max"])</code></
               <li><a href="pre/pre_15.html">PRE 15 · notebook</a></li>
             </ul>
           </nav>
-          <div class="project-group">
-            <h3>Programación, ingesta y preparación</h3>
-            <div class="project"><h4>PRE 01 · Hola mundo</h4><p>Ejercicios introductorios de Python. <a href="PRE_01_hola_mundo/src/pregunta_01.py">Código original</a>.</p><details class="code-sample"><summary>Ver fragmento de código</summary><pre><code>def pregunta_01():
-        return "Hola mundo cruel!"</code></pre></details></div>
-            <div class="project"><h4>PRE 02 · MapReduce</h4><p>Conteo de palabras y procesamiento por etapas. <a href="PRE_02_mapreduce/src/word_count_2.py">Código original</a>.</p><details class="code-sample"><summary>Ver mapper y reducer</summary><pre><code>def mapper(sequence):
-&#32;&#32;&#32;&#32;pairs_sequence = []
-&#32;&#32;&#32;&#32;for _, line in sequence:
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;line = line.lower()
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;line = line.translate(str.maketrans("", "", string.punctuation))
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;line = line.replace("\n", "")
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;words = line.split()
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;pairs_sequence.extend([(word, 1) for word in words])
-&#32;&#32;&#32;&#32;return pairs_sequence
-
-def reducer(pairs_sequence):
-&#32;&#32;&#32;&#32;result = []
-&#32;&#32;&#32;&#32;for key, value in pairs_sequence:
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if result and result[-1][0] == key:
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result[-1] = (key, result[-1][1] + value)
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;else:
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result.append((key, value))
-&#32;&#32;&#32;&#32;return result</code></pre></details></div>
-            <div class="project"><h4>PRE 03 · CSV a JSON</h4><p>Conversión entre formatos tabulares. <a href="PRE_03_csv2json/src/csv2json.py">Código original</a>.</p><details class="code-sample"><summary>Ver fragmento de código</summary><pre><code>def convert_csv_2_json(input_file):
-        output_file = input_file.replace(".csv", ".json")
-        output_file = output_file.replace("/data/", "/temp/")
-        data = []
-        with open(input_file, "r", encoding="utf-8") as f:
-          reader = csv.DictReader(f)
-          for row in reader:
-            data.append(row)
-        with open(output_file, "w", encoding="utf-8") as f:
-          json.dump(data, f, indent=4)</code></pre></details></div>
-            <div class="project"><h4>PRE 04 · Limpieza</h4><p>Diagnóstico y transformación de datos. <a href="PRE_04_limpieza/src/diagnostics.py">Diagnóstico</a> · <a href="PRE_04_limpieza/src/clean.py">Limpieza</a>.</p><details class="code-sample"><summary>Ver normalización de columnas y montos</summary><pre><code>def clean_column_names(series):
-&#32;&#32;&#32;&#32;series = strip_whitespace(series)
-&#32;&#32;&#32;&#32;series = to_lowercase(series)
-&#32;&#32;&#32;&#32;return replace_space_with_underscore(series)
-
-def clean_amount(series):
-&#32;&#32;&#32;&#32;series = strip_whitespace(series)
-&#32;&#32;&#32;&#32;series = series.str.replace("COP ", "", regex=False)
-&#32;&#32;&#32;&#32;series = series.str.replace(r"\.00K$", "000", regex=True)
-&#32;&#32;&#32;&#32;series = series.str.replace("$", "", regex=False)
-&#32;&#32;&#32;&#32;series = series.str.replace(",", "", regex=False)
-&#32;&#32;&#32;&#32;return series.str.replace(".", "", regex=False)</code></pre></details></div>
-            <div class="project"><h4>PRE 05 · Anonimización</h4><p>Protección y utilidad analítica. <a href="PRE_05_anonimizacion/notebooks/notebook.ipynb">Notebook original</a>.</p><details class="code-sample"><summary>Ver eliminación de identificadores directos</summary><pre><code>anonymized = raw.drop(
-&#32;&#32;&#32;&#32;columns=["name", "document_id", "email", "loyalty_card_number"]
-)</code></pre></details></div>
-            <div class="project"><h4>PRE 06 · Análisis con Pandas</h4><p>Agregación por conductor, medias, sumas, unión y gráfico top 10. <a href="PRE_06_analisis_pandas/notebooks/notebook.ipynb">Notebook original</a>.</p><details class="code-sample"><summary>Ver agregación por conductor</summary><pre><code>mean_timesheet = timesheet.groupby("driverId").mean()
-mean_timesheet.head()</code></pre></details></div>
-            <div class="project"><h4>PRE 07 · No disponible</h4><p>No se encontró una carpeta PRE 07 en este repositorio; no hay código fuente que mostrar.</p></div>
-            <div class="project"><h4>PRE 08 · Drivers con SQLite</h4><p>Consultas y resumen de registros de conductores. <a href="PRE_08_drivers_sqlite/notebooks/notebook.ipynb">Notebook original</a>.</p><details class="code-sample"><summary>Ver consulta SQL y vista de resumen</summary><pre><code>connection.executescript("""
-    &#32;&#32;&#32;&#32;CREATE VIEW driver_summary AS
-    &#32;&#32;&#32;&#32;SELECT t.driver_id,
-    &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;SUM(t.hours_logged) AS hours_logged,
-    &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;SUM(t.miles_logged) AS miles_logged,
-    &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;d.name
-    &#32;&#32;&#32;&#32;FROM timesheet AS t
-    &#32;&#32;&#32;&#32;INNER JOIN drivers AS d ON t.driver_id = d.driver_id
-    &#32;&#32;&#32;&#32;GROUP BY t.driver_id, d.name;
-    &#32;&#32;&#32;&#32;""")
-
-  # Consulta del resumen: summary = pd.read_sql_query("SELECT * FROM driver_summary", connection)</code></pre></details></div>
-            <div class="project"><h4>PRE 09 · Drivers y ChatGPT</h4><p>Proyecto de análisis de drivers. <a href="PRE_09_drivers_chatgpt/notebooks/notebook.ipynb">Notebook original</a>.</p><details class="code-sample"><summary>Disponibilidad de código</summary><p>El notebook disponible no contiene celdas ejecutables y no se encontró un fragmento de código sustantivo para mostrar en este PRE.</p></details></div>
-          </div>
-          <div class="project-group">
-            <h3>Análisis aplicado y comunicación</h3>
-            <div class="project"><h4>PRE 10 · Retail sales</h4><p>Ventas, devoluciones, categorías, clientes, canales y estacionalidad; tiene CSV de salida guardados. <a href="PRE_10_retail_sales/notebooks/notebook.ipynb">Notebook original</a>.</p><details class="code-sample"><summary>Ver KPI de ventas y devoluciones</summary><pre><code>kpi = pd.DataFrame({
-&#32;&#32;&#32;&#32;"orders": [sales["OrderID"].nunique()],
-&#32;&#32;&#32;&#32;"gross_sales": [sales["TotalAmount"].sum()],
-&#32;&#32;&#32;&#32;"returned_amount": [sales["ReturnedAmount"].sum()],
-&#32;&#32;&#32;&#32;"net_sales": [sales["NetAmount"].sum()],
-})
-kpi["return_rate_by_orders"] = sales["IsReturned"].mean()
-kpi["return_rate_by_value"] = kpi["returned_amount"] / kpi["gross_sales"]</code></pre></details></div>
-            <div class="project"><h4>PRE 11 · Vuelos</h4><p>Demoras, cancelaciones, aerolíneas y calendario operativo. <a href="PRE_11_vuelos/notebooks/notebook.ipynb">Notebook original</a>.</p><details class="code-sample"><summary>Ver tasas con denominadores explícitos</summary><pre><code>def add_rates(frame):
-      &#32;&#32;&#32;&#32;result = frame.copy()
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result["cancellation_rate"] = (
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result["cancelled_flights"] / result["scheduled_flights"]
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;)
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result["delay_rate"] = (
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;result["delayed_departure_15_flights"] / result["operated_flights"]
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;)
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return result</code></pre></details></div>
-            <div class="project"><h4>PRE 12 · Supply chain</h4><p>Cumplimiento de entregas, valor expuesto y análisis por país/modo. <a href="PRE_12_supply_chain/notebooks/notebook.ipynb">Notebook original</a>.</p><details class="code-sample"><summary>Ver cálculo de retraso frente a la promesa</summary><pre><code>for column in ["Scheduled Delivery Date", "Delivered to Client Date"]:
-&#32;&#32;&#32;&#32;shipments[column] = pd.to_datetime(
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;shipments[column], format="%d-%b-%y", errors="coerce"
-&#32;&#32;&#32;&#32;)
-
-shipments["DeliveryDaysVsSchedule"] = (
-&#32;&#32;&#32;&#32;shipments["Delivered to Client Date"]
-&#32;&#32;&#32;&#32;- shipments["Scheduled Delivery Date"]
-).dt.days
-shipments["IsLate"] = shipments["DeliveryDaysVsSchedule"] &gt; 0</code></pre></details></div>
-            <div class="project"><h4>PRE 13 · Scopus</h4><p>Frecuencias bibliométricas y redes de coocurrencia. <a href="PRE_13_scopus/src/s05_countries_frequency_report.py">Código de frecuencias</a> · <a href="PRE_13_scopus/submission/country_frequency_plot.html">gráfico HTML</a>.</p><details class="code-sample"><summary>Ver cálculo de frecuencias por país</summary><pre><code>def make_frequency_report(column, file_path):
-        df = pd.read_csv(SUBMISSION_FILE, compression="gzip")
-        series = df[column].dropna().str.split("; ").explode()
-        series.value_counts().to_csv(file_path)</code></pre></details></div>
-            <div class="project"><h4>PRE 14 · Marketing dashboard</h4><p>Filtros interactivos y métricas de campañas. <a href="PRE_14_marketing_dashboard/src/app.py">Aplicación</a> · <a href="PRE_14_marketing_dashboard/src/main.py">cálculo de métricas</a>.</p><details class="code-sample"><summary>Ver cálculo de ROAS y costo por clic</summary><pre><code>def safe_divide(numerator, denominator):
-&#32;&#32;&#32;&#32;if denominator == 0:
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;return None
-&#32;&#32;&#32;&#32;return numerator / denominator
-
-def calculate_kpis(data):
-&#32;&#32;&#32;&#32;revenue = float(data["revenue"].sum())
-&#32;&#32;&#32;&#32;ad_spend = float(data["ad_spend"].sum())
-&#32;&#32;&#32;&#32;paid_clicks = int(data["paid_clicks"].sum())
-&#32;&#32;&#32;&#32;return {
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;"gross_profit": revenue - ad_spend,
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;"roas": safe_divide(revenue, ad_spend),
-&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;"cpc": safe_divide(ad_spend, paid_clicks),
-&#32;&#32;&#32;&#32;}</code></pre></details></div>
-            <div class="project"><h4>PRE 15 · Salarios</h4><p>Distribución salarial, pares, brechas y trayectorias. <a href="PRE_15_salarios/notebooks/notebook.ipynb">Notebook original</a>.</p><details class="code-sample"><summary>Ver mediana y percentiles por trayectoria</summary><pre><code>salary_distribution = (
-        salaries.groupby("trayectoria")
-        .agg(
-          profesionales=("employee_id", "size"),
-          salario_mediano_cop=("salario_mensual_cop", "median"),
-          percentil_10_cop=("salario_mensual_cop", lambda value: value.quantile(0.10)),
-          percentil_90_cop=("salario_mensual_cop", lambda value: value.quantile(0.90)),
-        )
-        .reset_index()
-      )</code></pre></details></div>
-          </div>
+          
+          
           <p class="note">La estructura disponible salta de PRE 06 a PRE 08; no se encontró una carpeta PRE 07 en el repositorio inspeccionado.</p>
         </section>
         <section>

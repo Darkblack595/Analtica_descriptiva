@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Código fuente y notebook del PRE 08: Drivers con SQLite.">
+  <meta name="description" content="Código práctico del PRE 08: Drivers con SQLite.">
   <title>PRE 08 · Drivers con SQLite</title>
   <style>
     :root { color-scheme: light; --paper: #f3f5f2; --surface: #fff; --ink: #172522; --muted: #596963; --line: #d7dfd9; --green: #245c4b; --green-soft: #e2eee8; --blue-soft: #e5eef2; --code: #172b2b; }
@@ -16,7 +16,7 @@
     aside { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; } aside h2 { font-size: .85rem; text-transform: uppercase; } aside ol { padding-left: 1.25rem; } aside li { margin: .3rem 0; font-size: .88rem; } aside a { text-decoration: none; }
     main { min-width: 0; } .note { padding: .8rem 1rem; border-left: 3px solid #426d83; background: var(--blue-soft); }
     section.file, section.cell { margin: 0 0 1rem; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; scroll-margin-top: 1rem; }
-    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; } h3 { margin: 0 0 .5rem; font-size: 1rem; }
+    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; }
     .source { margin: .2rem 0 .8rem; color: var(--muted); font-size: .86rem; } .cell-comment { color: var(--green); font-weight: 650; }
     pre { overflow-x: auto; margin: .65rem 0; padding: 1rem; border-radius: 3px; background: var(--code); color: #ecf4ee; font: .85rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; tab-size: 4; }
     code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; } .markdown { white-space: pre-wrap; } .output { margin-top: .7rem; border-top: 1px solid var(--line); } .output summary { padding: .5rem 0; cursor: pointer; color: var(--green); font-weight: 700; } .output pre { background: #edf1ed; color: var(--ink); }
@@ -26,22 +26,20 @@
 </head>
 <body>
   <header>
-    <a class="back" href="../index.html#catalogo">Volver al índice principal</a>
-    <p>Material estático · PRE 08</p>
+    <a class="back" href="../index.html#practica">Volver al índice práctico</a>
+    <p>Cuaderno de código · PRE 08</p>
     <h1>PRE 08 · Drivers con SQLite</h1>
-    <p>Código fuente completo del proyecto, agrupado por archivo o por celda de notebook.</p>
   </header>
   <div class="layout">
-    <aside aria-label="Navegación por PRE"><h2>PRE 01–15</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_07.html">PRE 07 · No disponible</a></li><li><a href="pre_08.html" aria-current=page>PRE 08 · Drivers con SQLite</a></li><li><a href="pre_09.html">PRE 09 · Drivers y ChatGPT</a></li><li><a href="pre_10.html">PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html">PRE 13 · Scopus</a></li><li><a href="pre_14.html">PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
+    <aside aria-label="Navegación por PRE"><h2>Cuadernos con código</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_08.html" aria-current=page>PRE 08 · Drivers con SQLite</a></li><li><a href="pre_10.html">PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html">PRE 13 · Scopus</a></li><li><a href="pre_14.html">PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
     <main>
-      <p class="note">El contenido está escrito directamente en esta página HTML. El código y los comentarios originales se pueden seleccionar, copiar y explicar sin descargar el archivo. Las salidas guardadas se muestran como texto cuando están disponibles.</p>
-      <p class="note">Notebook original: 17 celdas, en su orden original. Se conservan comentarios de código y salidas textuales guardadas; las figuras Plotly se identifican, pero no se ejecutan en esta página estática.</p>
-<section class="cell" id="celda-1"><h2>Celda 1 · código</h2><pre><code>import sqlite3
+      <p class="note">Código mostrado como texto estático, organizado por archivo o celda. Se conservan los comentarios originales y, si el notebook las guarda, las salidas textuales. Puedes recorrer y copiar los fragmentos directamente desde aquí.</p>
+      <section class="cell" id="celda-1"><h2>Celda 1 · código</h2><pre><code>import sqlite3
 
 import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd</code></pre></section>
-<section class="cell" id="celda-2"><h2>Celda 2 · código</h2><p class="cell-comment">Comentario original: Carga de la tabla drivers</p><pre><code># Carga de la tabla drivers
+<section class="cell" id="celda-2"><h2>Celda 2 · código</h2><p class="cell-comment">Comentario: Carga de la tabla drivers</p><pre><code># Carga de la tabla drivers
 
 drivers = pd.read_csv(
     &quot;../data/drivers.csv&quot;,
@@ -62,7 +60,7 @@ drivers.head()</code></pre><details class="output"><summary>Salida guardada</sum
 2         Y     hours  
 3         Y     hours  
 4         Y     hours  </pre></details></section>
-<section class="cell" id="celda-3"><h2>Celda 3 · código</h2><p class="cell-comment">Comentario original: Carga de la tabla timesheet</p><pre><code># Carga de la tabla timesheet
+<section class="cell" id="celda-3"><h2>Celda 3 · código</h2><p class="cell-comment">Comentario: Carga de la tabla timesheet</p><pre><code># Carga de la tabla timesheet
 timesheet = pd.read_csv(
     &quot;../data/timesheet.csv&quot;,
     sep=&quot;,&quot;,
@@ -76,13 +74,13 @@ timesheet.head()
 2        10     3            60          2800
 3        10     4            70          3100
 4        10     5            70          3200</pre></details></section>
-<section class="cell" id="celda-4"><h2>Celda 4 · código</h2><p class="cell-comment">Comentario original: Conexión a la base de datos SQLite y almacena las tablas</p><pre><code># Conexión a la base de datos SQLite y almacena las tablas
+<section class="cell" id="celda-4"><h2>Celda 4 · código</h2><p class="cell-comment">Comentario: Conexión a la base de datos SQLite y almacena las tablas</p><pre><code># Conexión a la base de datos SQLite y almacena las tablas
 
 connection = sqlite3.connect(&quot;../temp/db.sqlite&quot;)
 
 drivers.to_sql(&quot;drivers_raw&quot;, connection, if_exists=&quot;replace&quot;, index=False)
 timesheet.to_sql(&quot;timesheet_raw&quot;, connection, if_exists=&quot;replace&quot;, index=False)</code></pre><details class="output"><summary>Salida guardada</summary><pre>1768</pre></details></section>
-<section class="cell" id="celda-5"><h2>Celda 5 · código</h2><p class="cell-comment">Comentario original: Crea vistas para las tablas drivers y timesheet</p><pre><code># Crea vistas para las tablas drivers y timesheet
+<section class="cell" id="celda-5"><h2>Celda 5 · código</h2><p class="cell-comment">Comentario: Crea vistas para las tablas drivers y timesheet</p><pre><code># Crea vistas para las tablas drivers y timesheet
 
 connection.executescript(
     &quot;&quot;&quot;
@@ -110,7 +108,7 @@ connection.executescript(
 )
 connection.commit()
 </code></pre></section>
-<section class="cell" id="celda-6"><h2>Celda 6 · código</h2><p class="cell-comment">Comentario original: Tablas y vistas disponibles en la base de datos</p><pre><code># Tablas y vistas disponibles en la base de datos
+<section class="cell" id="celda-6"><h2>Celda 6 · código</h2><p class="cell-comment">Comentario: Tablas y vistas disponibles en la base de datos</p><pre><code># Tablas y vistas disponibles en la base de datos
 
 sql = &quot;&quot;&quot;
 SELECT
@@ -126,7 +124,7 @@ pd.read_sql_query(sql, connection)</code></pre><details class="output"><summary>
 1  timesheet_raw  table
 2        drivers   view
 3      timesheet   view</pre></details></section>
-<section class="cell" id="celda-7"><h2>Celda 7 · código</h2><p class="cell-comment">Comentario original: Cinco primeras filas de la tabla de conductores</p><pre><code># Cinco primeras filas de la tabla de conductores
+<section class="cell" id="celda-7"><h2>Celda 7 · código</h2><p class="cell-comment">Comentario: Cinco primeras filas de la tabla de conductores</p><pre><code># Cinco primeras filas de la tabla de conductores
 sql = &quot;&quot;&quot;
 SELECT *
 FROM drivers
@@ -146,7 +144,7 @@ pd.read_sql_query(sql, connection)</code></pre><details class="output"><summary>
 2         Y     hours  
 3         Y     hours  
 4         Y     hours  </pre></details></section>
-<section class="cell" id="celda-8"><h2>Celda 8 · código</h2><p class="cell-comment">Comentario original: Media de las horas y las millas de cada conductor</p><pre><code># Media de las horas y las millas de cada conductor
+<section class="cell" id="celda-8"><h2>Celda 8 · código</h2><p class="cell-comment">Comentario: Media de las horas y las millas de cada conductor</p><pre><code># Media de las horas y las millas de cada conductor
 sql = &quot;&quot;&quot;
 SELECT
     driver_id,
@@ -164,7 +162,7 @@ mean_timesheet.head()</code></pre><details class="output"><summary>Salida guarda
 2         12          50.750000        2614.653846
 3         13          52.442308        2579.346154
 4         14          53.480769        2627.384615</pre></details></section>
-<section class="cell" id="celda-9"><h2>Celda 9 · código</h2><p class="cell-comment">Comentario original: Registros con valores por debajo de la media del grupo</p><pre><code># Registros con valores por debajo de la media del grupo
+<section class="cell" id="celda-9"><h2>Celda 9 · código</h2><p class="cell-comment">Comentario: Registros con valores por debajo de la media del grupo</p><pre><code># Registros con valores por debajo de la media del grupo
 sql = &quot;&quot;&quot;
 SELECT
     driver_id,
@@ -220,7 +218,7 @@ display(timesheet_below.head(), timesheet_below.tail())</code></pre><details cla
 821         43    47            50          2572          52.884615
 822         43    48            52          2517          52.884615
 823         43    52            48          2764          52.884615</pre></details></section>
-<section class="cell" id="celda-11"><h2>Celda 11 · código</h2><p class="cell-comment">Comentario original: Cantidad total de horas y millas de cada conductor</p><pre><code># Cantidad total de horas y millas de cada conductor
+<section class="cell" id="celda-11"><h2>Celda 11 · código</h2><p class="cell-comment">Comentario: Cantidad total de horas y millas de cada conductor</p><pre><code># Cantidad total de horas y millas de cada conductor
 sql = &quot;&quot;&quot;
 SELECT
     driver_id,
@@ -243,7 +241,7 @@ sum_timesheet.head(10)</code></pre><details class="output"><summary>Salida guard
 7         17          2701        135992
 8         18          2654        137834
 9         19          2738        137968</pre></details></section>
-<section class="cell" id="celda-12"><h2>Celda 12 · código</h2><p class="cell-comment">Comentario original: Valores mínimo y máximo de horas registradas por cada conductor</p><pre><code># Valores mínimo y máximo de horas registradas por cada conductor
+<section class="cell" id="celda-12"><h2>Celda 12 · código</h2><p class="cell-comment">Comentario: Valores mínimo y máximo de horas registradas por cada conductor</p><pre><code># Valores mínimo y máximo de horas registradas por cada conductor
 sql = &quot;&quot;&quot;
 SELECT
     driver_id,
@@ -352,7 +350,7 @@ summary</code></pre><details class="output"><summary>Salida guardada</summary><p
 31         41          2723        138407        Greg Phillips
 32         42          2697        136673      Randy Gelhausen
 33         43          2750        136993          Dave Patton</pre></details></section>
-<section class="cell" id="celda-14"><h2>Celda 14 · código</h2><p class="cell-comment">Comentario original: Almacenamiento de los resultados</p><pre><code># Almacenamiento de los resultados
+<section class="cell" id="celda-14"><h2>Celda 14 · código</h2><p class="cell-comment">Comentario: Almacenamiento de los resultados</p><pre><code># Almacenamiento de los resultados
 
 summary.to_csv(
     &quot;../submission/summary.csv&quot;,
@@ -361,7 +359,7 @@ summary.to_csv(
     index=False,
 )
 </code></pre></section>
-<section class="cell" id="celda-15"><h2>Celda 15 · código</h2><p class="cell-comment">Comentario original: Los conductores con mayor cantidad total de millas registradas</p><pre><code># Los conductores con mayor cantidad total de millas registradas
+<section class="cell" id="celda-15"><h2>Celda 15 · código</h2><p class="cell-comment">Comentario: Los conductores con mayor cantidad total de millas registradas</p><pre><code># Los conductores con mayor cantidad total de millas registradas
 sql = &quot;&quot;&quot;
 SELECT
     driver_id,
@@ -385,7 +383,7 @@ top10</code></pre><details class="output"><summary>Salida guardada</summary><pre
 7         21          2751        138719         Jeff Markham
 8         41          2723        138407        Greg Phillips
 9         29          2760        138255           Teddy Choi</pre></details></section>
-<section class="cell" id="celda-16"><h2>Celda 16 · código</h2><p class="cell-comment">Comentario original: Creación de un gráfico de barras horizontales La columna &#x27;name&#x27; pasa a ser el nombre de las filas</p><pre><code># Creación de un gráfico de barras horizontales
+<section class="cell" id="celda-16"><h2>Celda 16 · código</h2><p class="cell-comment">Comentario: Creación de un gráfico de barras horizontales La columna &#x27;name&#x27; pasa a ser el nombre de las filas</p><pre><code># Creación de un gráfico de barras horizontales
 # La columna &#x27;name&#x27; pasa a ser el nombre de las filas
 top10 = top10.set_index(&quot;name&quot;)
 
@@ -410,11 +408,11 @@ plt.gca().spines[&quot;top&quot;].set_visible(False)
 plt.gca().spines[&quot;right&quot;].set_visible(False)
 
 plt.savefig(&quot;../submission/top10_drivers.png&quot;, bbox_inches=&quot;tight&quot;)</code></pre></section>
-<section class="cell" id="celda-17"><h2>Celda 17 · código</h2><p class="cell-comment">Comentario original: Cierre de la conexión a la base de datos</p><pre><code># Cierre de la conexión a la base de datos
+<section class="cell" id="celda-17"><h2>Celda 17 · código</h2><p class="cell-comment">Comentario: Cierre de la conexión a la base de datos</p><pre><code># Cierre de la conexión a la base de datos
 connection.close()</code></pre></section>
-      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_07.html">PRE 07</a><a href="pre_09.html">PRE 09</a></nav>
+      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_06.html">← PRE 06</a><a href="pre_10.html">PRE 10 →</a></nav>
     </main>
   </div>
-  <footer><a class="back" href="../index.html#catalogo">Índice principal</a></footer>
+  <footer><a class="back" href="../index.html#practica">Índice práctico</a></footer>
 </body>
 </html>
