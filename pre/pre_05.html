@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Código fuente y notebook del PRE 05: Anonimización.">
+  <title>PRE 05 · Anonimización</title>
+  <style>
+    :root { color-scheme: light; --paper: #f3f5f2; --surface: #fff; --ink: #172522; --muted: #596963; --line: #d7dfd9; --green: #245c4b; --green-soft: #e2eee8; --blue-soft: #e5eef2; --code: #172b2b; }
+    * { box-sizing: border-box; } html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 "Aptos", "Segoe UI", sans-serif; }
+    a { color: var(--green); text-underline-offset: .18em; } a:hover { color: #b94f39; }
+    header { padding: 2rem max(1.25rem, calc((100% - 78rem) / 2)); background: var(--ink); color: #f8faf7; border-bottom: 6px solid var(--green); }
+    header p { margin: .25rem 0; color: #d5dfd9; } header h1 { margin: .35rem 0; font: 500 clamp(2rem, 5vw, 3.4rem)/1.08 Georgia, serif; }
+    .back { color: #a9d1bd; } .layout { display: grid; grid-template-columns: minmax(13rem, 18rem) minmax(0, 1fr); gap: 2rem; width: min(100% - 2rem, 82rem); margin: 2rem auto 4rem; align-items: start; }
+    aside { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; } aside h2 { font-size: .85rem; text-transform: uppercase; } aside ol { padding-left: 1.25rem; } aside li { margin: .3rem 0; font-size: .88rem; } aside a { text-decoration: none; }
+    main { min-width: 0; } .note { padding: .8rem 1rem; border-left: 3px solid #426d83; background: var(--blue-soft); }
+    section.file, section.cell { margin: 0 0 1rem; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; scroll-margin-top: 1rem; }
+    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; } h3 { margin: 0 0 .5rem; font-size: 1rem; }
+    .source { margin: .2rem 0 .8rem; color: var(--muted); font-size: .86rem; } .cell-comment { color: var(--green); font-weight: 650; }
+    pre { overflow-x: auto; margin: .65rem 0; padding: 1rem; border-radius: 3px; background: var(--code); color: #ecf4ee; font: .85rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; tab-size: 4; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; } .markdown { white-space: pre-wrap; } .output { margin-top: .7rem; border-top: 1px solid var(--line); } .output summary { padding: .5rem 0; cursor: pointer; color: var(--green); font-weight: 700; } .output pre { background: #edf1ed; color: var(--ink); }
+    .output-note { padding: .65rem .8rem; background: var(--green-soft); color: var(--ink); font-size: .9rem; } .pager { display: flex; justify-content: space-between; gap: 1rem; margin: 1.5rem 0; } footer { padding: 1rem; background: var(--ink); color: #d5dfd9; text-align: center; font-size: .85rem; }
+    [aria-current=page] { font-weight: 800; } @media (max-width: 760px) { .layout { grid-template-columns: 1fr; } aside { position: static; max-height: none; } aside ol { columns: 2; } } @media (max-width: 460px) { aside ol { columns: 1; } section.file, section.cell { padding: .85rem; } } @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../index.html#catalogo">Volver al índice principal</a>
+    <p>Material estático · PRE 05</p>
+    <h1>PRE 05 · Anonimización</h1>
+    <p>Código fuente completo del proyecto, agrupado por archivo o por celda de notebook.</p>
+  </header>
+  <div class="layout">
+    <aside aria-label="Navegación por PRE"><h2>PRE 01–15</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html" aria-current=page>PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_07.html">PRE 07 · No disponible</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_09.html">PRE 09 · Drivers y ChatGPT</a></li><li><a href="pre_10.html">PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html">PRE 13 · Scopus</a></li><li><a href="pre_14.html">PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
+    <main>
+      <p class="note">El contenido está escrito directamente en esta página HTML. El código y los comentarios originales se pueden seleccionar, copiar y explicar sin descargar el archivo. Las salidas guardadas se muestran como texto cuando están disponibles.</p>
+      <p class="note">Notebook original: 17 celdas, en su orden original. Se conservan comentarios de código y salidas textuales guardadas; las figuras Plotly se identifican, pero no se ejecutan en esta página estática.</p>
+<section class="cell" id="celda-1"><h2>Celda 1 · código</h2><pre><code>import pandas as pd</code></pre></section>
+<section class="cell" id="celda-2"><h2>Celda 2 · código</h2><p class="cell-comment">Comentario original: Identificadores directos: name, document_id, email, loyalty_card_number Cuasi-identificadores: age, city, occupation Información sensible/confidencial: annual_spend</p><pre><code>#Identificadores directos: name, document_id, email, loyalty_card_number
+#             Cuasi-identificadores: age, city, occupation
+# Información sensible/confidencial: annual_spend
+raw = pd.read_csv(&quot;../data/raw.csv&quot;)
+raw.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>                name  document_id                             email  \
+0    Camila González   1000000001    camila.gonzalez1@gmail.example   
+1       Mateo Ospina   1000000002       mateo.ospina2@yahoo.example   
+2        Diana Duque   1000000003      diana.duque3@outlook.example   
+3  Sebastián Álvarez   1000000004  sebastian.alvarez4@yahoo.example   
+4      Mariana Henao   1000000005    mariana.henao5@outlook.example   
+
+   loyalty_card_number  age      city             occupation  annual_spend  
+0         840000000001   25  Envigado            Comerciante       2580000  
+1         840000000002   36      Cali  Ingeniero de sistemas       5400000  
+2         840000000003   38    Bogotá                Docente       5320000  
+3         840000000004   67    Itagüí                Abogada       4290000  
+4         840000000005   29    Bogotá            Comerciante       3670000  </pre></details></section>
+<section class="cell" id="celda-3"><h2>Celda 3 · código</h2><p class="cell-comment">Comentario original: Información pública externa</p><pre><code># Información pública externa
+auxiliary = pd.read_csv(&quot;../data/auxiliary.csv&quot;)
+auxiliary.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>              name  age       city             occupation
+0      Laura Gómez   47   Rionegro             Arquitecta
+1  Andrés Restrepo   38   Envigado  Ingeniero de sistemas
+2     Camila Henao   29    Pereira     Diseñadora gráfica
+3     Carlos Muñoz   61      Bello   Técnico electricista
+4   Natalia Ospina   34  Manizales                Docente</pre></details></section>
+<section class="cell" id="celda-4"><h2>Celda 4 · código</h2><p class="cell-comment">Comentario original: Anonimización ingenua</p><pre><code># Anonimización ingenua
+
+anonymized = raw.drop(columns=[&quot;name&quot;, &quot;document_id&quot;, &quot;email&quot;, &quot;loyalty_card_number&quot;])
+anonymized.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>   age      city             occupation  annual_spend
+0   25  Envigado            Comerciante       2580000
+1   36      Cali  Ingeniero de sistemas       5400000
+2   38    Bogotá                Docente       5320000
+3   67    Itagüí                Abogada       4290000
+4   29    Bogotá            Comerciante       3670000</pre></details></section>
+<section class="cell" id="celda-5"><h2>Celda 5 · código</h2><p class="cell-comment">Comentario original: La combinación de los cuasi-identificadores puede permitir la reidentificación de individuos</p><pre><code># La combinación de los cuasi-identificadores puede permitir la reidentificación de individuos
+quasi_identifiers = [&quot;age&quot;, &quot;city&quot;, &quot;occupation&quot;]
+
+reidentified = auxiliary.merge(
+    anonymized,
+    on=quasi_identifiers,
+    how=&quot;inner&quot;,
+)
+
+reidentified.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>              name  age       city             occupation  annual_spend
+0      Laura Gómez   47   Rionegro             Arquitecta       5840000
+1  Andrés Restrepo   38   Envigado  Ingeniero de sistemas       5190000
+2     Camila Henao   29    Pereira     Diseñadora gráfica       2460000
+3     Carlos Muñoz   61      Bello   Técnico electricista       3370000
+4   Natalia Ospina   34  Manizales                Docente       2710000</pre></details></section>
+<section class="cell" id="celda-6"><h2>Celda 6 · código</h2><p class="cell-comment">Comentario original: Paso 1: eliminación de los identificadores directos</p><pre><code># Paso 1: eliminación de los identificadores directos
+
+anonymized = raw.drop(columns=[&quot;name&quot;, &quot;email&quot;])
+anonymized.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>   document_id  loyalty_card_number  age      city             occupation  \
+0   1000000001         840000000001   25  Envigado            Comerciante   
+1   1000000002         840000000002   36      Cali  Ingeniero de sistemas   
+2   1000000003         840000000003   38    Bogotá                Docente   
+3   1000000004         840000000004   67    Itagüí                Abogada   
+4   1000000005         840000000005   29    Bogotá            Comerciante   
+
+   annual_spend  
+0       2580000  
+1       5400000  
+2       5320000  
+3       4290000  
+4       3670000  </pre></details></section>
+<section class="cell" id="celda-7"><h2>Celda 7 · código</h2><p class="cell-comment">Comentario original: Paso 2: enmascaramiento del loyalty_card_number</p><pre><code># Paso 2: enmascaramiento del loyalty_card_number
+
+loyalty_card_number = anonymized[&quot;loyalty_card_number&quot;].astype(str).str.zfill(12)
+
+anonymized[&quot;loyalty_card_number&quot;] = &quot;********&quot; + loyalty_card_number.str[-4:]
+
+anonymized.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>   document_id loyalty_card_number  age      city             occupation  \
+0   1000000001        ********0001   25  Envigado            Comerciante   
+1   1000000002        ********0002   36      Cali  Ingeniero de sistemas   
+2   1000000003        ********0003   38    Bogotá                Docente   
+3   1000000004        ********0004   67    Itagüí                Abogada   
+4   1000000005        ********0005   29    Bogotá            Comerciante   
+
+   annual_spend  
+0       2580000  
+1       5400000  
+2       5320000  
+3       4290000  
+4       3670000  </pre></details></section>
+<section class="cell" id="celda-8"><h2>Celda 8 · código</h2><p class="cell-comment">Comentario original: Paso 3: pseudonimización del documento de identidad</p><pre><code># Paso 3: pseudonimización del documento de identidad
+
+import hashlib
+import hmac
+
+secret_key = b&quot;clave-secreta-del-programa&quot;
+
+
+def pseudonymize(document_id):
+    digest = hmac.new(
+        secret_key,
+        str(document_id).encode(&quot;utf-8&quot;),
+        hashlib.sha256,
+    ).hexdigest()
+
+    return f&quot;CUST-{digest[:12].upper()}&quot;
+
+
+anonymized[&quot;customer_id&quot;] = anonymized[&quot;document_id&quot;].apply(pseudonymize)
+
+anonymized = anonymized.drop(columns=[&quot;document_id&quot;])
+
+anonymized.head()
+</code></pre><details class="output"><summary>Salida guardada</summary><pre>  loyalty_card_number  age      city             occupation  annual_spend  \
+0        ********0001   25  Envigado            Comerciante       2580000   
+1        ********0002   36      Cali  Ingeniero de sistemas       5400000   
+2        ********0003   38    Bogotá                Docente       5320000   
+3        ********0004   67    Itagüí                Abogada       4290000   
+4        ********0005   29    Bogotá            Comerciante       3670000   
+
+         customer_id  
+0  CUST-EFF698B261D2  
+1  CUST-E9F4EC0BD860  
+2  CUST-E2C7317583CA  
+3  CUST-6AD4C8020C2B  
+4  CUST-92569771F46C  </pre></details></section>
+<section class="cell" id="celda-9"><h2>Celda 9 · código</h2><p class="cell-comment">Comentario original: Paso 4: anonimización de la edad</p><pre><code># Paso 4: anonimización de la edad
+
+anonymized[&quot;age_group&quot;] = pd.cut(
+    anonymized[&quot;age&quot;],
+    bins=[20, 30, 40, 50, 60, 70],
+    labels=[&quot;20-29&quot;, &quot;30-39&quot;, &quot;40-49&quot;, &quot;50-59&quot;, &quot;60-69&quot;],
+    right=False,
+)
+
+anonymized = anonymized.drop(columns=[&quot;age&quot;])
+
+anonymized.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>  loyalty_card_number      city             occupation  annual_spend  \
+0        ********0001  Envigado            Comerciante       2580000   
+1        ********0002      Cali  Ingeniero de sistemas       5400000   
+2        ********0003    Bogotá                Docente       5320000   
+3        ********0004    Itagüí                Abogada       4290000   
+4        ********0005    Bogotá            Comerciante       3670000   
+
+         customer_id age_group  
+0  CUST-EFF698B261D2     20-29  
+1  CUST-E9F4EC0BD860     30-39  
+2  CUST-E2C7317583CA     30-39  
+3  CUST-6AD4C8020C2B     60-69  
+4  CUST-92569771F46C     20-29  </pre></details></section>
+<section class="cell" id="celda-10"><h2>Celda 10 · código</h2><p class="cell-comment">Comentario original: Verificación</p><pre><code># Verificación
+
+auxiliary_attack = auxiliary.copy()
+auxiliary_attack[&quot;age_group&quot;] = pd.cut(
+    auxiliary_attack[&quot;age&quot;],
+    bins=[20, 30, 40, 50, 60, 70],
+    labels=[&quot;20-29&quot;, &quot;30-39&quot;, &quot;40-49&quot;, &quot;50-59&quot;, &quot;60-69&quot;],
+    right=False,
+)
+
+quasi_identifiers = [&quot;age_group&quot;, &quot;city&quot;, &quot;occupation&quot;]
+candidates = auxiliary_attack.merge(
+    anonymized,
+    on=quasi_identifiers,
+    how=&quot;inner&quot;,
+)
+
+number_of_candidates = (
+    candidates.groupby(&quot;name&quot;).size().reindex(auxiliary[&quot;name&quot;], fill_value=0)
+)
+
+unique_matches = candidates[candidates[&quot;name&quot;].map(number_of_candidates).eq(1)]
+
+print(
+    &quot;Perfiles reidentificados de forma única:&quot;,
+    number_of_candidates.eq(1).sum(),
+    &quot;de&quot;,
+    len(auxiliary),
+)
+
+unique_matches.head()</code></pre><details class="output"><summary>Salida de texto guardada</summary><pre>Perfiles reidentificados de forma única: 9 de 20
+</pre></details><details class="output"><summary>Salida guardada</summary><pre>               name  age          city   occupation age_group  \
+0       Laura Gómez   47      Rionegro   Arquitecta     40-49   
+10  Javier Cárdenas   52   Bucaramanga       Médico     50-59   
+11     Diana Correa   45          Cali    Contadora     40-49   
+12     Felipe Vélez   33     Cartagena  Comerciante     30-39   
+23      Isabel Díaz   64  Barranquilla    Enfermera     60-69   
+
+   loyalty_card_number  annual_spend        customer_id  
+0         ********0392       5840000  CUST-8ADE272FFEAF  
+10        ********0412       6420000  CUST-391F42D42771  
+11        ********0079       4180000  CUST-CB0B1C18C352  
+12        ********0600       3960000  CUST-3001E46E291C  
+23        ********0146       3520000  CUST-57D10B018171  </pre></details></section>
+<section class="cell" id="celda-11"><h2>Celda 11 · código</h2><p class="cell-comment">Comentario original: Paso 5: generalización de ciudad a departamento</p><pre><code># Paso 5: generalización de ciudad a departamento
+
+city_to_department = {
+    &quot;Medellín&quot;: &quot;Antioquia&quot;,
+    &quot;Bello&quot;: &quot;Antioquia&quot;,
+    &quot;Envigado&quot;: &quot;Antioquia&quot;,
+    &quot;Itagüí&quot;: &quot;Antioquia&quot;,
+    &quot;Rionegro&quot;: &quot;Antioquia&quot;,
+    &quot;Bogotá&quot;: &quot;Bogotá D.C.&quot;,
+    &quot;Cali&quot;: &quot;Valle del Cauca&quot;,
+    &quot;Barranquilla&quot;: &quot;Atlántico&quot;,
+    &quot;Manizales&quot;: &quot;Caldas&quot;,
+    &quot;Pereira&quot;: &quot;Risaralda&quot;,
+    &quot;Cartagena&quot;: &quot;Bolívar&quot;,
+    &quot;Bucaramanga&quot;: &quot;Santander&quot;,
+}
+
+anonymized[&quot;department&quot;] = anonymized[&quot;city&quot;].map(city_to_department)
+
+anonymized = anonymized.drop(columns=[&quot;city&quot;])
+
+anonymized.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>  loyalty_card_number             occupation  annual_spend        customer_id  \
+0        ********0001            Comerciante       2580000  CUST-EFF698B261D2   
+1        ********0002  Ingeniero de sistemas       5400000  CUST-E9F4EC0BD860   
+2        ********0003                Docente       5320000  CUST-E2C7317583CA   
+3        ********0004                Abogada       4290000  CUST-6AD4C8020C2B   
+4        ********0005            Comerciante       3670000  CUST-92569771F46C   
+
+  age_group       department  
+0     20-29        Antioquia  
+1     30-39  Valle del Cauca  
+2     30-39      Bogotá D.C.  
+3     60-69        Antioquia  
+4     20-29      Bogotá D.C.  </pre></details></section>
+<section class="cell" id="celda-12"><h2>Celda 12 · código</h2><p class="cell-comment">Comentario original: Verificación</p><pre><code># Verificación
+
+auxiliary_attack = auxiliary.copy()
+
+auxiliary_attack[&quot;age_group&quot;] = pd.cut(
+    auxiliary_attack[&quot;age&quot;],
+    bins=[20, 30, 40, 50, 60, 70],
+    labels=[&quot;20-29&quot;, &quot;30-39&quot;, &quot;40-49&quot;, &quot;50-59&quot;, &quot;60-69&quot;],
+    right=False,
+)
+
+auxiliary_attack[&quot;department&quot;] = auxiliary_attack[&quot;city&quot;].map(city_to_department)
+
+quasi_identifiers = [&quot;age_group&quot;, &quot;department&quot;, &quot;occupation&quot;]
+
+candidates = auxiliary_attack.merge(
+    anonymized,
+    on=quasi_identifiers,
+    how=&quot;inner&quot;,
+)
+
+number_of_candidates = (
+    candidates.groupby(&quot;name&quot;).size().reindex(auxiliary[&quot;name&quot;], fill_value=0)
+)
+
+unique_matches = candidates[candidates[&quot;name&quot;].map(number_of_candidates).eq(1)]
+
+print(
+    &quot;Perfiles reidentificados de forma única:&quot;,
+    number_of_candidates.eq(1).sum(),
+    &quot;de&quot;,
+    len(auxiliary),
+)
+
+unique_matches.head()
+</code></pre><details class="output"><summary>Salida de texto guardada</summary><pre>Perfiles reidentificados de forma única: 7 de 20
+</pre></details><details class="output"><summary>Salida guardada</summary><pre>               name  age          city   occupation age_group  \
+20  Javier Cárdenas   52   Bucaramanga       Médico     50-59   
+21     Diana Correa   45          Cali    Contadora     40-49   
+22     Felipe Vélez   33     Cartagena  Comerciante     30-39   
+44      Isabel Díaz   64  Barranquilla    Enfermera     60-69   
+66    Lucía Londoño   58       Pereira      Docente     50-59   
+
+         department loyalty_card_number  annual_spend        customer_id  
+20        Santander        ********0412       6420000  CUST-391F42D42771  
+21  Valle del Cauca        ********0079       4180000  CUST-CB0B1C18C352  
+22          Bolívar        ********0600       3960000  CUST-3001E46E291C  
+44        Atlántico        ********0146       3520000  CUST-57D10B018171  
+66        Risaralda        ********0355       3090000  CUST-8BB7CBF5F7B5  </pre></details></section>
+<section class="cell" id="celda-13"><h2>Celda 13 · código</h2><p class="cell-comment">Comentario original: Paso 6: generalización de departamento a región</p><pre><code># Paso 6: generalización de departamento a región
+
+department_to_region = {
+    &quot;Antioquia&quot;: &quot;Andina&quot;,
+    &quot;Bogotá D.C.&quot;: &quot;Andina&quot;,
+    &quot;Caldas&quot;: &quot;Andina&quot;,
+    &quot;Risaralda&quot;: &quot;Andina&quot;,
+    &quot;Santander&quot;: &quot;Andina&quot;,
+    &quot;Atlántico&quot;: &quot;Caribe&quot;,
+    &quot;Bolívar&quot;: &quot;Caribe&quot;,
+    &quot;Valle del Cauca&quot;: &quot;Pacífica&quot;,
+}
+
+anonymized[&quot;region&quot;] = anonymized[&quot;department&quot;].map(department_to_region)
+
+anonymized = anonymized.drop(columns=[&quot;department&quot;])
+
+anonymized.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>  loyalty_card_number             occupation  annual_spend        customer_id  \
+0        ********0001            Comerciante       2580000  CUST-EFF698B261D2   
+1        ********0002  Ingeniero de sistemas       5400000  CUST-E9F4EC0BD860   
+2        ********0003                Docente       5320000  CUST-E2C7317583CA   
+3        ********0004                Abogada       4290000  CUST-6AD4C8020C2B   
+4        ********0005            Comerciante       3670000  CUST-92569771F46C   
+
+  age_group    region  
+0     20-29    Andina  
+1     30-39  Pacífica  
+2     30-39    Andina  
+3     60-69    Andina  
+4     20-29    Andina  </pre></details></section>
+<section class="cell" id="celda-14"><h2>Celda 14 · código</h2><p class="cell-comment">Comentario original: Verificación</p><pre><code># Verificación
+
+auxiliary_attack = auxiliary.copy()
+
+auxiliary_attack[&quot;age_group&quot;] = pd.cut(
+    auxiliary_attack[&quot;age&quot;],
+    bins=[20, 30, 40, 50, 60, 70],
+    labels=[&quot;20-29&quot;, &quot;30-39&quot;, &quot;40-49&quot;, &quot;50-59&quot;, &quot;60-69&quot;],
+    right=False,
+)
+
+auxiliary_attack[&quot;department&quot;] = auxiliary_attack[&quot;city&quot;].map(city_to_department)
+
+auxiliary_attack[&quot;region&quot;] = auxiliary_attack[&quot;department&quot;].map(department_to_region)
+
+quasi_identifiers = [&quot;age_group&quot;, &quot;region&quot;, &quot;occupation&quot;]
+
+candidates = auxiliary_attack.merge(
+    anonymized,
+    on=quasi_identifiers,
+    how=&quot;inner&quot;,
+)
+
+number_of_candidates = (
+    candidates.groupby(&quot;name&quot;).size().reindex(auxiliary[&quot;name&quot;], fill_value=0)
+)
+
+unique_matches = candidates[candidates[&quot;name&quot;].map(number_of_candidates).eq(1)]
+
+print(
+    &quot;Perfiles reidentificados de forma única:&quot;,
+    number_of_candidates.eq(1).sum(),
+    &quot;de&quot;,
+    len(auxiliary),
+)
+
+unique_matches.head()</code></pre><details class="output"><summary>Salida de texto guardada</summary><pre>Perfiles reidentificados de forma única: 2 de 20
+</pre></details><details class="output"><summary>Salida guardada</summary><pre>                   name  age  city occupation age_group       department  \
+45         Diana Correa   45  Cali  Contadora     40-49  Valle del Cauca   
+126  Alejandro Martínez   41  Cali     Médico     40-49  Valle del Cauca   
+
+       region loyalty_card_number  annual_spend        customer_id  
+45   Pacífica        ********0079       4180000  CUST-CB0B1C18C352  
+126  Pacífica        ********0427       5970000  CUST-935387D17037  </pre></details></section>
+<section class="cell" id="celda-15"><h2>Celda 15 · código</h2><p class="cell-comment">Comentario original: Paso 7: generalización de ocupación</p><pre><code># Paso 7: generalización de ocupación
+
+occupation_to_group = {
+    &quot;Administradora&quot;: &quot;Servicios profesionales&quot;,
+    &quot;Abogada&quot;: &quot;Servicios profesionales&quot;,
+    &quot;Analista financiera&quot;: &quot;Servicios profesionales&quot;,
+    &quot;Contadora&quot;: &quot;Servicios profesionales&quot;,
+    &quot;Arquitecta&quot;: &quot;Tecnología y diseño&quot;,
+    &quot;Diseñadora gráfica&quot;: &quot;Tecnología y diseño&quot;,
+    &quot;Ingeniero de sistemas&quot;: &quot;Tecnología y diseño&quot;,
+    &quot;Médico&quot;: &quot;Salud y educación&quot;,
+    &quot;Enfermera&quot;: &quot;Salud y educación&quot;,
+    &quot;Docente&quot;: &quot;Salud y educación&quot;,
+    &quot;Comerciante&quot;: &quot;Comercio y oficios&quot;,
+    &quot;Técnico electricista&quot;: &quot;Comercio y oficios&quot;,
+}
+
+anonymized[&quot;occupation_group&quot;] = anonymized[&quot;occupation&quot;].map(occupation_to_group)
+
+anonymized = anonymized.drop(columns=[&quot;occupation&quot;])
+
+anonymized.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>  loyalty_card_number  annual_spend        customer_id age_group    region  \
+0        ********0001       2580000  CUST-EFF698B261D2     20-29    Andina   
+1        ********0002       5400000  CUST-E9F4EC0BD860     30-39  Pacífica   
+2        ********0003       5320000  CUST-E2C7317583CA     30-39    Andina   
+3        ********0004       4290000  CUST-6AD4C8020C2B     60-69    Andina   
+4        ********0005       3670000  CUST-92569771F46C     20-29    Andina   
+
+          occupation_group  
+0       Comercio y oficios  
+1      Tecnología y diseño  
+2        Salud y educación  
+3  Servicios profesionales  
+4       Comercio y oficios  </pre></details></section>
+<section class="cell" id="celda-16"><h2>Celda 16 · código</h2><p class="cell-comment">Comentario original: Paso 8: se almacena el archivo</p><pre><code># Paso 8: se almacena el archivo
+
+anonymized.to_csv(&quot;../submission/anonymized.csv&quot;, index=False)</code></pre></section>
+<section class="cell" id="celda-17"><h2>Celda 17 · código</h2><p class="cell-comment">Comentario original: Paso 9: evaluación de la utilidad analítica conservada</p><pre><code># Paso 9: evaluación de la utilidad analítica conservada
+
+utility_comparison = pd.DataFrame(
+    {
+        &quot;dimension&quot;: [&quot;Edad&quot;, &quot;Ubicación&quot;, &quot;Ocupación&quot;],
+        &quot;detalle_original&quot;: [
+            raw[&quot;age&quot;].nunique(),
+            raw[&quot;city&quot;].nunique(),
+            raw[&quot;occupation&quot;].nunique(),
+        ],
+        &quot;detalle_anonimizado&quot;: [
+            anonymized[&quot;age_group&quot;].nunique(),
+            anonymized[&quot;region&quot;].nunique(),
+            anonymized[&quot;occupation_group&quot;].nunique(),
+        ],
+    }
+)
+
+utility_comparison</code></pre><details class="output"><summary>Salida guardada</summary><pre>   dimension  detalle_original  detalle_anonimizado
+0       Edad                48                    5
+1  Ubicación                12                    3
+2  Ocupación                12                    4</pre></details></section>
+      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_04.html">PRE 04</a><a href="pre_06.html">PRE 06</a></nav>
+    </main>
+  </div>
+  <footer><a class="back" href="../index.html#catalogo">Índice principal</a></footer>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Código fuente y notebook del PRE 10: Retail sales.">
+  <title>PRE 10 · Retail sales</title>
+  <style>
+    :root { color-scheme: light; --paper: #f3f5f2; --surface: #fff; --ink: #172522; --muted: #596963; --line: #d7dfd9; --green: #245c4b; --green-soft: #e2eee8; --blue-soft: #e5eef2; --code: #172b2b; }
+    * { box-sizing: border-box; } html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 "Aptos", "Segoe UI", sans-serif; }
+    a { color: var(--green); text-underline-offset: .18em; } a:hover { color: #b94f39; }
+    header { padding: 2rem max(1.25rem, calc((100% - 78rem) / 2)); background: var(--ink); color: #f8faf7; border-bottom: 6px solid var(--green); }
+    header p { margin: .25rem 0; color: #d5dfd9; } header h1 { margin: .35rem 0; font: 500 clamp(2rem, 5vw, 3.4rem)/1.08 Georgia, serif; }
+    .back { color: #a9d1bd; } .layout { display: grid; grid-template-columns: minmax(13rem, 18rem) minmax(0, 1fr); gap: 2rem; width: min(100% - 2rem, 82rem); margin: 2rem auto 4rem; align-items: start; }
+    aside { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; } aside h2 { font-size: .85rem; text-transform: uppercase; } aside ol { padding-left: 1.25rem; } aside li { margin: .3rem 0; font-size: .88rem; } aside a { text-decoration: none; }
+    main { min-width: 0; } .note { padding: .8rem 1rem; border-left: 3px solid #426d83; background: var(--blue-soft); }
+    section.file, section.cell { margin: 0 0 1rem; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; scroll-margin-top: 1rem; }
+    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; } h3 { margin: 0 0 .5rem; font-size: 1rem; }
+    .source { margin: .2rem 0 .8rem; color: var(--muted); font-size: .86rem; } .cell-comment { color: var(--green); font-weight: 650; }
+    pre { overflow-x: auto; margin: .65rem 0; padding: 1rem; border-radius: 3px; background: var(--code); color: #ecf4ee; font: .85rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; tab-size: 4; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; } .markdown { white-space: pre-wrap; } .output { margin-top: .7rem; border-top: 1px solid var(--line); } .output summary { padding: .5rem 0; cursor: pointer; color: var(--green); font-weight: 700; } .output pre { background: #edf1ed; color: var(--ink); }
+    .output-note { padding: .65rem .8rem; background: var(--green-soft); color: var(--ink); font-size: .9rem; } .pager { display: flex; justify-content: space-between; gap: 1rem; margin: 1.5rem 0; } footer { padding: 1rem; background: var(--ink); color: #d5dfd9; text-align: center; font-size: .85rem; }
+    [aria-current=page] { font-weight: 800; } @media (max-width: 760px) { .layout { grid-template-columns: 1fr; } aside { position: static; max-height: none; } aside ol { columns: 2; } } @media (max-width: 460px) { aside ol { columns: 1; } section.file, section.cell { padding: .85rem; } } @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../index.html#catalogo">Volver al índice principal</a>
+    <p>Material estático · PRE 10</p>
+    <h1>PRE 10 · Retail sales</h1>
+    <p>Código fuente completo del proyecto, agrupado por archivo o por celda de notebook.</p>
+  </header>
+  <div class="layout">
+    <aside aria-label="Navegación por PRE"><h2>PRE 01–15</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_07.html">PRE 07 · No disponible</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_09.html">PRE 09 · Drivers y ChatGPT</a></li><li><a href="pre_10.html" aria-current=page>PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html">PRE 13 · Scopus</a></li><li><a href="pre_14.html">PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
+    <main>
+      <p class="note">El contenido está escrito directamente en esta página HTML. El código y los comentarios originales se pueden seleccionar, copiar y explicar sin descargar el archivo. Las salidas guardadas se muestran como texto cuando están disponibles.</p>
+      <p class="note">Notebook original: 16 celdas, en su orden original. Se conservan comentarios de código y salidas textuales guardadas; las figuras Plotly se identifican, pero no se ejecutan en esta página estática.</p>
+<section class="cell" id="celda-1"><h2>Celda 1 · código</h2><p class="cell-comment">Comentario original: Se deben importar las librerías usadas durante el análisis.</p><pre><code># Se deben importar las librerías usadas durante el análisis.
+
+from pathlib import Path
+import pandas as pd
+import plotly.express as px</code></pre></section>
+<section class="cell" id="celda-2"><h2>Celda 2 · código</h2><p class="cell-comment">Comentario original: Se deben definir y verificar la ruta del archivo de ventas y la carpeta de resultados.</p><pre><code># Se deben definir y verificar la ruta del archivo de ventas y la carpeta de resultados.
+
+SALES_PATH = Path(&quot;../data/sales.csv&quot;)
+SUBMISSION_DIR = Path(&quot;../submission&quot;)
+assert SALES_PATH.exists(), f&quot;No existe {SALES_PATH}&quot;
+assert SUBMISSION_DIR.exists(), f&quot;No existe {SUBMISSION_DIR}&quot;
+</code></pre></section>
+<section class="cell" id="celda-3"><h2>Celda 3 · código</h2><p class="cell-comment">Comentario original: Se debe cargar y verificar el archivo de ventas.</p><pre><code># Se debe cargar y verificar el archivo de ventas.
+
+sales = pd.read_csv(SALES_PATH)
+sales.info()
+sales.head()</code></pre><details class="output"><summary>Salida de texto guardada</summary><pre>&lt;class &#x27;pandas.core.frame.DataFrame&#x27;&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 12 columns):
+ #   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+ 0   OrderID        1000 non-null   int64  
+ 1   ProductID      1000 non-null   int64  
+ 2   Category       1000 non-null   object 
+ 3   ProductName    1000 non-null   object 
+ 4   Quantity       1000 non-null   int64  
+ 5   Price          1000 non-null   float64
+ 6   TotalAmount    1000 non-null   float64
+ 7   OrderDate      1000 non-null   object 
+ 8   CustomerID     1000 non-null   int64  
+ 9   PaymentMethod  1000 non-null   object 
+ 10  SalesChannel   1000 non-null   object 
+ 11  IsReturned     1000 non-null   int64  
+dtypes: float64(2), int64(5), object(5)
+memory usage: 93.9+ KB
+</pre></details><details class="output"><summary>Salida guardada</summary><pre>   OrderID  ProductID     Category  ProductName  Quantity   Price  \
+0        1        272  Electronics  Product_272         3   54.21   
+1        2        147  Electronics  Product_147         3  163.68   
+2        3        217      Fashion  Product_217         5  205.01   
+3        4        292  Electronics  Product_292         4  163.13   
+4        5        423      Fashion  Product_423         3  608.73   
+
+   TotalAmount            OrderDate  CustomerID PaymentMethod SalesChannel  \
+0       162.63  2022-04-21 01:48:37          26   Credit Card     In-Store   
+1       491.04  2022-02-26 03:09:32          38          Cash      Website   
+2      1025.05  2022-07-24 07:00:57         271          Cash      Website   
+3       652.52  2022-01-09 09:49:05         414          Cash      Website   
+4      1826.19  2022-05-19 09:38:52         368          Cash   Mobile App   
+
+   IsReturned  
+0           1  
+1           1  
+2           0  
+3           1  
+4           1  </pre></details></section>
+<section class="cell" id="celda-4"><h2>Celda 4 · código</h2><p class="cell-comment">Comentario original: Se deben explorar las medidas numéricas de las órdenes de venta.</p><pre><code># Se deben explorar las medidas numéricas de las órdenes de venta.
+
+sales.describe().T</code></pre><details class="output"><summary>Salida guardada</summary><pre>              count        mean         std     min       25%       50%  \
+OrderID      1000.0   500.50000  288.819436    1.00  250.7500   500.500   
+ProductID    1000.0   302.94600  115.281043  100.00  205.0000   298.500   
+Quantity     1000.0     3.06900    1.384976    1.00    2.0000     3.000   
+Price        1000.0   416.30670  223.930219   20.70  234.0175   411.995   
+TotalAmount  1000.0  1280.74555  942.705635   23.94  488.7500  1068.575   
+CustomerID   1000.0   255.25100  142.823803    1.00  136.7500   260.000   
+IsReturned   1000.0     0.51600    0.499994    0.00    0.0000     1.000   
+
+                   75%      max  
+OrderID       750.2500  1000.00  
+ProductID     405.2500   498.00  
+Quantity        4.0000     5.00  
+Price         612.7125   799.97  
+TotalAmount  1904.4000  3988.50  
+CustomerID    379.2500   500.00  
+IsReturned      1.0000     1.00  </pre></details></section>
+<section class="cell" id="celda-5"><h2>Celda 5 · código</h2><p class="cell-comment">Comentario original: Se debe verificar que cada fila es una orden completa y que el valor de venta es consistente.</p><pre><code># Se debe verificar que cada fila es una orden completa y que el valor de venta es consistente.
+
+assert sales.isna().sum().sum() == 0
+assert sales[&quot;OrderID&quot;].is_unique
+assert (
+    (sales[&quot;Quantity&quot;] * sales[&quot;Price&quot;])
+    .round(2)
+    .eq(sales[&quot;TotalAmount&quot;].round(2))
+    .all()
+)
+sales[[&quot;OrderID&quot;, &quot;Quantity&quot;, &quot;Price&quot;, &quot;TotalAmount&quot;]].head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>   OrderID  Quantity   Price  TotalAmount
+0        1         3   54.21       162.63
+1        2         3  163.68       491.04
+2        3         5  205.01      1025.05
+3        4         4  163.13       652.52
+4        5         3  608.73      1826.19</pre></details></section>
+<section class="cell" id="celda-6"><h2>Celda 6 · código</h2><p class="cell-comment">Comentario original: Se deben preparar la fecha, el valor devuelto, la venta neta y el tipo de día de cada orden.</p><pre><code># Se deben preparar la fecha, el valor devuelto, la venta neta y el tipo de día de cada orden.
+
+sales[&quot;OrderDate&quot;] = pd.to_datetime(sales[&quot;OrderDate&quot;])
+sales[&quot;OrderMonth&quot;] = sales[&quot;OrderDate&quot;].dt.to_period(&quot;M&quot;).dt.to_timestamp()
+sales[&quot;DayType&quot;] = sales[&quot;OrderDate&quot;].dt.dayofweek.map(
+    lambda day: &quot;Fin de semana&quot; if day &gt;= 5 else &quot;Laboral&quot;
+)
+sales[&quot;ReturnedAmount&quot;] = sales[&quot;TotalAmount&quot;].where(sales[&quot;IsReturned&quot;].eq(1), 0)
+sales[&quot;NetAmount&quot;] = sales[&quot;TotalAmount&quot;] - sales[&quot;ReturnedAmount&quot;]
+</code></pre></section>
+<section class="cell" id="celda-7"><h2>Celda 7 · código</h2><p class="cell-comment">Comentario original: ¿Cuál es el desempeño comercial global en ventas brutas, devoluciones y ventas netas?</p><pre><code># ¿Cuál es el desempeño comercial global en ventas brutas, devoluciones y ventas netas?
+
+kpi = pd.DataFrame(
+    {
+        &quot;orders&quot;: [sales[&quot;OrderID&quot;].nunique()],
+        &quot;customers&quot;: [sales[&quot;CustomerID&quot;].nunique()],
+        &quot;gross_sales&quot;: [sales[&quot;TotalAmount&quot;].sum()],
+        &quot;returned_amount&quot;: [sales[&quot;ReturnedAmount&quot;].sum()],
+        &quot;net_sales&quot;: [sales[&quot;NetAmount&quot;].sum()],
+    }
+)
+kpi[&quot;return_rate_by_orders&quot;] = sales[&quot;IsReturned&quot;].mean()
+kpi[&quot;return_rate_by_value&quot;] = kpi[&quot;returned_amount&quot;] / kpi[&quot;gross_sales&quot;]
+kpi[&quot;net_sales_per_order&quot;] = kpi[&quot;net_sales&quot;] / kpi[&quot;orders&quot;]
+kpi.to_csv(SUBMISSION_DIR / &quot;kpi_summary.csv&quot;, index=False)
+kpi.round(3)</code></pre><details class="output"><summary>Salida guardada</summary><pre>   orders  customers  gross_sales  returned_amount  net_sales  \
+0    1000        428   1280745.55        643703.02  637042.53   
+
+   return_rate_by_orders  return_rate_by_value  net_sales_per_order  
+0                  0.516                 0.503              637.043  </pre></details></section>
+<section class="cell" id="celda-8"><h2>Celda 8 · código</h2><p class="cell-comment">Comentario original: ¿Cómo evolucionan las ventas brutas, devoluciones y ventas netas durante el período observado?</p><pre><code># ¿Cómo evolucionan las ventas brutas, devoluciones y ventas netas durante el período observado?
+
+monthly_sales = (
+    sales.groupby(&quot;OrderMonth&quot;)[[&quot;TotalAmount&quot;, &quot;ReturnedAmount&quot;, &quot;NetAmount&quot;]]
+    .sum()
+    .reset_index()
+)
+monthly_sales = monthly_sales.melt(
+    id_vars=&quot;OrderMonth&quot;, var_name=&quot;metric&quot;, value_name=&quot;amount&quot;
+)
+monthly_sales.to_csv(SUBMISSION_DIR / &quot;monthly_sales.csv&quot;, index=False)
+fig = px.line(
+    monthly_sales,
+    x=&quot;OrderMonth&quot;,
+    y=&quot;amount&quot;,
+    color=&quot;metric&quot;,
+    markers=True,
+    title=&quot;Ventas brutas, devoluciones y ventas netas por mes&quot;,
+    labels={&quot;OrderMonth&quot;: &quot;Mes&quot;, &quot;amount&quot;: &quot;Valor&quot;, &quot;metric&quot;: &quot;Métrica&quot;},
+)
+fig.update_layout(template=&quot;plotly_white&quot;)
+fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
+<section class="cell" id="celda-9"><h2>Celda 9 · código</h2><p class="cell-comment">Comentario original: ¿Qué categorías combinan ventas netas altas con tasas de devolución elevadas?</p><pre><code>
+# ¿Qué categorías combinan ventas netas altas con tasas de devolución elevadas?
+
+category_summary = (
+    sales.groupby(&quot;Category&quot;)
+    .agg(
+        orders=(&quot;OrderID&quot;, &quot;size&quot;),
+        gross_sales=(&quot;TotalAmount&quot;, &quot;sum&quot;),
+        returned_amount=(&quot;ReturnedAmount&quot;, &quot;sum&quot;),
+        net_sales=(&quot;NetAmount&quot;, &quot;sum&quot;),
+        return_rate=(&quot;IsReturned&quot;, &quot;mean&quot;),
+    )
+    .reset_index()
+)
+category_summary = category_summary.sort_values(&quot;net_sales&quot;, ascending=False)
+category_summary.to_csv(SUBMISSION_DIR / &quot;category_summary.csv&quot;, index=False)
+category_summary.round(3)</code></pre><details class="output"><summary>Salida guardada</summary><pre>        Category  orders  gross_sales  returned_amount  net_sales  return_rate
+1        Fashion     343    451214.50        225784.37  225430.13        0.522
+0    Electronics     336    440470.24        226316.49  214153.75        0.512
+2  Home &amp; Garden     321    389060.81        191602.16  197458.65        0.514</pre></details></section>
+<section class="cell" id="celda-10"><h2>Celda 10 · código</h2><p class="cell-comment">Comentario original: ¿Qué clientes aportan mayor valor neto después de considerar sus devoluciones?</p><pre><code># ¿Qué clientes aportan mayor valor neto después de considerar sus devoluciones?
+
+customer_summary = (
+    sales.groupby(&quot;CustomerID&quot;)
+    .agg(
+        orders=(&quot;OrderID&quot;, &quot;size&quot;),
+        gross_sales=(&quot;TotalAmount&quot;, &quot;sum&quot;),
+        returned_amount=(&quot;ReturnedAmount&quot;, &quot;sum&quot;),
+        net_sales=(&quot;NetAmount&quot;, &quot;sum&quot;),
+    )
+    .reset_index()
+)
+customer_summary[&quot;return_rate_by_value&quot;] = (
+    customer_summary[&quot;returned_amount&quot;] / customer_summary[&quot;gross_sales&quot;]
+)
+top_customers = customer_summary.nlargest(10, &quot;net_sales&quot;)
+top_customers.to_csv(SUBMISSION_DIR / &quot;top_customers.csv&quot;, index=False)
+top_customers.round(3)</code></pre><details class="output"><summary>Salida guardada</summary><pre>     CustomerID  orders  gross_sales  returned_amount  net_sales  \
+326         383       4     12157.31          3428.45    8728.86   
+175         205       4      9065.55           486.40    8579.15   
+400         466       8     10623.11          2614.20    8008.91   
+122         141       4     10253.65          2824.60    7429.05   
+7             9       5      8867.89          2145.66    6722.23   
+138         160       5      9912.24          3487.00    6425.24   
+135         157       5     11836.95          5532.68    6304.27   
+34           40       4      8046.50          1841.68    6204.82   
+261         307       3      6136.78             0.00    6136.78   
+306         359       2      5710.80             0.00    5710.80   
+
+     return_rate_by_value  
+326                 0.282  
+175                 0.054  
+400                 0.246  
+122                 0.275  
+7                   0.242  
+138                 0.352  
+135                 0.467  
+34                  0.229  
+261                 0.000  
+306                 0.000  </pre></details></section>
+<section class="cell" id="celda-11"><h2>Celda 11 · código</h2><p class="cell-comment">Comentario original: ¿Qué productos generan mayor venta neta dentro de cada categoría?</p><pre><code># ¿Qué productos generan mayor venta neta dentro de cada categoría?
+
+product_summary = (
+    sales.groupby([&quot;Category&quot;, &quot;ProductName&quot;])
+    .agg(
+        orders=(&quot;OrderID&quot;, &quot;size&quot;),
+        net_sales=(&quot;NetAmount&quot;, &quot;sum&quot;),
+        return_rate=(&quot;IsReturned&quot;, &quot;mean&quot;),
+    )
+    .reset_index()
+)
+top_products = (
+    product_summary.sort_values([&quot;Category&quot;, &quot;net_sales&quot;], ascending=[True, False])
+    .groupby(&quot;Category&quot;)
+    .head(5)
+)
+top_products.to_csv(SUBMISSION_DIR / &quot;top_products.csv&quot;, index=False)
+fig = px.bar(
+    top_products,
+    x=&quot;net_sales&quot;,
+    y=&quot;ProductName&quot;,
+    color=&quot;Category&quot;,
+    facet_col=&quot;Category&quot;,
+    orientation=&quot;h&quot;,
+    hover_data=[&quot;orders&quot;, &quot;return_rate&quot;],
+    title=&quot;Cinco productos con mayor venta neta por categoría&quot;,
+    labels={&quot;net_sales&quot;: &quot;Ventas netas&quot;, &quot;ProductName&quot;: &quot;Producto&quot;},
+)
+fig.update_layout(template=&quot;plotly_white&quot;)
+fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
+<section class="cell" id="celda-12"><h2>Celda 12 · código</h2><p class="cell-comment">Comentario original: ¿Qué combinaciones de categoría y canal presentan mayor riesgo de devolución?</p><pre><code># ¿Qué combinaciones de categoría y canal presentan mayor riesgo de devolución?
+
+minimum_orders = 50
+return_risk = (
+    sales.groupby([&quot;Category&quot;, &quot;SalesChannel&quot;])
+    .agg(
+        orders=(&quot;OrderID&quot;, &quot;size&quot;),
+        gross_sales=(&quot;TotalAmount&quot;, &quot;sum&quot;),
+        returned_amount=(&quot;ReturnedAmount&quot;, &quot;sum&quot;),
+        return_rate=(&quot;IsReturned&quot;, &quot;mean&quot;),
+    )
+    .reset_index()
+)
+return_risk = return_risk[return_risk[&quot;orders&quot;] &gt;= minimum_orders]
+return_risk = return_risk.sort_values(&quot;return_rate&quot;, ascending=False)
+return_risk.to_csv(SUBMISSION_DIR / &quot;return_risk.csv&quot;, index=False)
+return_risk.round(3)
+</code></pre><details class="output"><summary>Salida guardada</summary><pre>        Category SalesChannel  orders  gross_sales  returned_amount  \
+7  Home &amp; Garden   Mobile App      99    115987.45         73969.23   
+2    Electronics      Website     107    129756.20         73225.86   
+5        Fashion      Website     112    161321.82         83604.72   
+8  Home &amp; Garden      Website     104    132400.53         64723.54   
+4        Fashion   Mobile App     131    167679.44         87672.87   
+1    Electronics   Mobile App     108    152164.20         78806.27   
+3        Fashion     In-Store     100    122213.24         54506.78   
+0    Electronics     In-Store     121    158549.84         74284.36   
+6  Home &amp; Garden     In-Store     118    140672.83         52909.39   
+
+   return_rate  
+7        0.576  
+2        0.551  
+5        0.545  
+8        0.529  
+4        0.519  
+1        0.500  
+3        0.500  
+0        0.488  
+6        0.449  </pre></details></section>
+<section class="cell" id="celda-13"><h2>Celda 13 · código</h2><p class="cell-comment">Comentario original: ¿Dónde se concentra visualmente el riesgo de devolución por categoría y canal?</p><pre><code># ¿Dónde se concentra visualmente el riesgo de devolución por categoría y canal?
+
+return_matrix = return_risk.pivot(
+    index=&quot;Category&quot;, columns=&quot;SalesChannel&quot;, values=&quot;return_rate&quot;
+)
+fig = px.imshow(
+    return_matrix,
+    color_continuous_scale=&quot;Oranges&quot;,
+    aspect=&quot;auto&quot;,
+    title=&quot;Tasa de devolución por categoría y canal&quot;,
+)
+fig.update_layout(template=&quot;plotly_white&quot;, coloraxis_colorbar_tickformat=&quot;.0%&quot;)
+fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
+<section class="cell" id="celda-14"><h2>Celda 14 · código</h2><p class="cell-comment">Comentario original: ¿Qué segmentos se deben priorizar para investigar y reducir las devoluciones?</p><pre><code># ¿Qué segmentos se deben priorizar para investigar y reducir las devoluciones?
+
+priorities = return_risk.copy()
+priorities[&quot;segment&quot;] = priorities[&quot;Category&quot;] + &quot; — &quot; + priorities[&quot;SalesChannel&quot;]
+priorities = priorities.nlargest(5, &quot;returned_amount&quot;)
+priorities.to_csv(SUBMISSION_DIR / &quot;priority_segments.csv&quot;, index=False)
+fig = px.bar(
+    priorities.sort_values(&quot;returned_amount&quot;),
+    x=&quot;returned_amount&quot;,
+    y=&quot;segment&quot;,
+    orientation=&quot;h&quot;,
+    color=&quot;return_rate&quot;,
+    color_continuous_scale=&quot;Oranges&quot;,
+    hover_data=[&quot;orders&quot;, &quot;gross_sales&quot;],
+    title=&quot;Segmentos prioritarios por valor devuelto&quot;,
+    labels={
+        &quot;returned_amount&quot;: &quot;Valor devuelto&quot;,
+        &quot;return_rate&quot;: &quot;Tasa de devolución&quot;,
+        &quot;segment&quot;: &quot;Categoría — canal&quot;,
+    },
+)
+fig.update_coloraxes(colorbar_tickformat=&quot;.0%&quot;)
+fig.update_layout(template=&quot;plotly_white&quot;)
+fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
+<section class="cell" id="celda-15"><h2>Celda 15 · código</h2><p class="cell-comment">Comentario original: ¿El comportamiento comercial cambia entre días laborales y fines de semana?</p><pre><code># ¿El comportamiento comercial cambia entre días laborales y fines de semana?
+
+day_type_summary = (
+    sales.groupby(&quot;DayType&quot;)
+    .agg(
+        orders=(&quot;OrderID&quot;, &quot;size&quot;),
+        gross_sales=(&quot;TotalAmount&quot;, &quot;sum&quot;),
+        net_sales=(&quot;NetAmount&quot;, &quot;sum&quot;),
+        return_rate=(&quot;IsReturned&quot;, &quot;mean&quot;),
+    )
+    .reset_index()
+)
+day_type_summary.to_csv(SUBMISSION_DIR / &quot;day_type_summary.csv&quot;, index=False)
+fig = px.bar(
+    day_type_summary,
+    x=&quot;DayType&quot;,
+    y=&quot;net_sales&quot;,
+    color=&quot;return_rate&quot;,
+    color_continuous_scale=&quot;Oranges&quot;,
+    hover_data=[&quot;orders&quot;, &quot;gross_sales&quot;],
+    title=&quot;Ventas netas y devoluciones por tipo de día&quot;,
+    labels={
+        &quot;DayType&quot;: &quot;Tipo de día&quot;,
+        &quot;net_sales&quot;: &quot;Ventas netas&quot;,
+        &quot;return_rate&quot;: &quot;Tasa de devolución&quot;,
+    },
+)
+fig.update_coloraxes(colorbar_tickformat=&quot;.0%&quot;)
+fig.update_layout(template=&quot;plotly_white&quot;)
+fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
+<section class="cell" id="celda-16"><h2>Celda 16 · código</h2><p class="cell-comment">Comentario original: ¿Qué medios de pago combinan ventas netas y tasas de devolución que requieren investigación?</p><pre><code># ¿Qué medios de pago combinan ventas netas y tasas de devolución que requieren investigación?
+
+payment_summary = (
+    sales.groupby(&quot;PaymentMethod&quot;)
+    .agg(
+        orders=(&quot;OrderID&quot;, &quot;size&quot;),
+        gross_sales=(&quot;TotalAmount&quot;, &quot;sum&quot;),
+        returned_amount=(&quot;ReturnedAmount&quot;, &quot;sum&quot;),
+        net_sales=(&quot;NetAmount&quot;, &quot;sum&quot;),
+        return_rate=(&quot;IsReturned&quot;, &quot;mean&quot;),
+    )
+    .reset_index()
+)
+payment_summary.to_csv(SUBMISSION_DIR / &quot;payment_summary.csv&quot;, index=False)
+fig = px.bar(
+    payment_summary,
+    x=&quot;PaymentMethod&quot;,
+    y=&quot;net_sales&quot;,
+    color=&quot;return_rate&quot;,
+    color_continuous_scale=&quot;Oranges&quot;,
+    hover_data=[&quot;orders&quot;, &quot;returned_amount&quot;],
+    title=&quot;Ventas netas y devoluciones por medio de pago&quot;,
+    labels={
+        &quot;PaymentMethod&quot;: &quot;Medio de pago&quot;,
+        &quot;net_sales&quot;: &quot;Ventas netas&quot;,
+        &quot;return_rate&quot;: &quot;Tasa de devolución&quot;,
+    },
+)
+fig.update_coloraxes(colorbar_tickformat=&quot;.0%&quot;)
+fig.update_layout(template=&quot;plotly_white&quot;)
+fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
+      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_09.html">PRE 09</a><a href="pre_11.html">PRE 11</a></nav>
+    </main>
+  </div>
+  <footer><a class="back" href="../index.html#catalogo">Índice principal</a></footer>
+</body>
+</html>

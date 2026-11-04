@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Código fuente y notebook del PRE 15: Salarios.">
+  <title>PRE 15 · Salarios</title>
+  <style>
+    :root { color-scheme: light; --paper: #f3f5f2; --surface: #fff; --ink: #172522; --muted: #596963; --line: #d7dfd9; --green: #245c4b; --green-soft: #e2eee8; --blue-soft: #e5eef2; --code: #172b2b; }
+    * { box-sizing: border-box; } html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 "Aptos", "Segoe UI", sans-serif; }
+    a { color: var(--green); text-underline-offset: .18em; } a:hover { color: #b94f39; }
+    header { padding: 2rem max(1.25rem, calc((100% - 78rem) / 2)); background: var(--ink); color: #f8faf7; border-bottom: 6px solid var(--green); }
+    header p { margin: .25rem 0; color: #d5dfd9; } header h1 { margin: .35rem 0; font: 500 clamp(2rem, 5vw, 3.4rem)/1.08 Georgia, serif; }
+    .back { color: #a9d1bd; } .layout { display: grid; grid-template-columns: minmax(13rem, 18rem) minmax(0, 1fr); gap: 2rem; width: min(100% - 2rem, 82rem); margin: 2rem auto 4rem; align-items: start; }
+    aside { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; } aside h2 { font-size: .85rem; text-transform: uppercase; } aside ol { padding-left: 1.25rem; } aside li { margin: .3rem 0; font-size: .88rem; } aside a { text-decoration: none; }
+    main { min-width: 0; } .note { padding: .8rem 1rem; border-left: 3px solid #426d83; background: var(--blue-soft); }
+    section.file, section.cell { margin: 0 0 1rem; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; scroll-margin-top: 1rem; }
+    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; } h3 { margin: 0 0 .5rem; font-size: 1rem; }
+    .source { margin: .2rem 0 .8rem; color: var(--muted); font-size: .86rem; } .cell-comment { color: var(--green); font-weight: 650; }
+    pre { overflow-x: auto; margin: .65rem 0; padding: 1rem; border-radius: 3px; background: var(--code); color: #ecf4ee; font: .85rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; tab-size: 4; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; } .markdown { white-space: pre-wrap; } .output { margin-top: .7rem; border-top: 1px solid var(--line); } .output summary { padding: .5rem 0; cursor: pointer; color: var(--green); font-weight: 700; } .output pre { background: #edf1ed; color: var(--ink); }
+    .output-note { padding: .65rem .8rem; background: var(--green-soft); color: var(--ink); font-size: .9rem; } .pager { display: flex; justify-content: space-between; gap: 1rem; margin: 1.5rem 0; } footer { padding: 1rem; background: var(--ink); color: #d5dfd9; text-align: center; font-size: .85rem; }
+    [aria-current=page] { font-weight: 800; } @media (max-width: 760px) { .layout { grid-template-columns: 1fr; } aside { position: static; max-height: none; } aside ol { columns: 2; } } @media (max-width: 460px) { aside ol { columns: 1; } section.file, section.cell { padding: .85rem; } } @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../index.html#catalogo">Volver al índice principal</a>
+    <p>Material estático · PRE 15</p>
+    <h1>PRE 15 · Salarios</h1>
+    <p>Código fuente completo del proyecto, agrupado por archivo o por celda de notebook.</p>
+  </header>
+  <div class="layout">
+    <aside aria-label="Navegación por PRE"><h2>PRE 01–15</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_07.html">PRE 07 · No disponible</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_09.html">PRE 09 · Drivers y ChatGPT</a></li><li><a href="pre_10.html">PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html">PRE 13 · Scopus</a></li><li><a href="pre_14.html">PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html" aria-current=page>PRE 15 · Salarios</a></li></ol></nav></aside>
+    <main>
+      <p class="note">El contenido está escrito directamente en esta página HTML. El código y los comentarios originales se pueden seleccionar, copiar y explicar sin descargar el archivo. Las salidas guardadas se muestran como texto cuando están disponibles.</p>
+      <p class="note">Notebook original: 19 celdas, en su orden original. Se conservan comentarios de código y salidas textuales guardadas; las figuras Plotly se identifican, pero no se ejecutan en esta página estática.</p>
+<section class="cell" id="celda-1"><h2>Celda 1 · código</h2><p class="cell-comment">Comentario original: Se importan las librerías usadas durante el análisis.</p><pre><code># Se importan las librerías usadas durante el análisis.
+
+from pathlib import Path
+
+import pandas as pd
+import plotly.express as px</code></pre></section>
+<section class="cell" id="celda-2"><h2>Celda 2 · código</h2><p class="cell-comment">Comentario original: Se definen las rutas de datos y entregables permanentes del taller.</p><pre><code># Se definen las rutas de datos y entregables permanentes del taller.
+
+data_file = Path(&quot;../data/salarios.csv&quot;)
+submission_directory = Path(&quot;../submission&quot;)
+submission_directory.mkdir(exist_ok=True)</code></pre></section>
+<section class="cell" id="celda-3"><h2>Celda 3 · código</h2><p class="cell-comment">Comentario original: Se definen las rutas de datos y entregables permanentes del taller.</p><pre><code># Se definen las rutas de datos y entregables permanentes del taller.
+
+data_file = Path(&quot;../data/salarios.csv&quot;)
+submission_directory = Path(&quot;../submission&quot;)
+submission_directory.mkdir(exist_ok=True)</code></pre></section>
+<section class="cell" id="celda-4"><h2>Celda 4 · código</h2><p class="cell-comment">Comentario original: Se carga el archivo y se verifican sus tipos, tamaño y campos disponibles.</p><pre><code># Se carga el archivo y se verifican sus tipos, tamaño y campos disponibles.
+
+salaries = pd.read_csv(data_file)
+salaries.info()
+salaries.shape
+salaries.columns.tolist()</code></pre><details class="output"><summary>Salida de texto guardada</summary><pre>&lt;class &#x27;pandas.core.frame.DataFrame&#x27;&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 7 columns):
+ #   Column                     Non-Null Count  Dtype 
+---  ------                     --------------  ----- 
+ 0   employee_id                1000 non-null   object
+ 1   gerencia                   1000 non-null   object
+ 2   departamento               1000 non-null   object
+ 3   trayectoria                1000 non-null   object
+ 4   categoria                  1000 non-null   object
+ 5   experiencia_tecnica_anios  1000 non-null   int64 
+ 6   salario_mensual_cop        1000 non-null   int64 
+dtypes: int64(2), object(5)
+memory usage: 54.8+ KB
+</pre></details><details class="output"><summary>Salida guardada</summary><pre>[&#x27;employee_id&#x27;,
+ &#x27;gerencia&#x27;,
+ &#x27;departamento&#x27;,
+ &#x27;trayectoria&#x27;,
+ &#x27;categoria&#x27;,
+ &#x27;experiencia_tecnica_anios&#x27;,
+ &#x27;salario_mensual_cop&#x27;]</pre></details></section>
+<section class="cell" id="celda-5"><h2>Celda 5 · código</h2><p class="cell-comment">Comentario original: Se comprueba que cada registro representa un profesional y que los salarios son utilizables.</p><pre><code>
+# Se comprueba que cada registro representa un profesional y que los salarios son utilizables.
+
+assert salaries[&quot;employee_id&quot;].is_unique
+assert salaries[&quot;salario_mensual_cop&quot;].gt(0).all()
+assert (
+    salaries[[&quot;gerencia&quot;, &quot;departamento&quot;, &quot;trayectoria&quot;, &quot;categoria&quot;]]
+    .notna()
+    .all()
+    .all()
+)
+salaries.groupby([&quot;gerencia&quot;, &quot;departamento&quot;]).size()</code></pre><details class="output"><summary>Salida guardada</summary><pre>gerencia     departamento         
+Comercial    Clientes mayoristas      173
+             Clientes menores         124
+Finanzas     Planeación financiera    112
+             Tesorería                130
+Operaciones  Operaciones              185
+             Tecnología               156
+Talento      Recursos humanos         120
+dtype: int64</pre></details></section>
+<section class="cell" id="celda-6"><h2>Celda 6 · código</h2><p class="cell-comment">Comentario original: Se agrupa la experiencia técnica en bandas comparables para definir pares internos.</p><pre><code># Se agrupa la experiencia técnica en bandas comparables para definir pares internos.
+
+salaries[&quot;banda_experiencia&quot;] = pd.cut(
+    salaries[&quot;experiencia_tecnica_anios&quot;],
+    bins=[-1, 4, 9, 14, 100],
+    labels=[&quot;0-4&quot;, &quot;5-9&quot;, &quot;10-14&quot;, &quot;15+&quot;],
+)
+salaries.groupby(&quot;banda_experiencia&quot;, observed=True).size()
+</code></pre><details class="output"><summary>Salida guardada</summary><pre>banda_experiencia
+0-4      170
+5-9      388
+10-14    307
+15+      135
+dtype: int64</pre></details></section>
+<section class="cell" id="celda-7"><h2>Celda 7 · código</h2><p class="cell-comment">Comentario original: Se observa la distribución salarial por trayectoria; la mediana y el rango importan más que un único promedio.</p><pre><code># Se observa la distribución salarial por trayectoria; la mediana y el rango importan más que un único promedio.
+
+salary_distribution = (
+    salaries.groupby(&quot;trayectoria&quot;)
+    .agg(
+        profesionales=(&quot;employee_id&quot;, &quot;size&quot;),
+        salario_mediano_cop=(&quot;salario_mensual_cop&quot;, &quot;median&quot;),
+        percentil_10_cop=(&quot;salario_mensual_cop&quot;, lambda value: value.quantile(0.10)),
+        percentil_90_cop=(&quot;salario_mensual_cop&quot;, lambda value: value.quantile(0.90)),
+    )
+    .reset_index()
+)
+salary_distribution.round(0)</code></pre><details class="output"><summary>Salida guardada</summary><pre>  trayectoria  profesionales  salario_mediano_cop  percentil_10_cop  \
+0   Directiva            205           14632908.0         9821169.0   
+1     Técnica            795            8138389.0         4215443.0   
+
+   percentil_90_cop  
+0        19658286.0  
+1        14086936.0  </pre></details></section>
+<section class="cell" id="celda-8"><h2>Celda 8 · código</h2><p class="cell-comment">Comentario original: Se comparan las distribuciones salariales de las trayectorias técnica y directiva.</p><pre><code># Se comparan las distribuciones salariales de las trayectorias técnica y directiva.
+
+fig = px.box(
+    salaries,
+    x=&quot;trayectoria&quot;,
+    y=&quot;salario_mensual_cop&quot;,
+    color=&quot;trayectoria&quot;,
+    points=False,
+    labels={
+        &quot;trayectoria&quot;: &quot;Trayectoria&quot;,
+        &quot;salario_mensual_cop&quot;: &quot;Salario mensual (COP)&quot;,
+    },
+    title=&quot;Distribución salarial por trayectoria&quot;,
+    color_discrete_map={&quot;Técnica&quot;: &quot;#4e79a7&quot;, &quot;Directiva&quot;: &quot;#f28e2b&quot;},
+)
+fig.update_layout(template=&quot;plotly_white&quot;, showlegend=False)
+fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
+<section class="cell" id="celda-9"><h2>Celda 9 · código</h2><p class="cell-comment">Comentario original: Se calcula la mediana empresarial de cada grupo de pares y la brecha individual frente a esa referencia.</p><pre><code># Se calcula la mediana empresarial de cada grupo de pares y la brecha individual frente a esa referencia.
+
+peer_columns = [&quot;categoria&quot;, &quot;trayectoria&quot;, &quot;banda_experiencia&quot;]
+salaries[&quot;salario_mediano_pares_cop&quot;] = salaries.groupby(peer_columns, observed=True)[
+    &quot;salario_mensual_cop&quot;
+].transform(&quot;median&quot;)
+salaries[&quot;brecha_vs_pares_pct&quot;] = (
+    salaries[&quot;salario_mensual_cop&quot;] / salaries[&quot;salario_mediano_pares_cop&quot;] - 1
+)
+salaries[
+    peer_columns
+    + [&quot;salario_mensual_cop&quot;, &quot;salario_mediano_pares_cop&quot;, &quot;brecha_vs_pares_pct&quot;]
+].head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>      categoria trayectoria banda_experiencia  salario_mensual_cop  \
+0  Especialista     Técnica               5-9              9031472   
+1  Especialista     Técnica               5-9              8784782   
+2        Senior     Técnica             10-14             13988237   
+3        Senior   Directiva               15+             15665175   
+4     Principal     Técnica               15+             20114861   
+
+   salario_mediano_pares_cop  brecha_vs_pares_pct  
+0                  8793625.0             0.027048  
+1                  8793625.0            -0.001006  
+2                 12890844.0             0.085130  
+3                 15756238.0            -0.005779  
+4                 18009313.0             0.116914  </pre></details></section>
+<section class="cell" id="celda-10"><h2>Celda 10 · código</h2><p class="cell-comment">Comentario original: ¿En qué áreas debemos revisar los salarios porque nuestros profesionales podrían ganar menos que perfiles similares en otras áreas de la empresa?</p><pre><code># ¿En qué áreas debemos revisar los salarios porque nuestros profesionales podrían ganar menos que perfiles similares en otras áreas de la empresa?
+
+minimum_group_size = 30
+department_gap = (
+    salaries.groupby([&quot;gerencia&quot;, &quot;departamento&quot;], as_index=False)
+    .agg(
+        profesionales=(&quot;employee_id&quot;, &quot;size&quot;),
+        salario_mediano_cop=(&quot;salario_mensual_cop&quot;, &quot;median&quot;),
+        brecha_mediana_vs_pares_pct=(&quot;brecha_vs_pares_pct&quot;, &quot;median&quot;),
+        proporcion_mas_de_5_pct_debajo=(
+            &quot;brecha_vs_pares_pct&quot;,
+            lambda value: (value &lt;= -0.05).mean(),
+        ),
+    )
+    .query(&quot;profesionales &gt;= @minimum_group_size&quot;)
+    .sort_values(&quot;brecha_mediana_vs_pares_pct&quot;)
+)
+department_gap.round(3)</code></pre><details class="output"><summary>Salida guardada</summary><pre>      gerencia           departamento  profesionales  salario_mediano_cop  \
+3     Finanzas              Tesorería            130            7128684.0   
+1    Comercial       Clientes menores            124            8107724.0   
+6      Talento       Recursos humanos            120            9780085.0   
+4  Operaciones            Operaciones            185            9481048.0   
+2     Finanzas  Planeación financiera            112            9753459.5   
+0    Comercial    Clientes mayoristas            173           10342126.0   
+5  Operaciones             Tecnología            156           10012159.0   
+
+   brecha_mediana_vs_pares_pct  proporcion_mas_de_5_pct_debajo  
+3                       -0.074                           0.662  
+1                       -0.071                           0.677  
+6                       -0.018                           0.283  
+4                        0.001                           0.157  
+2                        0.011                           0.080  
+0                        0.038                           0.040  
+5                        0.060                           0.013  </pre></details></section>
+<section class="cell" id="celda-11"><h2>Celda 11 · código</h2><p class="cell-comment">Comentario original: Se visualiza la brecha mediana por departamento frente a perfiles comparables de toda la empresa.</p><pre><code># Se visualiza la brecha mediana por departamento frente a perfiles comparables de toda la empresa.
+
+department_gap[&quot;estado&quot;] = department_gap[&quot;brecha_mediana_vs_pares_pct&quot;].map(
+    lambda value: &quot;Por debajo de pares&quot; if value &lt; 0 else &quot;En o sobre pares&quot;
+)
+fig = px.bar(
+    department_gap,
+    x=&quot;brecha_mediana_vs_pares_pct&quot;,
+    y=&quot;departamento&quot;,
+    orientation=&quot;h&quot;,
+    color=&quot;estado&quot;,
+    text=&quot;profesionales&quot;,
+    labels={
+        &quot;brecha_mediana_vs_pares_pct&quot;: &quot;Brecha frente a pares&quot;,
+        &quot;departamento&quot;: &quot;Departamento&quot;,
+        &quot;profesionales&quot;: &quot;Profesionales&quot;,
+    },
+    title=&quot;Brecha salarial interna por departamento&quot;,
+    color_discrete_map={
+        &quot;Por debajo de pares&quot;: &quot;#e15759&quot;,
+        &quot;En o sobre pares&quot;: &quot;#4e79a7&quot;,
+    },
+)
+fig.add_vline(x=0, line_color=&quot;#333333&quot;)
+fig.update_xaxes(tickformat=&quot;.0%&quot;)
+fig.update_layout(template=&quot;plotly_white&quot;, legend_title_text=&quot;Estado&quot;)
+fig.show()
+</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
+<section class="cell" id="celda-12"><h2>Celda 12 · código</h2><p class="cell-comment">Comentario original: Se priorizan áreas con una brecha mediana de al menos 5 % y una mayoría de profesionales bajo esa referencia.</p><pre><code># Se priorizan áreas con una brecha mediana de al menos 5 % y una mayoría de profesionales bajo esa referencia.
+
+areas_a_revisar = department_gap.query(
+    &quot;brecha_mediana_vs_pares_pct &lt;= -0.05 and proporcion_mas_de_5_pct_debajo &gt;= 0.50&quot;
+).copy()
+areas_a_revisar[
+    [
+        &quot;gerencia&quot;,
+        &quot;departamento&quot;,
+        &quot;profesionales&quot;,
+        &quot;brecha_mediana_vs_pares_pct&quot;,
+        &quot;proporcion_mas_de_5_pct_debajo&quot;,
+    ]
+].round(3)</code></pre><details class="output"><summary>Salida guardada</summary><pre>    gerencia      departamento  profesionales  brecha_mediana_vs_pares_pct  \
+3   Finanzas         Tesorería            130                       -0.074   
+1  Comercial  Clientes menores            124                       -0.071   
+
+   proporcion_mas_de_5_pct_debajo  
+3                           0.662  
+1                           0.677  </pre></details></section>
+<section class="cell" id="celda-13"><h2>Celda 13 · código</h2><p class="cell-comment">Comentario original: Se proponen alternativas para revisar bandas, criterios de progresión y retención en las áreas priorizadas.</p><pre><code># Se proponen alternativas para revisar bandas, criterios de progresión y retención en las áreas priorizadas.
+
+recommendations = areas_a_revisar.assign(
+    alternativa_1=&quot;Revisar la banda salarial frente a perfiles comparables.&quot;,
+    alternativa_2=&quot;Verificar criterios de progresión y ajustes salariales.&quot;,
+    alternativa_3=&quot;Priorizar conversación de retención sin divulgar salarios individuales.&quot;,
+)[
+    [
+        &quot;gerencia&quot;,
+        &quot;departamento&quot;,
+        &quot;brecha_mediana_vs_pares_pct&quot;,
+        &quot;alternativa_1&quot;,
+        &quot;alternativa_2&quot;,
+        &quot;alternativa_3&quot;,
+    ]
+]
+recommendations</code></pre><details class="output"><summary>Salida guardada</summary><pre>    gerencia      departamento  brecha_mediana_vs_pares_pct  \
+3   Finanzas         Tesorería                    -0.074176   
+1  Comercial  Clientes menores                    -0.071096   
+
+                                       alternativa_1  \
+3  Revisar la banda salarial frente a perfiles co...   
+1  Revisar la banda salarial frente a perfiles co...   
+
+                                       alternativa_2  \
+3  Verificar criterios de progresión y ajustes sa...   
+1  Verificar criterios de progresión y ajustes sa...   
+
+                                       alternativa_3  
+3  Priorizar conversación de retención sin divulg...  
+1  Priorizar conversación de retención sin divulg...  </pre></details></section>
+<section class="cell" id="celda-14"><h2>Celda 14 · código</h2><p class="cell-comment">Comentario original: Se guardan los resultados agregados para revisión posterior sin exponer información individual.</p><pre><code># Se guardan los resultados agregados para revisión posterior sin exponer información individual.
+
+department_gap.drop(columns=&quot;estado&quot;).to_csv(
+    submission_directory / &quot;department_pay_gap.csv&quot;, index=False
+)
+recommendations.to_csv(
+    submission_directory / &quot;compensation_recommendations.csv&quot;, index=False
+)
+</code></pre></section>
+<section class="cell" id="celda-15"><h2>Celda 15 · código</h2><p class="cell-comment">Comentario original: ¿Un profesional técnico puede alcanzar los salarios más altos sin tener que convertirse en directivo?</p><pre><code># ¿Un profesional técnico puede alcanzar los salarios más altos sin tener que convertirse en directivo?
+
+high_salary_threshold = salaries[&quot;salario_mensual_cop&quot;].quantile(0.90)
+salaries[&quot;salario_alto&quot;] = salaries[&quot;salario_mensual_cop&quot;].ge(high_salary_threshold)
+career_path_summary = salaries.groupby(&quot;trayectoria&quot;, as_index=False).agg(
+    profesionales=(&quot;employee_id&quot;, &quot;size&quot;),
+    salario_mediano_cop=(&quot;salario_mensual_cop&quot;, &quot;median&quot;),
+    profesionales_con_salario_alto=(&quot;salario_alto&quot;, &quot;sum&quot;),
+    proporcion_con_salario_alto=(&quot;salario_alto&quot;, &quot;mean&quot;),
+)
+career_path_summary.round(3)</code></pre><details class="output"><summary>Salida guardada</summary><pre>  trayectoria  profesionales  salario_mediano_cop  \
+0   Directiva            205           14632908.0   
+1     Técnica            795            8138389.0   
+
+   profesionales_con_salario_alto  proporcion_con_salario_alto  
+0                              55                        0.268  
+1                              45                        0.057  </pre></details></section>
+<section class="cell" id="celda-16"><h2>Celda 16 · código</h2><p class="cell-comment">Comentario original: Se compara la proporción de profesionales en el decil salarial superior por trayectoria.</p><pre><code># Se compara la proporción de profesionales en el decil salarial superior por trayectoria.
+
+fig = px.bar(
+    career_path_summary,
+    x=&quot;trayectoria&quot;,
+    y=&quot;proporcion_con_salario_alto&quot;,
+    text=&quot;profesionales_con_salario_alto&quot;,
+    labels={
+        &quot;trayectoria&quot;: &quot;Trayectoria&quot;,
+        &quot;proporcion_con_salario_alto&quot;: &quot;Proporción en salarios altos&quot;,
+        &quot;profesionales_con_salario_alto&quot;: &quot;Profesionales&quot;,
+    },
+    title=&quot;Acceso a salarios altos por trayectoria&quot;,
+    color=&quot;trayectoria&quot;,
+    color_discrete_map={&quot;Técnica&quot;: &quot;#4e79a7&quot;, &quot;Directiva&quot;: &quot;#f28e2b&quot;},
+)
+fig.update_yaxes(tickformat=&quot;.0%&quot;)
+fig.update_layout(template=&quot;plotly_white&quot;, showlegend=False)
+fig.show()</code></pre><p class="output-note">El notebook guarda aquí una figura interactiva de Plotly; la salida no interactiva se conserva en el notebook original.</p></section>
+<section class="cell" id="celda-17"><h2>Celda 17 · código</h2><p class="cell-comment">Comentario original: Se identifica dónde se concentran los profesionales técnicos que ya alcanzan el decil salarial superior.</p><pre><code># Se identifica dónde se concentran los profesionales técnicos que ya alcanzan el decil salarial superior.
+
+technical_high_salary = (
+    salaries.query(&quot;trayectoria == &#x27;Técnica&#x27; and salario_alto&quot;)
+    .groupby([&quot;categoria&quot;, &quot;banda_experiencia&quot;], observed=True, as_index=False)
+    .agg(profesionales=(&quot;employee_id&quot;, &quot;size&quot;))
+    .sort_values(&quot;profesionales&quot;, ascending=False)
+)
+technical_high_salary</code></pre><details class="output"><summary>Salida guardada</summary><pre>   categoria banda_experiencia  profesionales
+1  Principal               15+             37
+0  Principal             10-14              8</pre></details></section>
+<section class="cell" id="celda-18"><h2>Celda 18 · código</h2><p class="cell-comment">Comentario original: Se documenta la respuesta gerencial y sus límites: las diferencias observadas no prueban por sí solas una causa.</p><pre><code># Se documenta la respuesta gerencial y sus límites: las diferencias observadas no prueban por sí solas una causa.
+
+conclusions = pd.DataFrame(
+    {
+        &quot;pregunta&quot;: [
+            &quot;¿Existen áreas con posible brecha salarial interna?&quot;,
+            &quot;¿La dirección es la única vía hacia salarios altos?&quot;,
+        ],
+        &quot;respuesta&quot;: [
+            f&quot;Sí. Se priorizan {&#x27;, &#x27;.join(areas_a_revisar[&#x27;departamento&#x27;])} para revisar bandas y criterios de progresión.&quot;,
+            f&quot;No. {int((salaries[&#x27;trayectoria&#x27;].eq(&#x27;Técnica&#x27;) &amp; salaries[&#x27;salario_alto&#x27;]).sum())} profesionales técnicos están en el decil salarial superior.&quot;,
+        ],
+        &quot;límite&quot;: [
+            &quot;La brecha indica una señal para revisión; no identifica su causa por sí sola.&quot;,
+            &quot;La relación observada no prueba que una trayectoria cause el salario.&quot;,
+        ],
+    }
+)
+conclusions</code></pre><details class="output"><summary>Salida guardada</summary><pre>                                            pregunta  \
+0  ¿Existen áreas con posible brecha salarial int...   
+1  ¿La dirección es la única vía hacia salarios a...   
+
+                                           respuesta  \
+0  Sí. Se priorizan Tesorería, Clientes menores p...   
+1  No. 45 profesionales técnicos están en el deci...   
+
+                                              límite  
+0  La brecha indica una señal para revisión; no i...  
+1  La relación observada no prueba que una trayec...  </pre></details></section>
+<section class="cell" id="celda-19"><h2>Celda 19 · código</h2><p class="cell-comment">Comentario original: Se guardan las conclusiones y la tabla de trayectorias para una discusión gerencial posterior.</p><pre><code># Se guardan las conclusiones y la tabla de trayectorias para una discusión gerencial posterior.
+
+career_path_summary.to_csv(
+    submission_directory / &quot;high_salary_by_career.csv&quot;, index=False
+)
+conclusions.to_csv(submission_directory / &quot;analysis_conclusions.csv&quot;, index=False)</code></pre></section>
+      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_14.html">PRE 14</a></nav>
+    </main>
+  </div>
+  <footer><a class="back" href="../index.html#catalogo">Índice principal</a></footer>
+</body>
+</html>

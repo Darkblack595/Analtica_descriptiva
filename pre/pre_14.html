@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Código fuente y notebook del PRE 14: Marketing dashboard.">
+  <title>PRE 14 · Marketing dashboard</title>
+  <style>
+    :root { color-scheme: light; --paper: #f3f5f2; --surface: #fff; --ink: #172522; --muted: #596963; --line: #d7dfd9; --green: #245c4b; --green-soft: #e2eee8; --blue-soft: #e5eef2; --code: #172b2b; }
+    * { box-sizing: border-box; } html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 "Aptos", "Segoe UI", sans-serif; }
+    a { color: var(--green); text-underline-offset: .18em; } a:hover { color: #b94f39; }
+    header { padding: 2rem max(1.25rem, calc((100% - 78rem) / 2)); background: var(--ink); color: #f8faf7; border-bottom: 6px solid var(--green); }
+    header p { margin: .25rem 0; color: #d5dfd9; } header h1 { margin: .35rem 0; font: 500 clamp(2rem, 5vw, 3.4rem)/1.08 Georgia, serif; }
+    .back { color: #a9d1bd; } .layout { display: grid; grid-template-columns: minmax(13rem, 18rem) minmax(0, 1fr); gap: 2rem; width: min(100% - 2rem, 82rem); margin: 2rem auto 4rem; align-items: start; }
+    aside { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; } aside h2 { font-size: .85rem; text-transform: uppercase; } aside ol { padding-left: 1.25rem; } aside li { margin: .3rem 0; font-size: .88rem; } aside a { text-decoration: none; }
+    main { min-width: 0; } .note { padding: .8rem 1rem; border-left: 3px solid #426d83; background: var(--blue-soft); }
+    section.file, section.cell { margin: 0 0 1rem; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; scroll-margin-top: 1rem; }
+    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; } h3 { margin: 0 0 .5rem; font-size: 1rem; }
+    .source { margin: .2rem 0 .8rem; color: var(--muted); font-size: .86rem; } .cell-comment { color: var(--green); font-weight: 650; }
+    pre { overflow-x: auto; margin: .65rem 0; padding: 1rem; border-radius: 3px; background: var(--code); color: #ecf4ee; font: .85rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; tab-size: 4; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; } .markdown { white-space: pre-wrap; } .output { margin-top: .7rem; border-top: 1px solid var(--line); } .output summary { padding: .5rem 0; cursor: pointer; color: var(--green); font-weight: 700; } .output pre { background: #edf1ed; color: var(--ink); }
+    .output-note { padding: .65rem .8rem; background: var(--green-soft); color: var(--ink); font-size: .9rem; } .pager { display: flex; justify-content: space-between; gap: 1rem; margin: 1.5rem 0; } footer { padding: 1rem; background: var(--ink); color: #d5dfd9; text-align: center; font-size: .85rem; }
+    [aria-current=page] { font-weight: 800; } @media (max-width: 760px) { .layout { grid-template-columns: 1fr; } aside { position: static; max-height: none; } aside ol { columns: 2; } } @media (max-width: 460px) { aside ol { columns: 1; } section.file, section.cell { padding: .85rem; } } @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../index.html#catalogo">Volver al índice principal</a>
+    <p>Material estático · PRE 14</p>
+    <h1>PRE 14 · Marketing dashboard</h1>
+    <p>Código fuente completo del proyecto, agrupado por archivo o por celda de notebook.</p>
+  </header>
+  <div class="layout">
+    <aside aria-label="Navegación por PRE"><h2>PRE 01–15</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_07.html">PRE 07 · No disponible</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_09.html">PRE 09 · Drivers y ChatGPT</a></li><li><a href="pre_10.html">PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html">PRE 13 · Scopus</a></li><li><a href="pre_14.html" aria-current=page>PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
+    <main>
+      <p class="note">El contenido está escrito directamente en esta página HTML. El código y los comentarios originales se pueden seleccionar, copiar y explicar sin descargar el archivo. Las salidas guardadas se muestran como texto cuando están disponibles.</p>
+      <section class="file" id="archivo-app-py"><h2>app.py</h2><p class="source">Archivo original: <a href="../PRE_14_marketing_dashboard/src/app.py">PRE_14_marketing_dashboard/src/app.py</a> · 123 líneas</p><pre><code>import plotly.express as px
+import streamlit as st
+
+try:
+    from .main import (
+        DATA_FILE,
+        calculate_kpis,
+        filter_campaign_data,
+        load_campaign_data,
+        summarize_by_campaign,
+        summarize_by_day,
+        summarize_by_source,
+    )
+except ImportError:  # Permite ejecutar `streamlit run src/app.py`.
+    from main import (
+        DATA_FILE,
+        calculate_kpis,
+        filter_campaign_data,
+        load_campaign_data,
+        summarize_by_campaign,
+        summarize_by_day,
+        summarize_by_source,
+    )
+
+
+@st.cache_data
+def get_campaign_data():
+    &quot;&quot;&quot;Cache the supplied classroom dataset during a dashboard session.&quot;&quot;&quot;
+    return load_campaign_data(DATA_FILE)
+
+
+def format_currency(value):
+    &quot;&quot;&quot;Format a currency metric while preserving an unavailable ratio.&quot;&quot;&quot;
+    return &quot;No disponible&quot; if value is None else f&quot;USD {value:,.2f}&quot;
+
+
+def main():
+    &quot;&quot;&quot;Render the filtered marketing dashboard.&quot;&quot;&quot;
+    st.set_page_config(page_title=&quot;Desempeño de campañas&quot;, layout=&quot;wide&quot;)
+    st.title(&quot;Desempeño de campañas de marketing&quot;)
+    st.caption(&quot;Datos suministrados para el taller; no representan resultados operativos reales.&quot;)
+
+    data = get_campaign_data()
+    minimum_date = data[&quot;utc_date&quot;].min().date()
+    maximum_date = data[&quot;utc_date&quot;].max().date()
+
+    with st.sidebar:
+        st.header(&quot;Filtros&quot;)
+        selected_dates = st.date_input(
+            &quot;Período&quot;,
+            value=(minimum_date, maximum_date),
+            min_value=minimum_date,
+            max_value=maximum_date,
+        )
+        selected_sources = st.multiselect(
+            &quot;Fuente de tráfico&quot;,
+            options=sorted(data[&quot;traffic_source&quot;].unique()),
+            default=sorted(data[&quot;traffic_source&quot;].unique()),
+        )
+        selected_countries = st.multiselect(
+            &quot;País&quot;,
+            options=sorted(data[&quot;country&quot;].unique()),
+            default=sorted(data[&quot;country&quot;].unique()),
+        )
+
+    if len(selected_dates) != 2:
+        st.info(&quot;Seleccione una fecha inicial y una fecha final.&quot;)
+        st.stop()
+
+    filtered_data = filter_campaign_data(
+        data,
+        start_date=selected_dates[0],
+        end_date=selected_dates[1],
+        traffic_sources=selected_sources,
+        countries=selected_countries,
+    )
+    if filtered_data.empty:
+        st.warning(&quot;Los filtros seleccionados no contienen campañas.&quot;)
+        st.stop()
+
+    kpis = calculate_kpis(filtered_data)
+    metric_columns = st.columns(5)
+    metric_columns[0].metric(&quot;Utilidad bruta&quot;, format_currency(kpis[&quot;gross_profit&quot;]))
+    metric_columns[1].metric(&quot;Ingreso&quot;, format_currency(kpis[&quot;revenue&quot;]))
+    metric_columns[2].metric(&quot;Inversión&quot;, format_currency(kpis[&quot;ad_spend&quot;]))
+    metric_columns[3].metric(
+        &quot;ROAS&quot;, &quot;No disponible&quot; if kpis[&quot;roas&quot;] is None else f&quot;{kpis[&#x27;roas&#x27;]:.2f}&quot;
+    )
+    metric_columns[4].metric(&quot;CPC&quot;, format_currency(kpis[&quot;cpc&quot;]))
+
+    daily_summary = summarize_by_day(filtered_data)
+    daily_figure = px.line(
+        daily_summary,
+        x=&quot;utc_date&quot;,
+        y=&quot;gross_profit&quot;,
+        title=&quot;Utilidad bruta diaria&quot;,
+        labels={&quot;utc_date&quot;: &quot;Fecha&quot;, &quot;gross_profit&quot;: &quot;Utilidad bruta (USD)&quot;},
+        markers=True,
+        color_discrete_sequence=[&quot;#4e79a7&quot;],
+    )
+    st.plotly_chart(daily_figure)
+
+    source_summary = summarize_by_source(filtered_data)
+    source_figure = px.bar(
+        source_summary.sort_values(&quot;gross_profit&quot;),
+        x=&quot;gross_profit&quot;,
+        y=&quot;traffic_source&quot;,
+        orientation=&quot;h&quot;,
+        title=&quot;Utilidad bruta por fuente de tráfico&quot;,
+        labels={&quot;gross_profit&quot;: &quot;Utilidad bruta (USD)&quot;, &quot;traffic_source&quot;: &quot;Fuente&quot;},
+        color_discrete_sequence=[&quot;#f28e2b&quot;],
+    )
+    st.plotly_chart(source_figure)
+
+    campaign_summary = summarize_by_campaign(filtered_data)
+    st.subheader(&quot;Detalle por campaña&quot;)
+    st.dataframe(campaign_summary, width=&quot;stretch&quot;, hide_index=True)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+    
+    </code></pre></section>
+<section class="file" id="archivo-main-py"><h2>main.py</h2><p class="source">Archivo original: <a href="../PRE_14_marketing_dashboard/src/main.py">PRE_14_marketing_dashboard/src/main.py</a> · 151 líneas</p><pre><code>from pathlib import Path
+
+import pandas as pd
+
+
+PROJECT_FOLDER = Path(__file__).resolve().parents[1]
+DATA_FILE = PROJECT_FOLDER / &quot;data&quot; / &quot;campaign_data.csv&quot;
+SUBMISSION_FOLDER = PROJECT_FOLDER / &quot;submission&quot;
+
+REQUIRED_COLUMNS = {
+    &quot;utc_date&quot;,
+    &quot;traffic_source&quot;,
+    &quot;country&quot;,
+    &quot;template_name&quot;,
+    &quot;impressions&quot;,
+    &quot;paid_clicks&quot;,
+    &quot;revenue&quot;,
+    &quot;ad_spend&quot;,
+}
+NUMERIC_COLUMNS = (&quot;impressions&quot;, &quot;paid_clicks&quot;, &quot;revenue&quot;, &quot;ad_spend&quot;)
+
+
+def load_campaign_data(input_file=DATA_FILE):
+    &quot;&quot;&quot;Load the campaign data and derive profit from revenue and advertising spend.&quot;&quot;&quot;
+    data = pd.read_csv(input_file)
+    missing_columns = REQUIRED_COLUMNS - set(data.columns)
+
+    if missing_columns:
+        missing_columns = &quot;, &quot;.join(sorted(missing_columns))
+        raise ValueError(f&quot;Faltan columnas requeridas: {missing_columns}.&quot;)
+
+    data[&quot;utc_date&quot;] = pd.to_datetime(data[&quot;utc_date&quot;], errors=&quot;raise&quot;)
+    for column in NUMERIC_COLUMNS:
+        data[column] = pd.to_numeric(data[column], errors=&quot;raise&quot;)
+
+    if (data[list(NUMERIC_COLUMNS)] &lt; 0).any().any():
+        raise ValueError(&quot;Las métricas de campaña no pueden ser negativas.&quot;)
+
+    data[&quot;gross_profit&quot;] = data[&quot;revenue&quot;] - data[&quot;ad_spend&quot;]
+    return data
+
+
+def filter_campaign_data(data, start_date, end_date, traffic_sources=None, countries=None):
+    &quot;&quot;&quot;Return the campaign rows included by the dashboard filters.&quot;&quot;&quot;
+    start_date = pd.Timestamp(start_date)
+    end_date = pd.Timestamp(end_date)
+
+    if start_date &gt; end_date:
+        raise ValueError(&quot;La fecha inicial no puede ser posterior a la fecha final.&quot;)
+
+    filtered_data = data.loc[data[&quot;utc_date&quot;].between(start_date, end_date)].copy()
+
+    if traffic_sources is not None:
+        filtered_data = filtered_data.loc[
+            filtered_data[&quot;traffic_source&quot;].isin(traffic_sources)
+        ].copy()
+    if countries is not None:
+        filtered_data = filtered_data.loc[filtered_data[&quot;country&quot;].isin(countries)].copy()
+
+    return filtered_data
+
+
+def safe_divide(numerator, denominator):
+    &quot;&quot;&quot;Return a ratio or None when its denominator is zero.&quot;&quot;&quot;
+    if denominator == 0:
+        return None
+    return numerator / denominator
+
+
+def calculate_kpis(data):
+    &quot;&quot;&quot;Calculate additive campaign measures and ratios at the active filter scope.&quot;&quot;&quot;
+    impressions = int(data[&quot;impressions&quot;].sum())
+    paid_clicks = int(data[&quot;paid_clicks&quot;].sum())
+    revenue = float(data[&quot;revenue&quot;].sum())
+    ad_spend = float(data[&quot;ad_spend&quot;].sum())
+    gross_profit = revenue - ad_spend
+
+    return {
+        &quot;impressions&quot;: impressions,
+        &quot;paid_clicks&quot;: paid_clicks,
+        &quot;revenue&quot;: revenue,
+        &quot;ad_spend&quot;: ad_spend,
+        &quot;gross_profit&quot;: gross_profit,
+        &quot;roas&quot;: safe_divide(revenue, ad_spend),
+        &quot;cpc&quot;: safe_divide(ad_spend, paid_clicks),
+    }
+
+
+def summarize_by_day(data):
+    &quot;&quot;&quot;Aggregate daily financial performance for the temporal chart.&quot;&quot;&quot;
+    return (
+        data.groupby(&quot;utc_date&quot;, as_index=False)
+        .agg(
+            revenue=(&quot;revenue&quot;, &quot;sum&quot;),
+            ad_spend=(&quot;ad_spend&quot;, &quot;sum&quot;),
+            gross_profit=(&quot;gross_profit&quot;, &quot;sum&quot;),
+        )
+        .sort_values(&quot;utc_date&quot;)
+    )
+
+
+def summarize_by_source(data):
+    &quot;&quot;&quot;Aggregate performance by traffic source and recompute source-level ratios.&quot;&quot;&quot;
+    source_summary = (
+        data.groupby(&quot;traffic_source&quot;, as_index=False)
+        .agg(
+            impressions=(&quot;impressions&quot;, &quot;sum&quot;),
+            paid_clicks=(&quot;paid_clicks&quot;, &quot;sum&quot;),
+            revenue=(&quot;revenue&quot;, &quot;sum&quot;),
+            ad_spend=(&quot;ad_spend&quot;, &quot;sum&quot;),
+            gross_profit=(&quot;gross_profit&quot;, &quot;sum&quot;),
+        )
+        .sort_values(&quot;gross_profit&quot;, ascending=False)
+    )
+    source_summary[&quot;roas&quot;] = source_summary.apply(
+        lambda row: safe_divide(row[&quot;revenue&quot;], row[&quot;ad_spend&quot;]), axis=1
+    )
+    source_summary[&quot;cpc&quot;] = source_summary.apply(
+        lambda row: safe_divide(row[&quot;ad_spend&quot;], row[&quot;paid_clicks&quot;]), axis=1
+    )
+    return source_summary
+
+
+def summarize_by_campaign(data):
+    &quot;&quot;&quot;Rank campaign templates by gross profit for operational detail.&quot;&quot;&quot;
+    return (
+        data.groupby(&quot;template_name&quot;, as_index=False)
+        .agg(
+            impressions=(&quot;impressions&quot;, &quot;sum&quot;),
+            paid_clicks=(&quot;paid_clicks&quot;, &quot;sum&quot;),
+            revenue=(&quot;revenue&quot;, &quot;sum&quot;),
+            ad_spend=(&quot;ad_spend&quot;, &quot;sum&quot;),
+            gross_profit=(&quot;gross_profit&quot;, &quot;sum&quot;),
+        )
+        .sort_values(&quot;gross_profit&quot;, ascending=False)
+    )
+
+
+def export_dashboard_tables(output_folder=SUBMISSION_FOLDER):
+    &quot;&quot;&quot;Save the dashboard tables for the full campaign period.&quot;&quot;&quot;
+    data = load_campaign_data()
+    pd.DataFrame([calculate_kpis(data)]).to_csv(output_folder / &quot;kpis.csv&quot;, index=False)
+    summarize_by_day(data).to_csv(output_folder / &quot;daily_summary.csv&quot;, index=False)
+    summarize_by_source(data).to_csv(output_folder / &quot;source_summary.csv&quot;, index=False)
+    summarize_by_campaign(data).to_csv(
+        output_folder / &quot;campaign_summary.csv&quot;, index=False
+    )
+
+
+if __name__ == &quot;__main__&quot;:
+    export_dashboard_tables()</code></pre></section>
+      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_13.html">PRE 13</a><a href="pre_15.html">PRE 15</a></nav>
+    </main>
+  </div>
+  <footer><a class="back" href="../index.html#catalogo">Índice principal</a></footer>
+</body>
+</html>

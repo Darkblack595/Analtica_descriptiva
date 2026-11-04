@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Código fuente y notebook del PRE 09: Drivers y ChatGPT.">
+  <title>PRE 09 · Drivers y ChatGPT</title>
+  <style>
+    :root { color-scheme: light; --paper: #f3f5f2; --surface: #fff; --ink: #172522; --muted: #596963; --line: #d7dfd9; --green: #245c4b; --green-soft: #e2eee8; --blue-soft: #e5eef2; --code: #172b2b; }
+    * { box-sizing: border-box; } html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 "Aptos", "Segoe UI", sans-serif; }
+    a { color: var(--green); text-underline-offset: .18em; } a:hover { color: #b94f39; }
+    header { padding: 2rem max(1.25rem, calc((100% - 78rem) / 2)); background: var(--ink); color: #f8faf7; border-bottom: 6px solid var(--green); }
+    header p { margin: .25rem 0; color: #d5dfd9; } header h1 { margin: .35rem 0; font: 500 clamp(2rem, 5vw, 3.4rem)/1.08 Georgia, serif; }
+    .back { color: #a9d1bd; } .layout { display: grid; grid-template-columns: minmax(13rem, 18rem) minmax(0, 1fr); gap: 2rem; width: min(100% - 2rem, 82rem); margin: 2rem auto 4rem; align-items: start; }
+    aside { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; } aside h2 { font-size: .85rem; text-transform: uppercase; } aside ol { padding-left: 1.25rem; } aside li { margin: .3rem 0; font-size: .88rem; } aside a { text-decoration: none; }
+    main { min-width: 0; } .note { padding: .8rem 1rem; border-left: 3px solid #426d83; background: var(--blue-soft); }
+    section.file, section.cell { margin: 0 0 1rem; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; scroll-margin-top: 1rem; }
+    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; } h3 { margin: 0 0 .5rem; font-size: 1rem; }
+    .source { margin: .2rem 0 .8rem; color: var(--muted); font-size: .86rem; } .cell-comment { color: var(--green); font-weight: 650; }
+    pre { overflow-x: auto; margin: .65rem 0; padding: 1rem; border-radius: 3px; background: var(--code); color: #ecf4ee; font: .85rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; tab-size: 4; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; } .markdown { white-space: pre-wrap; } .output { margin-top: .7rem; border-top: 1px solid var(--line); } .output summary { padding: .5rem 0; cursor: pointer; color: var(--green); font-weight: 700; } .output pre { background: #edf1ed; color: var(--ink); }
+    .output-note { padding: .65rem .8rem; background: var(--green-soft); color: var(--ink); font-size: .9rem; } .pager { display: flex; justify-content: space-between; gap: 1rem; margin: 1.5rem 0; } footer { padding: 1rem; background: var(--ink); color: #d5dfd9; text-align: center; font-size: .85rem; }
+    [aria-current=page] { font-weight: 800; } @media (max-width: 760px) { .layout { grid-template-columns: 1fr; } aside { position: static; max-height: none; } aside ol { columns: 2; } } @media (max-width: 460px) { aside ol { columns: 1; } section.file, section.cell { padding: .85rem; } } @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../index.html#catalogo">Volver al índice principal</a>
+    <p>Material estático · PRE 09</p>
+    <h1>PRE 09 · Drivers y ChatGPT</h1>
+    <p>Código fuente completo del proyecto, agrupado por archivo o por celda de notebook.</p>
+  </header>
+  <div class="layout">
+    <aside aria-label="Navegación por PRE"><h2>PRE 01–15</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_07.html">PRE 07 · No disponible</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_09.html" aria-current=page>PRE 09 · Drivers y ChatGPT</a></li><li><a href="pre_10.html">PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html">PRE 13 · Scopus</a></li><li><a href="pre_14.html">PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
+    <main>
+      <p class="note">El contenido está escrito directamente en esta página HTML. El código y los comentarios originales se pueden seleccionar, copiar y explicar sin descargar el archivo. Las salidas guardadas se muestran como texto cuando están disponibles.</p>
+      <p class="note">Notebook original: 0 celdas, en su orden original. Se conservan comentarios de código y salidas textuales guardadas; las figuras Plotly se identifican, pero no se ejecutan en esta página estática.</p>
+<section class="file"><h2>Notebook sin celdas</h2><p>El notebook original está disponible, pero no contiene celdas de código ni de texto.</p></section>
+      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_08.html">PRE 08</a><a href="pre_10.html">PRE 10</a></nav>
+    </main>
+  </div>
+  <footer><a class="back" href="../index.html#catalogo">Índice principal</a></footer>
+</body>
+</html>

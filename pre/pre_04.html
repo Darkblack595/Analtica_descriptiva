@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Código fuente y notebook del PRE 04: Limpieza.">
+  <title>PRE 04 · Limpieza</title>
+  <style>
+    :root { color-scheme: light; --paper: #f3f5f2; --surface: #fff; --ink: #172522; --muted: #596963; --line: #d7dfd9; --green: #245c4b; --green-soft: #e2eee8; --blue-soft: #e5eef2; --code: #172b2b; }
+    * { box-sizing: border-box; } html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 "Aptos", "Segoe UI", sans-serif; }
+    a { color: var(--green); text-underline-offset: .18em; } a:hover { color: #b94f39; }
+    header { padding: 2rem max(1.25rem, calc((100% - 78rem) / 2)); background: var(--ink); color: #f8faf7; border-bottom: 6px solid var(--green); }
+    header p { margin: .25rem 0; color: #d5dfd9; } header h1 { margin: .35rem 0; font: 500 clamp(2rem, 5vw, 3.4rem)/1.08 Georgia, serif; }
+    .back { color: #a9d1bd; } .layout { display: grid; grid-template-columns: minmax(13rem, 18rem) minmax(0, 1fr); gap: 2rem; width: min(100% - 2rem, 82rem); margin: 2rem auto 4rem; align-items: start; }
+    aside { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; } aside h2 { font-size: .85rem; text-transform: uppercase; } aside ol { padding-left: 1.25rem; } aside li { margin: .3rem 0; font-size: .88rem; } aside a { text-decoration: none; }
+    main { min-width: 0; } .note { padding: .8rem 1rem; border-left: 3px solid #426d83; background: var(--blue-soft); }
+    section.file, section.cell { margin: 0 0 1rem; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; scroll-margin-top: 1rem; }
+    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; } h3 { margin: 0 0 .5rem; font-size: 1rem; }
+    .source { margin: .2rem 0 .8rem; color: var(--muted); font-size: .86rem; } .cell-comment { color: var(--green); font-weight: 650; }
+    pre { overflow-x: auto; margin: .65rem 0; padding: 1rem; border-radius: 3px; background: var(--code); color: #ecf4ee; font: .85rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; tab-size: 4; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; } .markdown { white-space: pre-wrap; } .output { margin-top: .7rem; border-top: 1px solid var(--line); } .output summary { padding: .5rem 0; cursor: pointer; color: var(--green); font-weight: 700; } .output pre { background: #edf1ed; color: var(--ink); }
+    .output-note { padding: .65rem .8rem; background: var(--green-soft); color: var(--ink); font-size: .9rem; } .pager { display: flex; justify-content: space-between; gap: 1rem; margin: 1.5rem 0; } footer { padding: 1rem; background: var(--ink); color: #d5dfd9; text-align: center; font-size: .85rem; }
+    [aria-current=page] { font-weight: 800; } @media (max-width: 760px) { .layout { grid-template-columns: 1fr; } aside { position: static; max-height: none; } aside ol { columns: 2; } } @media (max-width: 460px) { aside ol { columns: 1; } section.file, section.cell { padding: .85rem; } } @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../index.html#catalogo">Volver al índice principal</a>
+    <p>Material estático · PRE 04</p>
+    <h1>PRE 04 · Limpieza</h1>
+    <p>Código fuente completo del proyecto, agrupado por archivo o por celda de notebook.</p>
+  </header>
+  <div class="layout">
+    <aside aria-label="Navegación por PRE"><h2>PRE 01–15</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html" aria-current=page>PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_07.html">PRE 07 · No disponible</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_09.html">PRE 09 · Drivers y ChatGPT</a></li><li><a href="pre_10.html">PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html">PRE 13 · Scopus</a></li><li><a href="pre_14.html">PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
+    <main>
+      <p class="note">El contenido está escrito directamente en esta página HTML. El código y los comentarios originales se pueden seleccionar, copiar y explicar sin descargar el archivo. Las salidas guardadas se muestran como texto cuando están disponibles.</p>
+      <section class="file" id="archivo-clean-py"><h2>clean.py</h2><p class="source">Archivo original: <a href="../PRE_04_limpieza/src/clean.py">PRE_04_limpieza/src/clean.py</a> · 246 líneas</p><pre><code>import os
+
+import pandas as pd
+
+INPUT_FILE = &quot;PRE_04_limpieza/data/ventas.csv&quot;
+OUTPUT_FILE = &quot;PRE_04_limpieza/submission/ventas.csv&quot;
+
+
+SUPPLIER_REPLACEMENTS = {
+    &quot;Amazon Web Services Colombia&quot;: [
+        &quot;amazon web services colombia&quot;,
+    ],
+    &quot;Bancolombia S.A.&quot;: [
+        &quot;BANCOLOMBIA S.A.&quot;,
+    ],
+    &quot;Cementos Argos S.A.&quot;: [
+        &quot;Cementos Argos SA&quot;,
+        &quot;cementos argos s.a.&quot;,
+    ],
+    &quot;Corona S.A.S.&quot;: [
+        &quot;Corona SAS&quot;,
+    ],
+    &quot;Google Colombia Ltda.&quot;: [
+        &quot;GOOGLE COLOMBIA LTDA.&quot;,
+    ],
+    &quot;IBM Colombia S.A.S.&quot;: [
+        &quot;IBM Colombia SAS.&quot;,
+        &quot;ibm colombia s.a.s.&quot;,
+    ],
+    &quot;Microsoft Colombia Inc.&quot;: [
+        &quot;MICROSOFT COLOMBIA INC.&quot;,
+    ],
+    &quot;Nutresa S.A.&quot;: [
+        &quot;Nutresa SA&quot;,
+        &quot;nutresa s.a.&quot;,
+    ],
+    &quot;Oracle Colombia Ltda.&quot;: [
+        &quot;oracle colombia ltda.&quot;,
+    ],
+    &quot;Postobón S.A.&quot;: [
+        &quot;POSTOBÓN S.A.&quot;,
+        &quot;Postobon S.A.&quot;,
+    ],
+    &quot;SAP Colombia S.A.S.&quot;: [
+        &quot;SAP Colombia SAS&quot;,
+    ],
+    &quot;Siemens S.A.S.&quot;: [
+        &quot;SIEMENS S.A.S.&quot;,
+        &quot;siemens s.a.s.&quot;,
+    ],
+}
+
+COUNTRY_REPLACEMENTS = {
+    &quot;COL&quot;: [
+        &quot;Colombia&quot;,
+        &quot;CO&quot;,
+        &quot;COL&quot;,
+        &quot;COLOMBIA&quot;,
+        &quot;Colombia&quot;,
+        &quot;colombia&quot;,
+    ]
+}
+
+CITY_REPLACEMENTS = {
+    &quot;Bogotá&quot;: [
+        &quot;BOGOTÁ&quot;,
+        &quot;bogotá&quot;,
+    ],
+    &quot;Medellín&quot;: [
+        &quot;MEDELLÍN&quot;,
+        &quot;Medellin&quot;,
+        &quot;medellín&quot;,
+    ],
+}
+
+
+PURCHASE_DATE_REPLACEMENTS = {
+    r&quot;^(\d{2})-(\d{2})-(\d{2})$&quot;: r&quot;\1-\2-20\3&quot;,
+}
+
+
+def clean_column_names(series):
+    series = strip_whitespace(series)
+    series = to_lowercase(series)
+    series = replace_space_with_underscore(series)
+    return series
+
+
+def strip_whitespace(series):
+    return series.str.strip()
+
+
+def normalize_whitespace(series):
+    return series.str.replace(r&quot;\s+&quot;, &quot; &quot;, regex=True)
+
+
+def to_lowercase(series):
+    return series.str.lower()
+
+
+def replace_space_with_underscore(series):
+    return series.str.replace(&quot; &quot;, &quot;_&quot;)
+
+
+def replace_date_separators(series):
+    return series.str.replace(&quot;.&quot;, &quot;-&quot;, regex=False).str.replace(&quot;/&quot;, &quot;-&quot;, regex=False)
+
+
+def make_date_replacements(series, replacements):
+    for pattern, replacement in replacements.items():
+        series = series.str.replace(pattern, replacement, regex=True)
+    return series
+
+
+def dd_mm_yyyy_2_yyyy_mm_dd(series):
+    return series.str.replace(r&quot;^(\d{2})-(\d{2})-(\d{4})$&quot;, r&quot;\3-\2-\1&quot;, regex=True)
+
+
+def yyyy_dd_mm_2_yyyy_mm_dd(series):
+    def fn(text):
+        if pd.isna(text):
+            return text
+        parts = text.split(&quot;-&quot;)
+        year, p1, p2 = parts
+        if int(p1) &gt; 12:
+            day, month = p1, p2
+        else:
+            day, month = p2, p1
+
+        return f&quot;{year}-{month}-{day}&quot;
+
+    return series.apply(fn)
+
+
+def clean_supplier(series):
+    series = strip_whitespace(series)
+    series = normalize_whitespace(series)
+    series = make_replacements(series, SUPPLIER_REPLACEMENTS)
+    return series
+
+
+def clean_country(series):
+    series = strip_whitespace(series)
+    series = normalize_whitespace(series)
+    series = make_replacements(series, COUNTRY_REPLACEMENTS)
+    return series
+
+
+def clean_city(series):
+    series = strip_whitespace(series)
+    series = normalize_whitespace(series)
+    series = make_replacements(series, CITY_REPLACEMENTS)
+    return series
+
+
+def clean_purchase_date_format(series):
+    series = strip_whitespace(series)
+    series = normalize_whitespace(series)
+    series = make_date_replacements(series, PURCHASE_DATE_REPLACEMENTS)
+    series = replace_date_separators(series)
+    series = dd_mm_yyyy_2_yyyy_mm_dd(series)
+    series = yyyy_dd_mm_2_yyyy_mm_dd(series)
+
+    return series
+
+
+def clean_amount(series):
+    series = strip_whitespace(series)
+    series = series.str.replace(&quot;COP &quot;, &quot;&quot;, regex=False)
+    series = series.str.replace(r&quot;\.00K$&quot;, &quot;000&quot;, regex=True)
+    series = series.str.replace(&quot;$&quot;, &quot;&quot;, regex=False)
+    series = series.str.replace(&quot;,&quot;, &quot;&quot;, regex=False)
+    series = series.str.replace(&quot;.&quot;, &quot;&quot;, regex=False)
+    return series
+
+
+def clean_discount(series):
+    series = strip_whitespace(series)
+    series = series.str.replace(&quot;%&quot;, &quot;&quot;, regex=False)
+    series = series.apply(lambda x: float(x) / 100 if float(x) &gt; 1 else float(x))
+    return series
+
+
+def clean_weight(series):
+
+    def convert_weight(value):
+        if pd.isna(value):
+            return value
+        value = value.lower().strip()
+        if value.endswith(&quot; kg&quot;):
+            return float(value.replace(&quot;kg&quot;, &quot;&quot;).strip())
+        elif value.endswith(&quot; g&quot;):
+            return float(value.replace(&quot;g&quot;, &quot;&quot;).strip()) / 1000
+        elif value.endswith(&quot; ton&quot;):
+            return float(value.replace(&quot;ton&quot;, &quot;&quot;).strip()) * 1000
+
+        else:
+            return float(value)
+
+    series = strip_whitespace(series)
+    series = series.str.replace(&quot;,&quot;, &quot;.&quot;, regex=False)
+    series = series.apply(convert_weight)
+    return series
+
+
+def clean_unit_price(series):
+    series = strip_whitespace(series)
+    series = series.str.replace(&quot;$&quot;, &quot;&quot;, regex=False)
+    series = series.str.replace(r&quot;\.00$&quot;, &quot;&quot;, regex=True)
+    series = series.str.replace(&quot;,&quot;, &quot;&quot;, regex=False)
+    series = series.str.replace(&quot;.&quot;, &quot;&quot;, regex=False)
+    return series
+
+
+def make_replacements(series, replacements):
+    for replacement, values in replacements.items():
+        for value in values:
+            series = series.replace(value, replacement)
+    return series
+
+
+def main():
+
+    df = pd.read_csv(INPUT_FILE)
+
+    df.columns = clean_column_names(df.columns)
+
+    df[&quot;supplier&quot;] = clean_supplier(df[&quot;supplier&quot;])
+    df[&quot;country&quot;] = clean_country(df[&quot;country&quot;])
+    df[&quot;city&quot;] = clean_city(df[&quot;city&quot;])
+    df[&quot;purchase_date&quot;] = clean_purchase_date_format(df[&quot;purchase_date&quot;])
+    df[&quot;amount&quot;] = clean_amount(df[&quot;amount&quot;])
+    df[&quot;discount&quot;] = clean_discount(df[&quot;discount&quot;])
+    df[&quot;weight&quot;] = clean_weight(df[&quot;weight&quot;])
+    df[&quot;unit_price&quot;] = clean_unit_price(df[&quot;unit_price&quot;])
+
+    df.to_csv(OUTPUT_FILE, index=False)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+    
+    
+    
+    
+    </code></pre></section>
+<section class="file" id="archivo-diagnostics-py"><h2>diagnostics.py</h2><p class="source">Archivo original: <a href="../PRE_04_limpieza/src/diagnostics.py">PRE_04_limpieza/src/diagnostics.py</a> · 22 líneas</p><pre><code>import pandas as pd
+
+OUTPUT_FILE = &quot;PRE_04_limpieza/submission/ventas.csv&quot;
+
+
+def main():
+    df = pd.read_csv(OUTPUT_FILE)
+
+    series = df[&quot;amount&quot;]
+
+    series = series.astype(str)
+    # series = series[series.str.endswith(&quot;.0&quot;)]
+
+    series = series.sort_values()
+    series = series.drop_duplicates()
+
+    print(series)
+    print(len(series))
+
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre></section>
+      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_03.html">PRE 03</a><a href="pre_05.html">PRE 05</a></nav>
+    </main>
+  </div>
+  <footer><a class="back" href="../index.html#catalogo">Índice principal</a></footer>
+</body>
+</html>

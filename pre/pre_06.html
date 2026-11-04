@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Código fuente y notebook del PRE 06: Análisis con Pandas.">
+  <title>PRE 06 · Análisis con Pandas</title>
+  <style>
+    :root { color-scheme: light; --paper: #f3f5f2; --surface: #fff; --ink: #172522; --muted: #596963; --line: #d7dfd9; --green: #245c4b; --green-soft: #e2eee8; --blue-soft: #e5eef2; --code: #172b2b; }
+    * { box-sizing: border-box; } html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 "Aptos", "Segoe UI", sans-serif; }
+    a { color: var(--green); text-underline-offset: .18em; } a:hover { color: #b94f39; }
+    header { padding: 2rem max(1.25rem, calc((100% - 78rem) / 2)); background: var(--ink); color: #f8faf7; border-bottom: 6px solid var(--green); }
+    header p { margin: .25rem 0; color: #d5dfd9; } header h1 { margin: .35rem 0; font: 500 clamp(2rem, 5vw, 3.4rem)/1.08 Georgia, serif; }
+    .back { color: #a9d1bd; } .layout { display: grid; grid-template-columns: minmax(13rem, 18rem) minmax(0, 1fr); gap: 2rem; width: min(100% - 2rem, 82rem); margin: 2rem auto 4rem; align-items: start; }
+    aside { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; } aside h2 { font-size: .85rem; text-transform: uppercase; } aside ol { padding-left: 1.25rem; } aside li { margin: .3rem 0; font-size: .88rem; } aside a { text-decoration: none; }
+    main { min-width: 0; } .note { padding: .8rem 1rem; border-left: 3px solid #426d83; background: var(--blue-soft); }
+    section.file, section.cell { margin: 0 0 1rem; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; scroll-margin-top: 1rem; }
+    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; } h3 { margin: 0 0 .5rem; font-size: 1rem; }
+    .source { margin: .2rem 0 .8rem; color: var(--muted); font-size: .86rem; } .cell-comment { color: var(--green); font-weight: 650; }
+    pre { overflow-x: auto; margin: .65rem 0; padding: 1rem; border-radius: 3px; background: var(--code); color: #ecf4ee; font: .85rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; tab-size: 4; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; } .markdown { white-space: pre-wrap; } .output { margin-top: .7rem; border-top: 1px solid var(--line); } .output summary { padding: .5rem 0; cursor: pointer; color: var(--green); font-weight: 700; } .output pre { background: #edf1ed; color: var(--ink); }
+    .output-note { padding: .65rem .8rem; background: var(--green-soft); color: var(--ink); font-size: .9rem; } .pager { display: flex; justify-content: space-between; gap: 1rem; margin: 1.5rem 0; } footer { padding: 1rem; background: var(--ink); color: #d5dfd9; text-align: center; font-size: .85rem; }
+    [aria-current=page] { font-weight: 800; } @media (max-width: 760px) { .layout { grid-template-columns: 1fr; } aside { position: static; max-height: none; } aside ol { columns: 2; } } @media (max-width: 460px) { aside ol { columns: 1; } section.file, section.cell { padding: .85rem; } } @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../index.html#catalogo">Volver al índice principal</a>
+    <p>Material estático · PRE 06</p>
+    <h1>PRE 06 · Análisis con Pandas</h1>
+    <p>Código fuente completo del proyecto, agrupado por archivo o por celda de notebook.</p>
+  </header>
+  <div class="layout">
+    <aside aria-label="Navegación por PRE"><h2>PRE 01–15</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html" aria-current=page>PRE 06 · Análisis con Pandas</a></li><li><a href="pre_07.html">PRE 07 · No disponible</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_09.html">PRE 09 · Drivers y ChatGPT</a></li><li><a href="pre_10.html">PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html">PRE 13 · Scopus</a></li><li><a href="pre_14.html">PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
+    <main>
+      <p class="note">El contenido está escrito directamente en esta página HTML. El código y los comentarios originales se pueden seleccionar, copiar y explicar sin descargar el archivo. Las salidas guardadas se muestran como texto cuando están disponibles.</p>
+      <p class="note">Notebook original: 14 celdas, en su orden original. Se conservan comentarios de código y salidas textuales guardadas; las figuras Plotly se identifican, pero no se ejecutan en esta página estática.</p>
+<section class="cell" id="celda-1"><h2>Celda 1 · código</h2><p class="cell-comment">Comentario original: Preparacion</p><pre><code># Preparacion
+
+import matplotlib
+import matplotlib.pyplot as plt
+import pandas as pd</code></pre></section>
+<section class="cell" id="celda-2"><h2>Celda 2 · código</h2><p class="cell-comment">Comentario original: Carga de la tabla drivers</p><pre><code># Carga de la tabla drivers
+
+drivers = pd.read_csv(
+    &quot;../data/drivers.csv&quot;,
+    sep=&quot;,&quot;,
+    thousands=None,
+    decimal=&quot;.&quot;,
+)
+drivers.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>   driverId               name        ssn                   location  \
+0        10  George Vetticaden  621011971         244-4532 Nulla Rd.   
+1        11     Jamie Engesser  262112338         366-4125 Ac Street   
+2        12        Paul Coddin  198041975  Ap #622-957 Risus. Street   
+3        13        Joe Niemiec  139907145        2071 Hendrerit. Ave   
+4        14         Adis Cesir  820812209        Ap #810-1228 In St.   
+
+  certified wage-plan  
+0         N     miles  
+1         N     miles  
+2         Y     hours  
+3         Y     hours  
+4         Y     hours  </pre></details></section>
+<section class="cell" id="celda-3"><h2>Celda 3 · código</h2><p class="cell-comment">Comentario original: Carga de la tabla timesheet</p><pre><code># Carga de la tabla timesheet
+
+timesheet = pd.read_csv(
+    &quot;../data/timesheet.csv&quot;,
+    sep=&quot;,&quot;,
+    thousands=None,
+    decimal=&quot;.&quot;,
+)
+timesheet.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>   driverId  week  hours-logged  miles-logged
+0        10     1            70          3300
+1        10     2            70          3300
+2        10     3            60          2800
+3        10     4            70          3100
+4        10     5            70          3200</pre></details></section>
+<section class="cell" id="celda-4"><h2>Celda 4 · código</h2><p class="cell-comment">Comentario original: Media de las horas y las millas de cada conductor</p><pre><code># Media de las horas y las millas de cada conductor
+
+mean_timesheet = timesheet.groupby(&quot;driverId&quot;).mean()
+mean_timesheet.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>          week  hours-logged  miles-logged
+driverId                                  
+10        26.5     62.153846   2829.807692
+11        26.5     70.038462   3448.076923
+12        26.5     50.750000   2614.653846
+13        26.5     52.442308   2579.346154
+14        26.5     53.480769   2627.384615</pre></details></section>
+<section class="cell" id="celda-5"><h2>Celda 5 · código</h2><p class="cell-comment">Comentario original: Eliminación de la columna &#x27;week&#x27;</p><pre><code># Eliminación de la columna &#x27;week&#x27;
+mean_timesheet.pop(&quot;week&quot;)
+mean_timesheet.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>          hours-logged  miles-logged
+driverId                            
+10           62.153846   2829.807692
+11           70.038462   3448.076923
+12           50.750000   2614.653846
+13           52.442308   2579.346154
+14           53.480769   2627.384615</pre></details></section>
+<section class="cell" id="celda-6"><h2>Celda 6 · código</h2><p class="cell-comment">Comentario original: Registros con valores por debajo de la media del grupo</p><pre><code># Registros con valores por debajo de la media del grupo
+
+mean_hours_logged_by_driver = timesheet.groupby(&quot;driverId&quot;)[&quot;hours-logged&quot;].transform(
+    &quot;mean&quot;
+)
+mean_hours_logged_by_driver.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>0    62.153846
+1    62.153846
+2    62.153846
+3    62.153846
+4    62.153846
+Name: hours-logged, dtype: float64</pre></details></section>
+<section class="cell" id="celda-7"><h2>Celda 7 · código</h2><pre><code>timesheet_with_means = timesheet.copy()
+timesheet_with_means[&quot;mean_hours-logged&quot;] = mean_hours_logged_by_driver
+timesheet_with_means.head()</code></pre><details class="output"><summary>Salida guardada</summary><pre>   driverId  week  hours-logged  miles-logged  mean_hours-logged
+0        10     1            70          3300          62.153846
+1        10     2            70          3300          62.153846
+2        10     3            60          2800          62.153846
+3        10     4            70          3100          62.153846
+4        10     5            70          3200          62.153846</pre></details></section>
+<section class="cell" id="celda-8"><h2>Celda 8 · código</h2><pre><code>timesheet_below = timesheet_with_means[
+    timesheet_with_means[&quot;hours-logged&quot;] &lt; timesheet_with_means[&quot;mean_hours-logged&quot;]
+]
+display(timesheet_below.head(), timesheet_below.tail())</code></pre><details class="output"><summary>Salida guardada</summary><pre>    driverId  week  hours-logged  miles-logged  mean_hours-logged
+2         10     3            60          2800          62.153846
+9         10    10            50          2500          62.153846
+19        10    20            30          1200          62.153846
+20        10    21            50          2500          62.153846
+25        10    26            60          2600          62.153846</pre></details><details class="output"><summary>Salida guardada</summary><pre>      driverId  week  hours-logged  miles-logged  mean_hours-logged
+1756        43    41            51          2701          52.884615
+1760        43    45            46          2671          52.884615
+1762        43    47            50          2572          52.884615
+1763        43    48            52          2517          52.884615
+1767        43    52            48          2764          52.884615</pre></details></section>
+<section class="cell" id="celda-9"><h2>Celda 9 · código</h2><p class="cell-comment">Comentario original: Cómputo de la cantidad de horas y millas de cada conductor por año</p><pre><code># Cómputo de la cantidad de horas y millas de cada conductor por año
+
+sum_timesheet = timesheet.groupby(&quot;driverId&quot;).sum()
+sum_timesheet.head(10)</code></pre><details class="output"><summary>Salida guardada</summary><pre>          week  hours-logged  miles-logged
+driverId                                  
+10        1378          3232        147150
+11        1378          3642        179300
+12        1378          2639        135962
+13        1378          2727        134126
+14        1378          2781        136624
+15        1378          2734        138750
+16        1378          2746        137205
+17        1378          2701        135992
+18        1378          2654        137834
+19        1378          2738        137968</pre></details></section>
+<section class="cell" id="celda-10"><h2>Celda 10 · código</h2><pre><code>timesheet.groupby(&quot;driverId&quot;)[&quot;hours-logged&quot;].agg([min, max])</code></pre><details class="output"><summary>Salida de texto guardada</summary><pre>C:\Users\Juan Pablo\AppData\Local\Temp\ipykernel_24468\2763429320.py:1: FutureWarning: The provided callable &lt;built-in function min&gt; is currently using SeriesGroupBy.min. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;min&quot; instead.
+  timesheet.groupby(&quot;driverId&quot;)[&quot;hours-logged&quot;].agg([min, max])
+C:\Users\Juan Pablo\AppData\Local\Temp\ipykernel_24468\2763429320.py:1: FutureWarning: The provided callable &lt;built-in function max&gt; is currently using SeriesGroupBy.max. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;max&quot; instead.
+  timesheet.groupby(&quot;driverId&quot;)[&quot;hours-logged&quot;].agg([min, max])
+</pre></details><details class="output"><summary>Salida guardada</summary><pre>          min  max
+driverId          
+10          0   76
+11          0   92
+12          0   60
+13         10   60
+14         45   60
+15         45   60
+16         45   60
+17         20   60
+18         45   60
+19         45   60
+20          0   60
+21         45   60
+22         45   60
+23         45   60
+24          0   60
+25         45   60
+26         45   60
+27         45   60
+28         45   60
+29         45   60
+30         45   60
+31         45   60
+32         45   60
+33         46   60
+34         45   60
+35         45   60
+36         45   60
+37         45   59
+38         45   60
+39         45   60
+40         45   60
+41         45   60
+42         45   60
+43         46   60</pre></details></section>
+<section class="cell" id="celda-11"><h2>Celda 11 · código</h2><p class="cell-comment">Comentario original: Unión de las tablas usando join</p><pre><code># Unión de las tablas usando join
+
+summary = pd.merge(
+    sum_timesheet,
+    drivers[[&quot;driverId&quot;, &quot;name&quot;]],
+    on=&quot;driverId&quot;,
+)
+summary</code></pre><details class="output"><summary>Salida guardada</summary><pre>    driverId  week  hours-logged  miles-logged                 name
+0         10  1378          3232        147150    George Vetticaden
+1         11  1378          3642        179300       Jamie Engesser
+2         12  1378          2639        135962          Paul Coddin
+3         13  1378          2727        134126          Joe Niemiec
+4         14  1378          2781        136624           Adis Cesir
+5         15  1378          2734        138750         Rohit Bakshi
+6         16  1378          2746        137205           Tom McCuch
+7         17  1378          2701        135992          Eric Mizell
+8         18  1378          2654        137834            Grant Liu
+9         19  1378          2738        137968           Ajay Singh
+10        20  1378          2644        134564         Chris Harris
+11        21  1378          2751        138719         Jeff Markham
+12        22  1378          2733        137550        Nadeem Asghar
+13        23  1378          2750        137980            Adam Diaz
+14        24  1378          2647        134461          Don Hilborn
+15        25  1378          2723        139180  Jean-Philippe Playe
+16        26  1378          2730        137530         Michael Aube
+17        27  1378          2771        137922      Mark Lochbihler
+18        28  1378          2723        137469      Olivier Renault
+19        29  1378          2760        138255           Teddy Choi
+20        30  1378          2773        137473             Dan Rice
+21        31  1378          2704        137057        Rommel Garcia
+22        32  1378          2736        137422       Ryan Templeton
+23        33  1378          2759        139285    Sridhara Sabbella
+24        34  1378          2811        137728         Frank Romano
+25        35  1378          2728        138727          Emil Siemes
+26        36  1378          2795        138025        Andrew Grande
+27        37  1378          2694        137223            Wes Floyd
+28        38  1378          2760        137464           Scott Shaw
+29        39  1378          2745        138788         David Kaiser
+30        40  1378          2700        136931     Nicolas Maillard
+31        41  1378          2723        138407        Greg Phillips
+32        42  1378          2697        136673      Randy Gelhausen
+33        43  1378          2750        136993          Dave Patton</pre></details></section>
+<section class="cell" id="celda-12"><h2>Celda 12 · código</h2><p class="cell-comment">Comentario original: Almacenamiento de los resultados</p><pre><code># Almacenamiento de los resultados
+
+summary.to_csv(
+    &quot;../submission/summary.csv&quot;,
+    sep=&quot;,&quot;,
+    header=True,
+    index=False,
+)
+</code></pre></section>
+<section class="cell" id="celda-13"><h2>Celda 13 · código</h2><p class="cell-comment">Comentario original: Ordenamiento por la cantidad de millas registradas</p><pre><code># Ordenamiento por la cantidad de millas registradas
+
+top10 = summary.sort_values(by=&quot;miles-logged&quot;, ascending=False).head(10)
+top10</code></pre><details class="output"><summary>Salida guardada</summary><pre>    driverId  week  hours-logged  miles-logged                 name
+1         11  1378          3642        179300       Jamie Engesser
+0         10  1378          3232        147150    George Vetticaden
+23        33  1378          2759        139285    Sridhara Sabbella
+15        25  1378          2723        139180  Jean-Philippe Playe
+29        39  1378          2745        138788         David Kaiser
+5         15  1378          2734        138750         Rohit Bakshi
+25        35  1378          2728        138727          Emil Siemes
+11        21  1378          2751        138719         Jeff Markham
+31        41  1378          2723        138407        Greg Phillips
+19        29  1378          2760        138255           Teddy Choi</pre></details></section>
+<section class="cell" id="celda-14"><h2>Celda 14 · código</h2><p class="cell-comment">Comentario original: Creación de un gráfico de barras horizontales La columna &#x27;name&#x27; pasa a ser el nombre de las filas</p><pre><code># Creación de un gráfico de barras horizontales
+# La columna &#x27;name&#x27; pasa a ser el nombre de las filas
+
+top10 = summary.sort_values(by=&quot;miles-logged&quot;, ascending=False).head(10)
+top10 = top10.set_index(&quot;name&quot;)
+
+# Paleta de colores:
+#   tab:blue     tab:red       tab:pink
+#   tab:orange   tab:purple    tab:gray
+#   tab:green    tab:brown     tab:olive
+#   tab:cyan
+
+top10[&quot;miles-logged&quot;].plot.barh(color=&quot;tab:orange&quot;, alpha=0.6)
+
+plt.gca().invert_yaxis()
+
+plt.gca().get_xaxis().set_major_formatter(
+    matplotlib.ticker.FuncFormatter(lambda x, p: format(int(x), &quot;,&quot;))
+)
+
+plt.xticks(rotation=90)
+
+plt.gca().spines[&quot;left&quot;].set_color(&quot;lightgray&quot;)
+plt.gca().spines[&quot;bottom&quot;].set_color(&quot;gray&quot;)
+plt.gca().spines[&quot;top&quot;].set_visible(False)
+plt.gca().spines[&quot;right&quot;].set_visible(False)
+
+plt.savefig(&quot;../submission/top10_drivers.png&quot;, bbox_inches=&quot;tight&quot;)
+</code></pre></section>
+      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_05.html">PRE 05</a><a href="pre_07.html">PRE 07</a></nav>
+    </main>
+  </div>
+  <footer><a class="back" href="../index.html#catalogo">Índice principal</a></footer>
+</body>
+</html>

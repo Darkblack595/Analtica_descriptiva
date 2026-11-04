@@ -1,0 +1,1090 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Código fuente y notebook del PRE 13: Scopus.">
+  <title>PRE 13 · Scopus</title>
+  <style>
+    :root { color-scheme: light; --paper: #f3f5f2; --surface: #fff; --ink: #172522; --muted: #596963; --line: #d7dfd9; --green: #245c4b; --green-soft: #e2eee8; --blue-soft: #e5eef2; --code: #172b2b; }
+    * { box-sizing: border-box; } html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 "Aptos", "Segoe UI", sans-serif; }
+    a { color: var(--green); text-underline-offset: .18em; } a:hover { color: #b94f39; }
+    header { padding: 2rem max(1.25rem, calc((100% - 78rem) / 2)); background: var(--ink); color: #f8faf7; border-bottom: 6px solid var(--green); }
+    header p { margin: .25rem 0; color: #d5dfd9; } header h1 { margin: .35rem 0; font: 500 clamp(2rem, 5vw, 3.4rem)/1.08 Georgia, serif; }
+    .back { color: #a9d1bd; } .layout { display: grid; grid-template-columns: minmax(13rem, 18rem) minmax(0, 1fr); gap: 2rem; width: min(100% - 2rem, 82rem); margin: 2rem auto 4rem; align-items: start; }
+    aside { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; } aside h2 { font-size: .85rem; text-transform: uppercase; } aside ol { padding-left: 1.25rem; } aside li { margin: .3rem 0; font-size: .88rem; } aside a { text-decoration: none; }
+    main { min-width: 0; } .note { padding: .8rem 1rem; border-left: 3px solid #426d83; background: var(--blue-soft); }
+    section.file, section.cell { margin: 0 0 1rem; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; scroll-margin-top: 1rem; }
+    h2 { margin: 0 0 .4rem; font: 500 1.45rem/1.2 Georgia, serif; overflow-wrap: anywhere; } h3 { margin: 0 0 .5rem; font-size: 1rem; }
+    .source { margin: .2rem 0 .8rem; color: var(--muted); font-size: .86rem; } .cell-comment { color: var(--green); font-weight: 650; }
+    pre { overflow-x: auto; margin: .65rem 0; padding: 1rem; border-radius: 3px; background: var(--code); color: #ecf4ee; font: .85rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; tab-size: 4; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; } .markdown { white-space: pre-wrap; } .output { margin-top: .7rem; border-top: 1px solid var(--line); } .output summary { padding: .5rem 0; cursor: pointer; color: var(--green); font-weight: 700; } .output pre { background: #edf1ed; color: var(--ink); }
+    .output-note { padding: .65rem .8rem; background: var(--green-soft); color: var(--ink); font-size: .9rem; } .pager { display: flex; justify-content: space-between; gap: 1rem; margin: 1.5rem 0; } footer { padding: 1rem; background: var(--ink); color: #d5dfd9; text-align: center; font-size: .85rem; }
+    [aria-current=page] { font-weight: 800; } @media (max-width: 760px) { .layout { grid-template-columns: 1fr; } aside { position: static; max-height: none; } aside ol { columns: 2; } } @media (max-width: 460px) { aside ol { columns: 1; } section.file, section.cell { padding: .85rem; } } @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../index.html#catalogo">Volver al índice principal</a>
+    <p>Material estático · PRE 13</p>
+    <h1>PRE 13 · Scopus</h1>
+    <p>Código fuente completo del proyecto, agrupado por archivo o por celda de notebook.</p>
+  </header>
+  <div class="layout">
+    <aside aria-label="Navegación por PRE"><h2>PRE 01–15</h2><nav><ol><li><a href="pre_01.html">PRE 01 · Hola mundo</a></li><li><a href="pre_02.html">PRE 02 · MapReduce</a></li><li><a href="pre_03.html">PRE 03 · CSV a JSON</a></li><li><a href="pre_04.html">PRE 04 · Limpieza</a></li><li><a href="pre_05.html">PRE 05 · Anonimización</a></li><li><a href="pre_06.html">PRE 06 · Análisis con Pandas</a></li><li><a href="pre_07.html">PRE 07 · No disponible</a></li><li><a href="pre_08.html">PRE 08 · Drivers con SQLite</a></li><li><a href="pre_09.html">PRE 09 · Drivers y ChatGPT</a></li><li><a href="pre_10.html">PRE 10 · Retail sales</a></li><li><a href="pre_11.html">PRE 11 · Vuelos</a></li><li><a href="pre_12.html">PRE 12 · Supply chain</a></li><li><a href="pre_13.html" aria-current=page>PRE 13 · Scopus</a></li><li><a href="pre_14.html">PRE 14 · Marketing dashboard</a></li><li><a href="pre_15.html">PRE 15 · Salarios</a></li></ol></nav></aside>
+    <main>
+      <p class="note">El contenido está escrito directamente en esta página HTML. El código y los comentarios originales se pueden seleccionar, copiar y explicar sin descargar el archivo. Las salidas guardadas se muestran como texto cuando están disponibles.</p>
+      <section class="file" id="archivo-main-py"><h2>main.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/main.py">PRE_13_scopus/src/main.py</a> · 48 líneas</p><pre><code>from s01_ingest import s01_ingest
+from s02_make_documents_by_year_plot import s02_make_documents_by_year_plot
+from s03_countries_create import s03_countries_create
+from s04_countries_clean import s04_countries_clean
+from s05_countries_frequency_report import s05_countries_frequency_report
+from s06_countries_frequency_plot import s06_countries_frequency_plot
+from s07_countries_world_map import s07_countries_world_map
+from s08_countries_cooc_matrix import s08_countries_cooc_matrix
+from s09_countries_heatmap import s09_countries_heatmap
+from s10_countries_clusters import s10_countries_clusters
+from s11_countries_network import s11_countries_network
+from s12_sources_frequency_report import s12_sources_frequency_report
+from s13_authors_frequency_report import s13_authors_frequency_report
+from s14_keywords_create import s14_keywords_create
+from s15_keywords_clean import s15_keywords_clean
+from s16_keywords_frequency_report import s16_keywords_frequency_report
+from s17_keywords_cooc_matrix import s17_keywords_cooc_matrix
+from s18_keywords_filter import s18_keywords_filter
+from s19_keywords_clusters import s19_keywords_clusters
+from s20_keywords_network import s20_keywords_network
+
+
+
+def main():
+    s01_ingest()
+    s02_make_documents_by_year_plot()
+    s03_countries_create()
+    s04_countries_clean()
+    s05_countries_frequency_report()
+    s06_countries_frequency_plot()
+    s07_countries_world_map()
+    s08_countries_cooc_matrix()
+    s09_countries_heatmap()
+    s10_countries_clusters()
+    s11_countries_network()
+    s12_sources_frequency_report()
+    s13_authors_frequency_report()
+    s14_keywords_create()
+    s15_keywords_clean()
+    s16_keywords_frequency_report()
+    s17_keywords_cooc_matrix()
+    s18_keywords_filter()
+    s19_keywords_clusters()
+    s20_keywords_network()
+
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre></section>
+<section class="file" id="archivo-s01-ingest-py"><h2>s01_ingest.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s01_ingest.py">PRE_13_scopus/src/s01_ingest.py</a> · 52 líneas</p><pre><code>from pathlib import Path
+
+import pandas as pd
+
+DATA_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;data&quot;
+SUBMISSION_DIRECTORY = DATA_DIRECTORY.parent / &quot;submission&quot;
+
+INPUT_FILE = DATA_DIRECTORY / &quot;scopus.csv.gz&quot;
+OUTPUT_FILE = SUBMISSION_DIRECTORY / &quot;scopus.csv.gz&quot;
+
+
+COLUMN_RENAME_MAP = {
+    &quot;Abstract&quot;: &quot;abstract&quot;,
+    &quot;Abbreviated Source Title&quot;: &quot;source_title_abbr&quot;,
+    &quot;Art. No.&quot;: &quot;article_number&quot;,
+    &quot;Affiliations&quot;: &quot;affiliations&quot;,
+    &quot;Author full names&quot;: &quot;author_full_names&quot;,
+    &quot;Author Keywords&quot;: &quot;author_keywords&quot;,
+    &quot;Author(s) ID&quot;: &quot;author_ids&quot;,
+    &quot;Authors&quot;: &quot;author_names&quot;,
+    &quot;Authors with affiliations&quot;: &quot;author_names_with_affiliations&quot;,
+    &quot;Cited by&quot;: &quot;citation_count&quot;,
+    &quot;Document Type&quot;: &quot;document_type&quot;,
+    &quot;DOI&quot;: &quot;doi&quot;,
+    &quot;EID&quot;: &quot;scopus_record_id&quot;,
+    &quot;Index Keywords&quot;: &quot;index_keywords&quot;,
+    &quot;Issue&quot;: &quot;issue_number&quot;,
+    &quot;Link&quot;: &quot;scopus_url&quot;,
+    &quot;Open Access&quot;: &quot;open_access_status&quot;,
+    &quot;Page count&quot;: &quot;page_count&quot;,
+    &quot;Page end&quot;: &quot;page_end&quot;,
+    &quot;Page start&quot;: &quot;page_start&quot;,
+    &quot;Publication Stage&quot;: &quot;publication_stage&quot;,
+    &quot;Source title&quot;: &quot;source_title_full&quot;,
+    &quot;Source&quot;: &quot;data_source&quot;,
+    &quot;Title&quot;: &quot;publication_title&quot;,
+    &quot;Volume&quot;: &quot;volume_number&quot;,
+    &quot;Year&quot;: &quot;publication_year&quot;,
+}
+
+
+def s01_ingest() -&gt; None:
+
+    records = pd.read_csv(INPUT_FILE, compression=&quot;gzip&quot;)
+    records = records.rename(columns=COLUMN_RENAME_MAP)
+    records.to_csv(OUTPUT_FILE, index=False, compression=&quot;gzip&quot;)
+
+    print(f&quot;\nRenamed {len(records):,} records and saved them to {OUTPUT_FILE}\n&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    s01_ingest()</code></pre></section>
+<section class="file" id="archivo-s02-make-documents-by-year-plot-py"><h2>s02_make_documents_by_year_plot.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s02_make_documents_by_year_plot.py">PRE_13_scopus/src/s02_make_documents_by_year_plot.py</a> · 53 líneas</p><pre><code># s02_make_documents_by_year_plot.py
+
+from pathlib import Path
+
+import pandas as pd
+import plotly.express as px
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+SUBMISSION_FILE = SUBMISSION_DIRECTORY / &quot;scopus.csv.gz&quot;
+PLOT_FILE = SUBMISSION_DIRECTORY / &quot;documents_by_year.html&quot;
+
+
+def s02_make_documents_by_year_plot():
+
+    df = pd.read_csv(SUBMISSION_FILE, compression=&quot;gzip&quot;)
+
+    df = df[[&quot;publication_year&quot;]].copy()
+    df = df.groupby(&quot;publication_year&quot;).size().reset_index(name=&quot;count&quot;)
+
+    all_years = pd.DataFrame(
+        {
+            &quot;publication_year&quot;: range(
+                int(df[&quot;publication_year&quot;].min()), int(df[&quot;publication_year&quot;].max()) + 1
+            )
+        }
+    )
+    df = all_years.merge(df, on=&quot;publication_year&quot;, how=&quot;left&quot;)
+    df[&quot;count&quot;] = df[&quot;count&quot;].fillna(0).astype(int)
+
+    fig = px.line(
+        df,
+        x=&quot;publication_year&quot;,
+        y=&quot;count&quot;,
+        labels={&quot;publication_year&quot;: &quot;Año&quot;, &quot;count&quot;: &quot;Documentos&quot;},
+        title=&quot;Documentos por año&quot;,
+        markers=True,
+    )
+    fig.update_xaxes(dtick=1, tickangle=270, showline=True, linecolor=&quot;black&quot;)
+    fig.update_yaxes(showline=True, linecolor=&quot;black&quot;)
+    fig.update_layout(
+        plot_bgcolor=&quot;white&quot;,
+        paper_bgcolor=&quot;white&quot;,
+    )
+
+    fig.write_html(PLOT_FILE)
+
+
+if __name__ == &quot;__main__&quot;:
+    s02_make_documents_by_year_plot()
+
+
+
+
+</code></pre></section>
+<section class="file" id="archivo-s03-countries-create-py"><h2>s03_countries_create.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s03_countries_create.py">PRE_13_scopus/src/s03_countries_create.py</a> · 41 líneas</p><pre><code>
+
+from pathlib import Path
+
+import pandas as pd
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+SUBMISSION_FILE = SUBMISSION_DIRECTORY / &quot;scopus.csv.gz&quot;
+
+
+def _create_countries_column(df):
+
+    df = df.copy()
+    df[&quot;countries_raw&quot;] = df[&quot;affiliations&quot;].copy()
+    df[&quot;countries_raw&quot;] = df[&quot;countries_raw&quot;].str.split(&quot;;&quot;)
+    df[&quot;countries_raw&quot;] = df[&quot;countries_raw&quot;].map(
+        lambda x: [y.split(&quot;,&quot;) for y in x] if isinstance(x, list) else x
+    )
+    df[&quot;countries_raw&quot;] = df[&quot;countries_raw&quot;].map(
+        lambda x: [y[-1].strip() for y in x] if isinstance(x, list) else x
+    )
+    df[&quot;countries_raw&quot;] = df[&quot;countries_raw&quot;].map(
+        lambda x: set(x) if isinstance(x, list) else x
+    )
+    df[&quot;countries_raw&quot;] = df[&quot;countries_raw&quot;].str.join(&quot;; &quot;)
+
+    return df
+
+
+def s03_countries_create() -&gt; None:
+
+    df = pd.read_csv(SUBMISSION_FILE, compression=&quot;gzip&quot;)
+    df = _create_countries_column(df)
+    print(df.countries_raw.head(20))
+    df.to_csv(SUBMISSION_FILE, index=False, compression=&quot;gzip&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    s03_countries_create()
+    
+    </code></pre></section>
+<section class="file" id="archivo-s04-countries-clean-py"><h2>s04_countries_clean.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s04_countries_clean.py">PRE_13_scopus/src/s04_countries_clean.py</a> · 74 líneas</p><pre><code># s04_countries_clean.py
+
+
+from pathlib import Path
+
+import pandas as pd
+import requests
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+SUBMISSION_FILE = SUBMISSION_DIRECTORY / &quot;scopus.csv.gz&quot;
+
+REPLACEMENTS = {
+    &quot;North Macedonia&quot;: &quot;Macedonia&quot;,
+    &quot;Palestine&quot;: &quot;West Bank&quot;,
+    &quot;Russian Federation&quot;: &quot;Russia&quot;,
+    &quot;Serbia&quot;: &quot;Republic of Serbia&quot;,
+    &quot;USA&quot;: &quot;United States of America&quot;,
+    &quot;United States&quot;: &quot;United States of America&quot;,
+    &quot;Viet Nam&quot;: &quot;Vietnam&quot;,
+}
+
+
+URL = (
+    &quot;https://raw.githubusercontent.com/python-visualization/&quot;
+    &quot;folium/master/examples/data/world-countries.json&quot;
+)
+
+
+VALID_COUNTRIES = {
+    feature[&quot;properties&quot;][&quot;name&quot;] for feature in requests.get(URL).json()[&quot;features&quot;]
+}
+
+
+def _correct_country_names(df):
+
+    df = df.copy()
+
+    df[&quot;countries_clean&quot;] = df[&quot;countries_clean&quot;].str.split(&quot;; &quot;)
+    df[&quot;countries_clean&quot;] = df[&quot;countries_clean&quot;].map(
+        lambda x: (
+            [REPLACEMENTS.get(y, y) for y in x] if isinstance(x, list) else x
+        )
+    )
+    df[&quot;countries_clean&quot;] = df[&quot;countries_clean&quot;].map(
+        lambda x: set(x) if isinstance(x, list) else x
+    )
+    df[&quot;countries_clean&quot;] = df[&quot;countries_clean&quot;].str.join(&quot;; &quot;)
+
+    return df
+
+
+def _remove_invalid_countries(df):
+
+    df = df.copy()
+    df[&quot;countries_clean&quot;] = df[&quot;countries_clean&quot;].str.split(&quot;; &quot;)
+    df[&quot;countries_clean&quot;] = df[&quot;countries_clean&quot;].map(
+        lambda x: [y for y in x if y in VALID_COUNTRIES] if isinstance(x, list) else x
+    )
+    df[&quot;countries_clean&quot;] = df[&quot;countries_clean&quot;].str.join(&quot;; &quot;)
+    return df
+
+
+def s04_countries_clean() -&gt; None:
+
+    df = pd.read_csv(SUBMISSION_FILE, compression=&quot;gzip&quot;)
+
+    df[&quot;countries_clean&quot;] = df[&quot;countries_raw&quot;]
+    df = _correct_country_names(df)
+    df = _remove_invalid_countries(df)
+    df.to_csv(SUBMISSION_FILE, index=False, compression=&quot;gzip&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    s04_countries_clean()
+</code></pre></section>
+<section class="file" id="archivo-s05-countries-frequency-report-py"><h2>s05_countries_frequency_report.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s05_countries_frequency_report.py">PRE_13_scopus/src/s05_countries_frequency_report.py</a> · 35 líneas</p><pre><code># s05_countries_frequency_report.py
+
+
+from pathlib import Path
+
+import pandas as pd
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+SUBMISSION_FILE = SUBMISSION_DIRECTORY / &quot;scopus.csv.gz&quot;
+FREQUENCY_REPORT_FILE = SUBMISSION_DIRECTORY / &quot;country_frequency.csv&quot;
+
+
+def make_frequency_report(column, file_path):
+
+    df = pd.read_csv(SUBMISSION_FILE, compression=&quot;gzip&quot;)
+    df = df[[column]].copy()
+    df = df.rename(columns={column: &quot;item&quot;})
+
+    series = df[&quot;item&quot;].copy()
+    series = series.dropna()
+    series = series.str.split(&quot;; &quot;).explode()
+    series = series.value_counts()
+    series.to_csv(file_path)
+
+
+def s05_countries_frequency_report():
+    make_frequency_report(
+        column=&quot;countries_clean&quot;,
+        file_path=FREQUENCY_REPORT_FILE,
+    )
+
+
+if __name__ == &quot;__main__&quot;:
+    s05_countries_frequency_report()
+
+</code></pre></section>
+<section class="file" id="archivo-s06-countries-frequency-plot-py"><h2>s06_countries_frequency_plot.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s06_countries_frequency_plot.py">PRE_13_scopus/src/s06_countries_frequency_plot.py</a> · 36 líneas</p><pre><code># s06_countries_frequency_plot.py
+
+
+from pathlib import Path
+
+import pandas as pd
+import plotly.express as px
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+DATA_FILE = SUBMISSION_DIRECTORY / &quot;country_frequency.csv&quot;
+BAR_PLOT_FILE = SUBMISSION_DIRECTORY / &quot;country_frequency_plot.html&quot;
+
+
+def make_frequency_plot(filepath, n):
+
+    df = pd.read_csv(filepath)
+    df = df.head(n)
+
+    fig = px.bar(
+        df,
+        x=df.columns[1],
+        y=df.columns[0],
+        orientation=&quot;h&quot;,
+    )
+    fig.update_yaxes(autorange=&quot;reversed&quot;)
+    fig.write_html(BAR_PLOT_FILE)
+
+
+def s06_countries_frequency_plot():
+    make_frequency_plot(DATA_FILE, n=10)
+
+
+if __name__ == &quot;__main__&quot;:
+    s06_countries_frequency_plot()
+    
+    </code></pre></section>
+<section class="file" id="archivo-s07-countries-world-map-py"><h2>s07_countries_world_map.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s07_countries_world_map.py">PRE_13_scopus/src/s07_countries_world_map.py</a> · 42 líneas</p><pre><code># s07_countries_world_map.py
+
+from pathlib import Path
+
+import folium
+import pandas as pd
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+DATA_FILE = SUBMISSION_DIRECTORY / &quot;country_frequency.csv&quot;
+WORLD_MAP_FILE = SUBMISSION_DIRECTORY / &quot;world_map.html&quot;
+
+GEO_DATA_URL = &quot;https://raw.githubusercontent.com/python-visualization/folium/master/examples/data/world-countries.json&quot;
+
+
+def s07_countries_world_map() -&gt; None:
+
+    df = pd.read_csv(DATA_FILE)
+
+    m = folium.Map(
+        location=[0, 0],
+        zoom_start=2,
+        tiles=None,
+    )
+
+    folium.Choropleth(
+        geo_data=GEO_DATA_URL,
+        data=df,
+        columns=[&quot;item&quot;, &quot;count&quot;],
+        key_on=&quot;feature.properties.name&quot;,
+        fill_color=&quot;Greens&quot;,
+    ).add_to(m)
+
+    m.save(WORLD_MAP_FILE)
+
+
+if __name__ == &quot;__main__&quot;:
+    s07_countries_world_map()
+
+
+
+
+
+</code></pre></section>
+<section class="file" id="archivo-s08-countries-cooc-matrix-py"><h2>s08_countries_cooc_matrix.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s08_countries_cooc_matrix.py">PRE_13_scopus/src/s08_countries_cooc_matrix.py</a> · 46 líneas</p><pre><code># s08_countries_cooc_matrix.py
+
+from pathlib import Path
+
+import pandas as pd
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+DATA_FILE = SUBMISSION_DIRECTORY / &quot;scopus.csv.gz&quot;
+MATRIX_FILE = SUBMISSION_DIRECTORY / &quot;country_cooc_matrix.csv&quot;
+
+
+def make_cooc_matrix(column, output_file) -&gt; pd.DataFrame:
+
+    df = pd.read_csv(DATA_FILE, compression=&quot;gzip&quot;)
+
+    df = df[[column]].copy()
+    df = df.rename(columns={column: &quot;rows&quot;})
+    df[&quot;columns&quot;] = df[&quot;rows&quot;]
+
+    df = df.dropna()
+
+    df[&quot;rows&quot;] = df[&quot;rows&quot;].str.split(&quot;; &quot;)
+    df[&quot;columns&quot;] = df[&quot;columns&quot;].str.split(&quot;; &quot;)
+    df = df.explode(&quot;rows&quot;)
+    df = df.explode(&quot;columns&quot;)
+    matrix_list = df.groupby([&quot;rows&quot;, &quot;columns&quot;]).size().reset_index(name=&quot;count&quot;)
+
+    matrix = (
+        matrix_list.pivot(index=&quot;rows&quot;, columns=&quot;columns&quot;, values=&quot;count&quot;)
+        .fillna(0)
+        .astype(int)
+    )
+
+    matrix.to_csv(output_file)
+
+
+def s08_countries_cooc_matrix():
+    make_cooc_matrix(
+        column=&quot;countries_clean&quot;,
+        output_file=MATRIX_FILE,
+    )
+
+
+if __name__ == &quot;__main__&quot;:
+    s08_countries_cooc_matrix()
+
+</code></pre></section>
+<section class="file" id="archivo-s09-countries-heatmap-py"><h2>s09_countries_heatmap.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s09_countries_heatmap.py">PRE_13_scopus/src/s09_countries_heatmap.py</a> · 57 líneas</p><pre><code># s09_countries_heatmap.py
+
+from pathlib import Path
+
+import pandas as pd
+import plotly.express as px
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+MATRIX_FILE = SUBMISSION_DIRECTORY / &quot;country_cooc_matrix.csv&quot;
+COOC_HEATMAP_FILE = SUBMISSION_DIRECTORY / &quot;country_cooc_heatmap.html&quot;
+
+
+def make_cooc_heatmap(input_file, output_file) -&gt; None:
+
+    cooc_matrix = pd.read_csv(input_file)
+    cooc_matrix = cooc_matrix.set_index(cooc_matrix.columns[0])
+
+    figure = px.imshow(
+        cooc_matrix,
+        color_continuous_scale=&quot;Blues&quot;,
+    )
+
+    text = cooc_matrix.map(lambda value: str(value) if value &gt; 0 else &quot;&quot;).to_numpy()
+    figure.update_traces(text=text, texttemplate=&quot;%{text}&quot;, textfont_size=9)
+
+    figure.update_traces(xgap=1, ygap=1)
+    figure.update_coloraxes(showscale=False)
+
+    n_rows, n_cols = cooc_matrix.shape
+
+    figure.update_xaxes(
+        side=&quot;top&quot;,
+        layer=&quot;above traces&quot;,
+        tickangle=270,
+        showgrid=True,
+        range=[-0.5, n_cols - 0.5],
+    )
+
+    figure.update_yaxes(
+        layer=&quot;above traces&quot;,
+        showgrid=True,
+        scaleanchor=&quot;x&quot;,
+        scaleratio=1,
+        range=[n_rows - 0.5, -0.5],
+    )
+
+    figure.write_html(output_file)
+
+
+def s09_countries_heatmap():
+    make_cooc_heatmap(
+        input_file=MATRIX_FILE,
+        output_file=COOC_HEATMAP_FILE,
+    )
+
+if __name__ == &quot;__main__&quot;:
+    s09_countries_heatmap()</code></pre></section>
+<section class="file" id="archivo-s10-countries-clusters-py"><h2>s10_countries_clusters.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s10_countries_clusters.py">PRE_13_scopus/src/s10_countries_clusters.py</a> · 45 líneas</p><pre><code># s10_countries_clusters.py
+
+
+from pathlib import Path
+
+import matplotlib.pyplot as plt
+import networkx as nx
+import pandas as pd
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+DATA_FILE = SUBMISSION_DIRECTORY / &quot;scopus.csv.gz&quot;
+MATRIX_FILE = SUBMISSION_DIRECTORY / &quot;country_cooc_matrix.csv&quot;
+CLUSTERS_FILE = SUBMISSION_DIRECTORY / &quot;country_clusters.txt&quot;
+
+
+def make_communities_report(input_file, output_file) -&gt; None:
+
+    cooc_matrix = pd.read_csv(input_file)
+    cooc_matrix = cooc_matrix.set_index(cooc_matrix.columns[0])
+
+    G = nx.from_pandas_adjacency(cooc_matrix)
+    G.remove_edges_from(nx.selfloop_edges(G))
+    G.remove_edges_from(
+        [(u, v) for u, v, w in G.edges(data=&quot;weight&quot;) if not w or w &lt;= 0]
+    )
+
+    communities = nx.community.louvain_communities(G, weight=&quot;weight&quot;, seed=0)
+    communities = sorted(communities, key=lambda x: len(x), reverse=True)
+
+    with open(output_file, &quot;w&quot;) as f:
+
+        for community in communities:
+            community = &quot;; &quot;.join(sorted(community))
+            f.write(f&quot;{community}\n&quot;)
+
+
+def s10_countries_clusters():
+    make_communities_report(
+        input_file=MATRIX_FILE,
+        output_file=CLUSTERS_FILE,
+    )
+
+
+if __name__ == &quot;__main__&quot;:
+    s10_countries_clusters()
+</code></pre></section>
+<section class="file" id="archivo-s11-countries-network-py"><h2>s11_countries_network.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s11_countries_network.py">PRE_13_scopus/src/s11_countries_network.py</a> · 290 líneas</p><pre><code># s11_countries_network.py
+
+
+from pathlib import Path
+
+import networkx as nx
+import pandas as pd
+import plotly.graph_objects as go
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+DATA_FILE = SUBMISSION_DIRECTORY / &quot;scopus.csv.gz&quot;
+
+CLUSTERS_FILE = SUBMISSION_DIRECTORY / &quot;country_clusters.txt&quot;
+MATRIX_FILE = SUBMISSION_DIRECTORY / &quot;country_cooc_matrix.csv&quot;
+FREQUENCY_REPORT_FILE = SUBMISSION_DIRECTORY / &quot;country_frequency.csv&quot;
+
+NETWORK_FILE = SUBMISSION_DIRECTORY / &quot;country_collab_network.html&quot;
+
+FONTSIZE = 12
+
+
+def _create_networkx_graph(matrix_file) -&gt; nx.Graph:
+
+    cooc_matrix = pd.read_csv(matrix_file)
+    cooc_matrix = cooc_matrix.set_index(cooc_matrix.columns[0])
+
+    G = nx.from_pandas_adjacency(cooc_matrix)
+    G.remove_edges_from(nx.selfloop_edges(G))
+    G.remove_edges_from(
+        [(u, v) for u, v, w in G.edges(data=&quot;weight&quot;) if not w or w &lt;= 0]
+    )
+    G.remove_nodes_from(list(nx.isolates(G)))
+
+    return G
+
+
+def _assign_cluster_to_node(G, clusters_file) -&gt; dict:
+
+    with open(clusters_file, &quot;r&quot;) as f:
+        communities = [line.strip().split(&quot;; &quot;) for line in f.readlines()]
+
+    node_to_cluster = {
+        node: cluster_id
+        for cluster_id, community in enumerate(communities)
+        for node in community
+    }
+
+    nx.set_node_attributes(G, node_to_cluster, &quot;cluster&quot;)
+
+    return G
+
+
+def _assign_node_occurrences(G, frequency_report_file) -&gt; nx.Graph:
+
+    country_frequency = pd.read_csv(frequency_report_file)
+    country_frequency = country_frequency.set_index(country_frequency.columns[0])
+
+    node_sizes = {
+        node: (
+            country_frequency.loc[node].values[0]
+            if node in country_frequency.index
+            else 1
+        )
+        for node in G.nodes()
+    }
+
+    nx.set_node_attributes(G, node_sizes, &quot;occ&quot;)
+
+    return G
+
+
+def _assign_node_colors(G) -&gt; nx.Graph:
+
+    palette = [
+        &quot;#1f77b4&quot;,
+        &quot;#ff7f0e&quot;,
+        &quot;#2ca02c&quot;,
+        &quot;#d62728&quot;,
+        &quot;#9467bd&quot;,
+        &quot;#8c564b&quot;,
+        &quot;#e377c2&quot;,
+        &quot;#7f7f7f&quot;,
+        &quot;#bcbd22&quot;,
+        &quot;#17becf&quot;,
+    ] * 10
+
+    cluster_colors = {
+        cluster_id: palette[cluster_id % len(palette)]
+        for cluster_id in set(nx.get_node_attributes(G, &quot;cluster&quot;).values())
+    }
+
+    node_colors = {node: cluster_colors[G.nodes[node][&quot;cluster&quot;]] for node in G.nodes()}
+
+    nx.set_node_attributes(G, node_colors, &quot;color&quot;)
+
+    return G
+
+
+def _assign_node_sizes(G, frequency_report_file, node_size_range) -&gt; nx.Graph:
+
+    min_size = node_size_range[0]
+    max_size = node_size_range[1]
+
+    frequency = pd.read_csv(frequency_report_file)
+    frequency = frequency.set_index(frequency.columns[0])
+
+    occ = {node: G.nodes[node][&quot;occ&quot;] for node in G.nodes()}
+
+    if max_size == min_size:
+
+        scaled_sizes = {node: ((min_size + max_size) / 2) for node in occ}
+
+    else:
+
+        min_node_size = min(occ.values())
+        max_node_size = max(occ.values())
+        node_size_range = max_node_size - min_node_size
+
+        scaled_sizes = {
+            node: min_size
+            + (max_size - min_size) * ((s - min_node_size) / node_size_range) ** 0.5
+            for node, s in occ.items()
+        }
+
+    nx.set_node_attributes(G, scaled_sizes, &quot;size&quot;)
+
+    return G
+
+
+def _asssign_link_sizes(G, link_size_range) -&gt; nx.Graph:
+
+    min_size = link_size_range[0]
+    max_size = link_size_range[1]
+
+    weights = {edge: G.edges[edge][&quot;weight&quot;] for edge in G.edges()}
+
+    if max_size == min_size:
+
+        scaled_sizes = {edge: ((min_size + max_size) / 2) for edge in weights}
+
+    else:
+
+        min_weight = min(weights.values())
+        max_weight = max(weights.values())
+        weight_range = max_weight - min_weight
+
+        scaled_sizes = {
+            edge: min_size
+            + (max_size - min_size) * ((w - min_weight) / weight_range) ** 0.5
+            for edge, w in weights.items()
+        }
+
+    nx.set_edge_attributes(G, scaled_sizes, &quot;width&quot;)
+
+    return G
+
+
+def _assign_font_sizes(G, font_size_range) -&gt; nx.Graph:
+
+    min_font_size = font_size_range[0]
+    max_font_size = font_size_range[1]
+
+    node_sizes = {node: G.nodes[node][&quot;size&quot;] for node in G.nodes()}
+
+    if max_font_size == min_font_size:
+
+        scaled_font_sizes = {
+            node: ((min_font_size + max_font_size) / 2) for node in node_sizes
+        }
+
+    else:
+
+        min_node_size = min(node_sizes.values())
+        max_node_size = max(node_sizes.values())
+        node_size_range = max_node_size - min_node_size
+        font_range = max_font_size - min_font_size
+
+        scaled_font_sizes = {
+            node: min_font_size
+            + font_range * ((s - min_node_size) / node_size_range) ** 0.5
+            for node, s in node_sizes.items()
+        }
+
+    nx.set_node_attributes(G, scaled_font_sizes, &quot;font_size&quot;)
+
+    return G
+
+
+def _make_edge_trace(G, pos) -&gt; list[go.Scatter]:
+
+    edge_traces = []
+
+    for u, v in G.edges():
+        edge_traces.append(
+            go.Scatter(
+                x=[pos[u][0], pos[v][0]],
+                y=[pos[u][1], pos[v][1]],
+                mode=&quot;lines&quot;,
+                line=dict(color=&quot;gray&quot;, width=G.edges[u, v][&quot;width&quot;]),
+                hoverinfo=&quot;none&quot;,
+            )
+        )
+
+    return edge_traces
+
+
+def _make_node_trace(G, pos) -&gt; go.Scatter:
+
+    node_x, node_y = [], []
+
+    for node in G.nodes():
+        node_x.append(pos[node][0])
+        node_y.append(pos[node][1])
+
+    node_trace = go.Scatter(
+        x=node_x,
+        y=node_y,
+        mode=&quot;markers+text&quot;,
+        text=list(G.nodes()),
+        textposition=&quot;middle center&quot;,
+        textfont=dict(
+            size=[G.nodes[node][&quot;font_size&quot;] for node in G.nodes()],
+            color=&quot;black&quot;,
+        ),
+        hovertext=[
+            f&quot;{node}&lt;br&gt;Frequency: {G.nodes[node][&#x27;size&#x27;]}&quot; for node in G.nodes()
+        ],
+        hoverinfo=&quot;text&quot;,
+        marker=dict(
+            size=[G.nodes[edge][&quot;size&quot;] for edge in G.nodes()],
+            color=[G.nodes[node][&quot;color&quot;] for node in G.nodes()],
+            line=dict(width=1, color=&quot;black&quot;),
+            opacity=0.5,
+        ),
+    )
+
+    return node_trace
+
+
+def make_cooc_network_plot(
+    matrix_file,
+    clusters_file,
+    frequency_report_file,
+    output_file,
+    node_size_range,
+    font_size_range,
+    link_size_range,
+) -&gt; None:
+
+    G = _create_networkx_graph(matrix_file)
+    G = _assign_cluster_to_node(G, clusters_file)
+    G = _assign_node_occurrences(G, frequency_report_file)
+    G = _assign_node_colors(G)
+    G = _assign_node_sizes(G, frequency_report_file, node_size_range)
+    G = _assign_font_sizes(G, font_size_range)
+    G = _asssign_link_sizes(G, link_size_range)
+
+    pos = nx.spring_layout(G, seed=1, k=1.35, iterations=200)
+
+    edge_trace = _make_edge_trace(G, pos)
+    node_trace = _make_node_trace(G, pos)
+
+    figure = go.Figure(data=[*edge_trace, node_trace])
+
+    figure.update_layout(
+        showlegend=False,
+        plot_bgcolor=&quot;rgba(0,0,0,0)&quot;,
+        paper_bgcolor=&quot;rgba(0,0,0,0)&quot;,
+        margin=dict(l=20, r=20, t=50, b=20),
+        xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+        yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+    )
+
+    figure.write_html(output_file)
+
+
+def s11_countries_network():
+    make_cooc_network_plot(
+        matrix_file=MATRIX_FILE,
+        clusters_file=CLUSTERS_FILE,
+        frequency_report_file=FREQUENCY_REPORT_FILE,
+        output_file=NETWORK_FILE,
+        node_size_range=(10, 100),
+        font_size_range=(8, 30),
+        link_size_range=(1, 10),
+    )
+
+
+if __name__ == &quot;__main__&quot;:
+    s11_countries_network()
+</code></pre></section>
+<section class="file" id="archivo-s12-sources-frequency-report-py"><h2>s12_sources_frequency_report.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s12_sources_frequency_report.py">PRE_13_scopus/src/s12_sources_frequency_report.py</a> · 18 líneas</p><pre><code>from pathlib import Path
+
+import pandas as pd
+from s05_countries_frequency_report import make_frequency_report
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+REPORT_FREQUENCY_FILE = SUBMISSION_DIRECTORY / &quot;source_frequency.csv&quot;
+
+
+def s12_sources_frequency_report():
+    make_frequency_report(
+        column=&quot;source_title_abbr&quot;,
+        file_path=REPORT_FREQUENCY_FILE,
+    )
+
+
+if __name__ == &quot;__main__&quot;:
+    s12_sources_frequency_report()</code></pre></section>
+<section class="file" id="archivo-s13-authors-frequency-report-py"><h2>s13_authors_frequency_report.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s13_authors_frequency_report.py">PRE_13_scopus/src/s13_authors_frequency_report.py</a> · 18 líneas</p><pre><code>from pathlib import Path
+
+import pandas as pd
+from s05_countries_frequency_report import make_frequency_report
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+REPORT_FREQUENCY_FILE = SUBMISSION_DIRECTORY / &quot;authors_frequency.csv&quot;
+
+
+def s13_authors_frequency_report():
+    make_frequency_report(
+        column=&quot;author_full_names&quot;,
+        file_path=REPORT_FREQUENCY_FILE,
+    )
+
+
+if __name__ == &quot;__main__&quot;:
+    s13_authors_frequency_report()</code></pre></section>
+<section class="file" id="archivo-s14-keywords-create-py"><h2>s14_keywords_create.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s14_keywords_create.py">PRE_13_scopus/src/s14_keywords_create.py</a> · 20 líneas</p><pre><code>from pathlib import Path
+
+import pandas as pd
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+SUBMISSION_FILE = SUBMISSION_DIRECTORY / &quot;scopus.csv.gz&quot;
+
+
+def s14_keywords_create() -&gt; None:
+
+    df = pd.read_csv(SUBMISSION_FILE, compression=&quot;gzip&quot;)
+    df[&quot;keywords_raw&quot;] = (
+        df[&quot;author_keywords&quot;].fillna(&quot;&quot;) + &quot;; &quot; + df[&quot;index_keywords&quot;].fillna(&quot;&quot;)
+    )
+    df[&quot;keywords_raw&quot;] = df[&quot;keywords_raw&quot;].str.strip(&quot;; &quot;)
+    df.to_csv(SUBMISSION_FILE, index=False)
+
+
+if __name__ == &quot;__main__&quot;:
+    s14_keywords_create()</code></pre></section>
+<section class="file" id="archivo-s15-keywords-clean-py"><h2>s15_keywords_clean.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s15_keywords_clean.py">PRE_13_scopus/src/s15_keywords_clean.py</a> · 30 líneas</p><pre><code>
+from pathlib import Path
+
+import pandas as pd
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+SUBMISSION_FILE = SUBMISSION_DIRECTORY / &quot;scopus.csv.gz&quot;
+
+
+REPLACEMENTS = {
+    &quot;NLP APPLICATION&quot;: &quot;NLP APPLICATIONS&quot;,
+    &quot;ARTIFICIAL INTELLIGENCE (AI)&quot;: &quot;ARTIFICIAL INTELLIGENCE&quot;,
+    &quot;BLOCK-CHAIN&quot;: &quot;BLOCKCHAIN&quot;,
+    &quot;BLOCKCHAIN TECHNOLOGY&quot;: &quot;BLOCKCHAIN&quot;,
+}
+
+
+def s15_keywords_clean() -&gt; None:
+
+    df = pd.read_csv(SUBMISSION_FILE, compression=&quot;gzip&quot;)
+
+    df[&quot;keywords_clean&quot;] = df[&quot;keywords_raw&quot;].str.upper()
+    for old, new in REPLACEMENTS.items():
+        df[&quot;keywords_clean&quot;] = df[&quot;keywords_clean&quot;].str.replace(old, new)
+
+    df.to_csv(SUBMISSION_FILE, index=False)
+
+
+if __name__ == &quot;__main__&quot;:
+    s15_keywords_clean()
+</code></pre></section>
+<section class="file" id="archivo-s16-keywords-frequency-report-py"><h2>s16_keywords_frequency_report.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s16_keywords_frequency_report.py">PRE_13_scopus/src/s16_keywords_frequency_report.py</a> · 20 líneas</p><pre><code>from pathlib import Path
+
+import pandas as pd
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+SUBMISSION_FILE = SUBMISSION_DIRECTORY / &quot;scopus.csv.gz&quot;
+FREQUENCY_REPORT_FILE = SUBMISSION_DIRECTORY / &quot;keywords_frequency.csv&quot;
+
+from s05_countries_frequency_report import make_frequency_report
+
+
+def s16_keywords_frequency_report():
+    make_frequency_report(
+        column=&quot;keywords_clean&quot;,
+        file_path=FREQUENCY_REPORT_FILE,
+    )
+
+
+if __name__ == &quot;__main__&quot;:
+    s16_keywords_frequency_report()
+</code></pre></section>
+<section class="file" id="archivo-s17-keywords-cooc-matrix-py"><h2>s17_keywords_cooc_matrix.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s17_keywords_cooc_matrix.py">PRE_13_scopus/src/s17_keywords_cooc_matrix.py</a> · 21 líneas</p><pre><code>from pathlib import Path
+
+from s08_countries_cooc_matrix import make_cooc_matrix
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+DATA_FILE = SUBMISSION_DIRECTORY / &quot;scopus.csv.gz&quot;
+MATRIX_FILE = SUBMISSION_DIRECTORY / &quot;keywords_cooc_matrix.csv&quot;
+
+
+def s17_keywords_cooc_matrix():
+    make_cooc_matrix(
+        column=&quot;keywords_clean&quot;,
+        output_file=MATRIX_FILE,
+    )
+
+
+if __name__ == &quot;__main__&quot;:
+    s17_keywords_cooc_matrix()
+    
+    
+    </code></pre></section>
+<section class="file" id="archivo-s18-keywords-filter-py"><h2>s18_keywords_filter.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s18_keywords_filter.py">PRE_13_scopus/src/s18_keywords_filter.py</a> · 37 líneas</p><pre><code># s18_keywords_filter.py
+
+from pathlib import Path
+
+import pandas as pd
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+DATA_FILE = SUBMISSION_DIRECTORY / &quot;scopus.csv.gz&quot;
+MATRIX_FILE = SUBMISSION_DIRECTORY / &quot;keywords_cooc_matrix.csv&quot;
+
+
+def filter_cooc_matrix(matrix_file, min_occ):
+
+    terms = []
+
+    df = pd.read_csv(matrix_file)
+    df = df.set_index(df.columns[0])
+
+    diagonal = df.values.diagonal()
+    for i, term in enumerate(df.index):
+        if diagonal[i] &gt;= min_occ:
+            terms.append(term)
+
+    df = df.loc[terms, terms]
+
+    df.to_csv(MATRIX_FILE, index=True)
+
+
+def s18_keywords_filter():
+    filter_cooc_matrix(
+        matrix_file=MATRIX_FILE,
+        min_occ=10,
+    )
+
+
+if __name__ == &quot;__main__&quot;:
+    s18_keywords_filter()</code></pre></section>
+<section class="file" id="archivo-s19-keywords-clusters-py"><h2>s19_keywords_clusters.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s19_keywords_clusters.py">PRE_13_scopus/src/s19_keywords_clusters.py</a> · 23 líneas</p><pre><code>from pathlib import Path
+
+import matplotlib.pyplot as plt
+import networkx as nx
+import pandas as pd
+from s10_countries_clusters import make_communities_report
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+DATA_FILE = SUBMISSION_DIRECTORY / &quot;scopus.csv.gz&quot;
+
+MATRIX_FILE = SUBMISSION_DIRECTORY / &quot;keywords_cooc_matrix.csv&quot;
+CLUSTERS_FILE = SUBMISSION_DIRECTORY / &quot;keywords_clusters.txt&quot;
+
+
+def s19_keywords_clusters():
+    make_communities_report(
+        input_file=MATRIX_FILE,
+        output_file=CLUSTERS_FILE,
+    )
+
+
+if __name__ == &quot;__main__&quot;:
+    s19_keywords_clusters()
+</code></pre></section>
+<section class="file" id="archivo-s20-keywords-network-py"><h2>s20_keywords_network.py</h2><p class="source">Archivo original: <a href="../PRE_13_scopus/src/s20_keywords_network.py">PRE_13_scopus/src/s20_keywords_network.py</a> · 30 líneas</p><pre><code>from pathlib import Path
+
+from s11_countries_network import make_cooc_network_plot
+
+SUBMISSION_DIRECTORY = Path(__file__).resolve().parent.parent / &quot;submission&quot;
+DATA_FILE = SUBMISSION_DIRECTORY / &quot;scopus.csv.gz&quot;
+
+CLUSTERS_FILE = SUBMISSION_DIRECTORY / &quot;keywords_clusters.txt&quot;
+MATRIX_FILE = SUBMISSION_DIRECTORY / &quot;keywords_cooc_matrix.csv&quot;
+FREQUENCY_REPORT_FILE = SUBMISSION_DIRECTORY / &quot;keywords_frequency.csv&quot;
+
+NETWORK_FILE = SUBMISSION_DIRECTORY / &quot;keywords_cooc_network.html&quot;
+
+FONTSIZE = 12
+
+
+def s20_keywords_network():
+    make_cooc_network_plot(
+        matrix_file=MATRIX_FILE,
+        clusters_file=CLUSTERS_FILE,
+        frequency_report_file=FREQUENCY_REPORT_FILE,
+        output_file=NETWORK_FILE,
+        node_size_range=(10, 100),
+        font_size_range=(8, 30),
+        link_size_range=(1, 10),
+    )
+
+
+if __name__ == &quot;__main__&quot;:
+    s20_keywords_network()
+</code></pre></section>
+      <nav class="pager" aria-label="PRE anterior y siguiente"><a href="pre_12.html">PRE 12</a><a href="pre_14.html">PRE 14</a></nav>
+    </main>
+  </div>
+  <footer><a class="back" href="../index.html#catalogo">Índice principal</a></footer>
+</body>
+</html>
